@@ -20,6 +20,26 @@ public struct Lexicon: Sendable, Codable {
     public let merchants: [MerchantEntry]
     public let noiseWords: [String]
 
+    /// Income categories are listed separately because the same word means different things on the two
+    /// sides of the ledger — "premiya" is a bonus you receive, not a category of spending.
+    public let incomeCategoryKeywords: [CategoryKeywords]
+
+    /// Words that make an utterance a question rather than a record.
+    public let queryMarkers: [LanguageMarker]
+
+    /// Words marking an intention: something planned, not something done.
+    public let intentMarkers: [LanguageMarker]
+
+    /// Negation. Uzbek negates with a verb suffix, so some of these are suffix patterns rather than
+    /// whole words — see ``MergedLexicon/negationSuffixes``.
+    public let negationMarkers: [LanguageMarker]
+
+    /// Hedges: "almost bought", "was going to". Nothing moved.
+    public let hedgeWords: MarkerGroup?
+
+    /// Moving your own money between your own accounts is not spending.
+    public let transferMarkers: MarkerGroup?
+
     private enum CodingKeys: String, CodingKey {
         case language, scripts
         case magnitudeWords = "magnitude_words"
@@ -28,9 +48,15 @@ public struct Lexicon: Sendable, Codable {
         case expenseMarkers = "expense_markers"
         case incomeMarkers = "income_markers"
         case categoryKeywords = "category_keywords"
+        case incomeCategoryKeywords = "income_category_keywords"
         case dateExpressions = "date_expressions"
         case merchants
         case noiseWords = "noise_words"
+        case queryMarkers = "query_markers"
+        case intentMarkers = "intent_markers"
+        case negationMarkers = "negation_markers"
+        case hedgeWords = "hedge_words"
+        case transferMarkers = "transfer_markers"
     }
 
     public init(from decoder: any Decoder) throws {
@@ -46,6 +72,14 @@ public struct Lexicon: Sendable, Codable {
         dateExpressions = try container.decodeIfPresent([DateExpression].self, forKey: .dateExpressions) ?? []
         merchants = try container.decodeIfPresent([MerchantEntry].self, forKey: .merchants) ?? []
         noiseWords = try container.decodeIfPresent([String].self, forKey: .noiseWords) ?? []
+        incomeCategoryKeywords =
+            try container.decodeIfPresent([CategoryKeywords].self, forKey: .incomeCategoryKeywords) ?? []
+        queryMarkers = try container.decodeIfPresent([LanguageMarker].self, forKey: .queryMarkers) ?? []
+        intentMarkers = try container.decodeIfPresent([LanguageMarker].self, forKey: .intentMarkers) ?? []
+        negationMarkers =
+            try container.decodeIfPresent([LanguageMarker].self, forKey: .negationMarkers) ?? []
+        hedgeWords = try container.decodeIfPresent(MarkerGroup.self, forKey: .hedgeWords)
+        transferMarkers = try container.decodeIfPresent(MarkerGroup.self, forKey: .transferMarkers)
     }
 
     // MARK: Entry types
@@ -69,14 +103,38 @@ public struct Lexicon: Sendable, Codable {
 
     public struct CurrencyWord: Sendable, Codable {
         public let surface: String
-        /// ISO code. May name a currency Pulse does not support, in which case it is dropped on merge.
-        public let iso: String
+        /// ISO code, or **null** when the word genuinely names more than one currency and no default is
+        /// safe: bare `som`/`сом` is both the apostrophe-less Uzbek so'm and the Kyrgyz som. Such a word
+        /// still counts as the speaker having named a currency — it just does not say which.
+        public let iso: String?
         public let notes: String?
     }
 
     public struct Marker: Sendable, Codable {
         public let surface: String
         public let notes: String?
+    }
+
+    /// A marker tagged with the language it belongs to.
+    public struct LanguageMarker: Sendable, Codable {
+        public let surface: String
+        public let lang: String?
+        public let meaning: String?
+        public let notes: String?
+    }
+
+    /// A documented group of markers: `{ "notes": "...", "entries": [...] }`.
+    public struct MarkerGroup: Sendable, Codable {
+        public let notes: String?
+        public let entries: [LanguageMarker]
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            notes = try container.decodeIfPresent(String.self, forKey: .notes)
+            entries = try container.decodeIfPresent([LanguageMarker].self, forKey: .entries) ?? []
+        }
+
+        private enum CodingKeys: String, CodingKey { case notes, entries }
     }
 
     public struct CategoryKeywords: Sendable, Codable {
@@ -134,6 +192,21 @@ public struct MergedLexicon: Sendable {
 
     /// The fixed part of "N days ago" templates: `kun oldin`, `кун олдин`, `дней назад`.
     public private(set) var daysAgoPhrases: Set<String> = []
+
+    /// Interrogatives. A question about spending must never become spending.
+    public private(set) var queryMarkers: Set<String> = []
+
+    /// Currency words that name more than one currency. Recognised as "a currency was stated", but
+    /// resolving to none.
+    public private(set) var ambiguousCurrencyWords: Set<String> = []
+
+    /// Whole-word negations, hedges ("almost bought"), and self-transfers — all cases where the words
+    /// describe money that did not actually move.
+    public private(set) var nothingMovedMarkers: Set<String> = []
+
+    /// Uzbek negates with a verb suffix rather than a word, so these are matched as token endings:
+    /// `sarflamadim`, `olmadim`, `to'lamadim`.
+    public private(set) var negationSuffixes: Set<String> = []
     public private(set) var noiseWords: Set<String> = []
 
     /// The languages that contributed, in merge order.
@@ -211,8 +284,14 @@ public struct MergedLexicon: Sendable {
             )
         }
         for entry in lexicon.currencyWords {
+            // A word that names a currency ambiguously still tells us the speaker was being explicit,
+            // which is enough to stop the implied-thousands rule from firing on their number.
+            guard let iso = entry.iso else {
+                ambiguousCurrencyWords.insert(Self.key(entry.surface))
+                continue
+            }
             // A currency Pulse cannot represent is dropped rather than faked — see Currency.known(code:).
-            guard let currency = Currency.known(code: entry.iso) else { continue }
+            guard let currency = Currency.known(code: iso) else { continue }
             Self.insert(
                 key: entry.surface, value: currency,
                 into: &currencies, conflicts: &conflicts, table: "currencies"
@@ -224,7 +303,9 @@ public struct MergedLexicon: Sendable {
         for entry in lexicon.incomeMarkers {
             incomeMarkers.insert(Self.key(entry.surface))
         }
-        for group in lexicon.categoryKeywords {
+        // Income category words are kept in their own section because the same surface can mean
+        // different things per side of the ledger.
+        for group in lexicon.categoryKeywords + lexicon.incomeCategoryKeywords {
             guard let category = TransactionCategory(rawValue: group.category) else { continue }
             for keyword in group.keywords {
                 Self.insert(
@@ -291,6 +372,30 @@ public struct MergedLexicon: Sendable {
         }
         for word in lexicon.noiseWords {
             noiseWords.insert(Self.key(word))
+        }
+
+        for marker in lexicon.queryMarkers {
+            queryMarkers.insert(Self.key(marker.surface))
+        }
+        for marker in lexicon.intentMarkers {
+            uncompletedMarkers.insert(Self.key(marker.surface))
+        }
+        for marker in lexicon.negationMarkers {
+            // Entries like "-madim / -medim" list several suffix variants in one surface.
+            for variant in marker.surface.split(separator: "/") {
+                let trimmed = variant.trimmingCharacters(in: .whitespaces)
+                if trimmed.hasPrefix("-") {
+                    let suffix = Self.key(String(trimmed.dropFirst()))
+                    if suffix.count >= 2 { negationSuffixes.insert(suffix) }
+                } else if !trimmed.isEmpty {
+                    nothingMovedMarkers.insert(Self.key(trimmed))
+                }
+            }
+        }
+        for group in [lexicon.hedgeWords, lexicon.transferMarkers] {
+            for entry in group?.entries ?? [] {
+                nothingMovedMarkers.insert(Self.key(entry.surface))
+            }
         }
     }
 

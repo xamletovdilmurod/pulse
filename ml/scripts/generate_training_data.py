@@ -123,7 +123,9 @@ def index_by_category(lexicon: dict) -> dict[str, list[str]]:
     }
 
     out: dict[str, list[str]] = {}
-    for group in lexicon.get("category_keywords", []):
+    # Income categories live in their own section: the same surface can mean different things on the
+    # two sides of the ledger, so they are listed separately rather than merged by the author.
+    for group in lexicon.get("category_keywords", []) + lexicon.get("income_category_keywords", []):
         keywords = [
             k for k in group.get("keywords", [])
             if k and "<" not in k and is_frame_safe(k) and k.lower() not in verbs

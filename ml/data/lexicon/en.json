@@ -23,7 +23,7 @@
     {
       "surface": "grand",
       "multiplier": 1000,
-      "notes": "native slang, '1 grand', 'a grand'. Bare 'grand' with no currency word must still leave currency null."
+      "notes": "Native slang, '1 grand'. RARE for this user, and dangerous: a Tashkent price quoted in grands is almost always a mis-transcription. Prefer 'mln'/'k'."
     },
     {
       "surface": "m",
@@ -239,8 +239,8 @@
     },
     {
       "surface": "som",
-      "iso": "UZS",
-      "notes": "apostrophe dropped on a phone keyboard"
+      "iso": null,
+      "notes": "AMBIGUOUS - the apostrophe-less Uzbek so'm OR the Kyrgyz som. No default: resolve only from a place word (bishkek, osh, kyrgyzstan -> KGS), otherwise leave currency null and lower confidence."
     },
     {
       "surface": "soum",
@@ -406,6 +406,26 @@
     {
       "surface": "aed",
       "iso": "AED"
+    },
+    {
+      "surface": "soʻm",
+      "iso": "UZS",
+      "notes": "U+02BB, the official Uzbek Latin letter"
+    },
+    {
+      "surface": "so’m",
+      "iso": "UZS",
+      "notes": "U+2019, what iOS autocorrect emits"
+    },
+    {
+      "surface": "so`m",
+      "iso": "UZS",
+      "notes": "backtick"
+    },
+    {
+      "surface": "baks",
+      "iso": "USD",
+      "notes": "the local slang, appears even in English-frame utterances"
     }
   ],
   "expense_markers": [
@@ -659,7 +679,10 @@
         "ate",
         "eating out",
         "bill",
-        "tip"
+        "tip",
+        "choyxona",
+        "chaykhana",
+        "lavash"
       ]
     },
     {
@@ -728,8 +751,9 @@
         "kvartira",
         "apartment rent",
         "landlord",
-        "deposit",
-        "flat rent"
+        "flat rent",
+        "rent deposit",
+        "office rent"
       ]
     },
     {
@@ -744,7 +768,12 @@
         "heating",
         "garbage",
         "trash",
-        "hoa"
+        "hoa",
+        "electricity bill",
+        "heating bill",
+        "garbage fee",
+        "hoa fee",
+        "intercom"
       ]
     },
     {
@@ -826,7 +855,10 @@
         "attraction",
         "tickets",
         "club",
-        "karaoke"
+        "karaoke",
+        "concert tickets",
+        "theatre",
+        "theater"
       ]
     },
     {
@@ -839,7 +871,12 @@
         "birthday",
         "toy wedding gift",
         "chocolate for",
-        "souvenir"
+        "souvenir",
+        "wedding gift",
+        "gift for",
+        "toy",
+        "gap",
+        "present for"
       ]
     },
     {
@@ -874,7 +911,10 @@
         "mobiuz",
         "sim",
         "tariff",
-        "minutes"
+        "minutes",
+        "home internet",
+        "internet bill",
+        "mobile balance"
       ]
     },
     {
@@ -912,7 +952,10 @@
         "children",
         "pocket money",
         "for the family",
-        "parents"
+        "parents",
+        "sent to my parents",
+        "for my son",
+        "for my daughter"
       ]
     },
     {
@@ -933,10 +976,7 @@
         "remont",
         "dry cleaning",
         "laundry",
-        "hardware",
-        "macbook",
-        "laptop",
-        "electronics"
+        "hardware"
       ]
     },
     {
@@ -967,7 +1007,9 @@
         "pet shop",
         "collar",
         "kitten",
-        "puppy"
+        "puppy",
+        "vaccination for",
+        "pet food"
       ]
     },
     {
@@ -983,7 +1025,8 @@
         "masjid",
         "zakat",
         "helped a beggar",
-        "fundraiser"
+        "fundraiser",
+        "donated"
       ]
     },
     {
@@ -1014,7 +1057,20 @@
         "dont know",
         "unknown",
         "savings",
-        "transfer"
+        "transfer",
+        "macbook",
+        "laptop",
+        "electronics",
+        "phone",
+        "headphones",
+        "naushnik",
+        "tablet",
+        "charger",
+        "phone case",
+        "screen repair",
+        "exchange",
+        "loan",
+        "instalment"
       ]
     },
     {
@@ -1054,7 +1110,10 @@
         "profit",
         "biznes",
         "store income",
-        "customers paid"
+        "customers paid",
+        "shop made",
+        "revenue",
+        "my business made"
       ]
     },
     {
@@ -1093,7 +1152,8 @@
         "stocks",
         "crypto profit",
         "rent income",
-        "foiz"
+        "foiz",
+        "dividends"
       ]
     },
     {
@@ -1117,8 +1177,7 @@
     },
     {
       "surface": "todya",
-      "meaning": "today",
-      "notes": "typo"
+      "meaning": "today"
     },
     {
       "surface": "this morning",
@@ -1146,13 +1205,11 @@
     },
     {
       "surface": "yestarday",
-      "meaning": "yesterday",
-      "notes": "typo"
+      "meaning": "yesterday"
     },
     {
       "surface": "last night",
-      "meaning": "yesterday",
-      "notes": "ambiguous - could still be today for a late-night logger, but yesterday is the safer default"
+      "meaning": "yesterday"
     },
     {
       "surface": "day before yesterday",
@@ -1163,51 +1220,116 @@
       "meaning": "day_before_yesterday"
     },
     {
-      "surface": "2 days ago",
-      "meaning": "2_days_ago"
-    },
-    {
-      "surface": "3 days ago",
-      "meaning": "3_days_ago"
+      "surface": "<N> days ago",
+      "meaning": "<N>_days_ago"
     },
     {
       "surface": "a week ago",
       "meaning": "7_days_ago"
     },
     {
-      "surface": "last week",
-      "meaning": null,
-      "notes": "too vague for a specific date; leave date null and lower confidence"
-    },
-    {
       "surface": "last monday",
       "meaning": "last_monday"
     },
     {
-      "surface": "last friday",
-      "meaning": "last_friday"
-    },
-    {
-      "surface": "friday night",
-      "meaning": "last_friday",
-      "notes": "a past weekday with no 'last' still means the most recent one"
-    },
-    {
-      "surface": "on saturday",
-      "meaning": "last_saturday"
+      "surface": "on monday",
+      "meaning": "last_monday"
     },
     {
       "surface": "this monday",
       "meaning": "this_monday"
     },
     {
+      "surface": "last tuesday",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "on tuesday",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "this tuesday",
+      "meaning": "this_tuesday"
+    },
+    {
+      "surface": "last wednesday",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "on wednesday",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "this wednesday",
+      "meaning": "this_wednesday"
+    },
+    {
+      "surface": "last thursday",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "on thursday",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "this thursday",
+      "meaning": "this_thursday"
+    },
+    {
+      "surface": "last friday",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "on friday",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "this friday",
+      "meaning": "this_friday"
+    },
+    {
+      "surface": "last saturday",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "on saturday",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "this saturday",
+      "meaning": "this_saturday"
+    },
+    {
+      "surface": "last sunday",
+      "meaning": "last_sunday"
+    },
+    {
+      "surface": "on sunday",
+      "meaning": "last_sunday"
+    },
+    {
       "surface": "this sunday",
       "meaning": "this_sunday"
     },
     {
+      "surface": "last week",
+      "meaning": null,
+      "notes": "a PERIOD, not a day"
+    },
+    {
+      "surface": "this month",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "for august",
+      "meaning": null,
+      "notes": "the period the payment COVERS, not the date it was paid"
+    },
+    {
       "surface": "tomorrow",
       "meaning": null,
-      "notes": "FUTURE - the utterance is an intention, not a transaction. Do not create an entry."
+      "notes": "FUTURE"
     },
     {
       "surface": "next week",
@@ -1215,14 +1337,9 @@
       "notes": "FUTURE"
     },
     {
-      "surface": "this month",
+      "surface": "on the 12th",
       "meaning": null,
-      "notes": "a period, not a date; usually appears in questions"
-    },
-    {
-      "surface": "for august",
-      "meaning": null,
-      "notes": "the period the payment covers, NOT the date it was paid"
+      "notes": "an ABSOLUTE calendar date; the enum is relative-only. Preserve in `note`."
     }
   ],
   "merchants": [
@@ -1253,14 +1370,15 @@
     },
     {
       "surface": "uzum market",
-      "canonical": "Uzum Market",
-      "category": "groceries"
+      "canonical": "Uzum",
+      "category": "other",
+      "notes": "A VARIANT surface of Uzum, never a canonical output."
     },
     {
       "surface": "uzum",
       "canonical": "Uzum",
       "category": "other",
-      "notes": "marketplace - category depends on what was bought"
+      "notes": "Marketplace - the category comes from the item bought."
     },
     {
       "surface": "chorsu",
@@ -1279,9 +1397,9 @@
     },
     {
       "surface": "yandex",
-      "canonical": "Yandex",
+      "canonical": "Yandex Taxi",
       "category": "transport",
-      "notes": "bare 'yandex' almost always means the taxi for this user"
+      "notes": "Bare 'yandex' in a spending context resolves to the taxi. There is no merchant simply called 'Yandex'."
     },
     {
       "surface": "uber",
@@ -1376,24 +1494,27 @@
     },
     {
       "surface": "payme",
-      "canonical": "Payme",
-      "category": "fees"
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "click",
-      "canonical": "Click",
-      "category": "fees",
-      "notes": "DANGEROUS: also the English verb. Only a merchant next to an amount or a fee word."
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "uzcard",
-      "canonical": "Uzcard",
-      "category": "fees"
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "humo",
-      "canonical": "Humo",
-      "category": "fees"
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "kapitalbank",
@@ -1469,6 +1590,97 @@
       "surface": "upwork",
       "canonical": "Upwork",
       "category": "freelance"
+    },
+    {
+      "surface": "oloy",
+      "canonical": "Oloy Bozori",
+      "category": "groceries"
+    },
+    {
+      "surface": "wildberries",
+      "canonical": "Wildberries",
+      "category": "clothing"
+    },
+    {
+      "surface": "atto",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "black bear",
+      "canonical": "Black Bear Coffee",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "olx",
+      "canonical": "OLX",
+      "category": "other"
+    },
+    {
+      "surface": "yandex eats",
+      "canonical": "Yandex Eats",
+      "category": "dining"
+    },
+    {
+      "surface": "yandex plus",
+      "canonical": "Yandex Plus",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "yandex lavka",
+      "canonical": "Yandex Lavka",
+      "category": "groceries"
+    },
+    {
+      "surface": "korzinka go",
+      "canonical": "Korzinka Go",
+      "category": "groceries"
+    },
+    {
+      "surface": "artel",
+      "canonical": "Artel",
+      "category": "household"
+    },
+    {
+      "surface": "max way",
+      "canonical": "Max Way",
+      "category": "dining"
+    },
+    {
+      "surface": "chinoz bozor",
+      "canonical": "Chinoz bozor",
+      "category": "groceries"
+    },
+    {
+      "surface": "uzgasoil",
+      "canonical": "UzGasOil",
+      "category": "fuel"
+    },
+    {
+      "surface": "hududgaz",
+      "canonical": "Hududgaz",
+      "category": "utilities"
+    },
+    {
+      "surface": "alif",
+      "canonical": "Alif",
+      "category": "other"
+    },
+    {
+      "surface": "anor",
+      "canonical": "Anor",
+      "category": "other"
+    },
+    {
+      "surface": "zoomrad",
+      "canonical": "Zoomrad",
+      "category": "other"
+    },
+    {
+      "surface": "magnum",
+      "canonical": "Magnum",
+      "category": "groceries"
     }
   ],
   "noise_words": [
@@ -1504,20 +1716,11 @@
     "some",
     "just",
     "like",
-    "about",
-    "around",
-    "approximately",
-    "maybe",
-    "i think",
-    "i guess",
-    "roughly",
-    "or so",
     "something",
     "smth",
     "also",
     "and",
     "then",
-    "again",
     "ok",
     "okay",
     "hmm",
@@ -1525,21 +1728,12 @@
     "um",
     "err",
     "wait",
-    "no wait",
-    "actually",
     "total",
     "totally",
     "all",
     "only",
     "spent money",
     "money",
-    "cash",
-    "by card",
-    "karta",
-    "with card",
-    "cardla",
-    "naqd",
-    "in cash",
     "receipt",
     "no receipt",
     "yeah",
@@ -1548,5 +1742,265 @@
     "well",
     "kinda",
     "sort of"
+  ],
+  "noise_words_notes": "Hedges (about/around/roughly/maybe/i think/or so) moved to hedge_words, self-correction markers (no wait/actually) to self_correction, and payment methods (by card/karta/naqd/in cash) to payment_methods. None of them are filler.",
+  "magnitude_ellipsis": {
+    "rule": "SAME RULE AS UZBEK AND RUSSIAN. A bare integer < 1000 with no magnitude word and no currency word means that many THOUSAND so'm: 'coffee 15' -> 15000, 'taxi 30 today' -> 30000, 'add outcome 200' -> 200000. The old corpus answered 'kofe 15' and 'coffee 15' 1000x apart depending only on a language tag guessed from two tokens; that is now fixed.",
+    "counter_rule": "An explicit currency word makes the number literal: 'log 20 dollars taxi' = 20 USD.",
+    "counter_rule_2": "Digits >= 1000 are already literal: '45000', '23000'.",
+    "counter_rule_3": "A number followed by a counter (2 coffees, 3 kg, x 2, 3 nights) is a QUANTITY."
+  },
+  "date_notes": "See conventions.date_enum. Emits only the legal enum; there are no sentinel values.",
+  "conventions": {
+    "purpose": "Decision rules shared by all four lexicons and by every line of the corpus. Where a rule is stated here, no file may contradict it.",
+    "magnitude_ellipsis": "A bare integer < 1000 with NO magnitude word and NO currency word in an expense/income frame means that many THOUSAND so'm ('taksiga 45' / 'такси 25' / 'coffee 15' -> 45000 / 25000 / 15000). THIS APPLIES IN EVERY LANGUAGE - the app is UZS-first and the rule must not depend on a language tag guessed from two tokens. Counter-rules: (a) if an explicit currency word is present the number is literal ('5 dollar' = 5); (b) digits >= 1000 are already literal; (c) a number immediately followed by -ta / kg / kilo / dona / litr / marta / штук / foiz / % is a QUANTITY, not an amount.",
+    "currency": "currency is filled ONLY from an explicit currency token in the text. A bare number yields currency=null and the app applies the user's default later. Never infer UZS from a magnitude word ('ming', 'тыщ', 'k') and never from plausibility.",
+    "reject_convention": "Queries, balance/budget statements, negations, future intentions, cancelled or returned purchases, price commentary, third-party payments and app commands are NOT transactions. They are labelled confidence = 0.0 with EVERY slot blanked: amount, currency, merchant, note and date all null and category 'other'. A single `confidence == 0.0` gate is therefore sufficient to refuse, in all four languages. `kind` has no null case in the schema, so it carries the direction the utterance implies.",
+    "multi_transaction": "When one utterance contains several transactions, expected = the FIRST transaction only. Amounts are NEVER summed (a bill plus a tip is two records, not one total) and the line is scored 0.4. The remaining records cannot be expressed in a one-record schema and must be surfaced by the app.",
+    "transfer_class": "ATM withdrawals, wallet top-ups, moving money to savings, lending, borrowing, repaying a loan, P2P card transfers and currency exchange move money without consuming it. The schema has no `transfer` kind, so they are recorded as expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4 for the whole class.",
+    "date_enum": "The ONLY legal date values are: today, yesterday, day_before_yesterday, last_<weekday>, this_<weekday>, <N>_days_ago, and null. There are no sentinels (no AMBIGUOUS/FUTURE/RECURRING/UNSUPPORTED) and no bare weekday names. Resolution rules: a time of day (ertalab / kechqurun / tushda / hozir / утром / вечером / this morning / tonight) -> today; a BARE weekday with no 'o'tgan'/'shu'/'прошлый'/'этот'/'last'/'this' modifier -> null, because it is genuinely ambiguous between past and future; an explicit day COUNT ('7 kun oldin', 'неделю назад', 'a week ago') -> <N>_days_ago; a PERIOD ('o'tgan hafta', 'на прошлой неделе', 'last week', 'o'tgan oy', 'this month', 'на выходных') -> null, because resolving it to a day would be an invention; an absolute calendar date ('8 mart', '1-sentabr', 'the 12th') -> null, with the phrase preserved in `note`; a recurrence ('har oy', 'oyiga', 'kuniga') -> null.",
+    "confidence_scale": "Six points only, each with a written meaning. 0.95 = unambiguous, every slot recoverable. 0.8 = one small inference (fuzzy merchant match, cross-script token, spoken numeral, hedged amount). 0.6 = exactly one genuinely underdetermined slot (magnitude ellipsis, contested category, approximation). 0.4 = two or more underdetermined slots, a missing amount, a multi-transaction line, or the transfer class. 0.2 = intent is present but nothing is loggable - the app must prompt. 0.0 = not a transaction; refuse. `difficulty` is derived from this: 0.95 easy, 0.8 medium, <= 0.6 hard.",
+    "note_field": "`note` is a SHORT EXTRACTIVE span of the user's own words - the item or service, in the language and script of the utterance - or null. It is never annotator commentary, never a translation, never a meta-description of the parse, and never a date phrase (except an absolute calendar date, which has nowhere else to go). All explanation belongs in the corpus row's `notes` field, which is not a model output.",
+    "merchant_canonicalisation": "One brand yields exactly ONE gold string in every file: Korzinka, Korzinka Go, Makro, Havas, Chorsu Bozor, Oloy Bozori, Uzum ('uzum market' is a VARIANT surface of it, never a canonical), Evos, Oqtepa Lavash, Chopar Pizza, Max Way, Les Ailes, KFC, McDonald's, Express24, Yandex Eats, Yandex Taxi (bare 'yandex' in a spending context resolves here), Yandex Go, Yandex Plus, Yandex Lavka, Bolt, Uber, MyTaxi, Beeline, Ucell, Uzmobile, Mobiuz, Humans, Texnomart, Mediapark, Idea, Artel, Netflix, Spotify, iCloud, ChatGPT, Zara, Starbucks, Black Bear Coffee, OLX, Wildberries, Upwork, Kapitalbank, TBC Bank, Alif, Anor, Zoomrad, UzGasOil, Hududgaz. A personal name is NEVER a merchant.",
+    "category_rules": {
+      "cafe_vs_dining": "The VENUE word wins over the amount and over what was eaten. cafe / kafe / кафе / kofeynya / choy / kofe and the drink nouns -> cafe_coffee. restoran / choyxona / osh / lavash / somsa / burger / pizza / obed / tushlik and the meal nouns -> dining.",
+      "groceries_vs_dining": "Raw ingredients and supermarket/bozor merchants -> groceries, including supermarket DELIVERY. Prepared food, food delivery and eat-in venues -> dining.",
+      "gaz": "The VERB decides, never the noun: quydim / заправил / залил / 'filled the tank' -> fuel; to'ladim / заплатил / 'gaz puli' / 'за газ' / 'gas bill' -> utilities.",
+      "car_spend": "Consumed into the tank -> fuel. Service, parts, wash (moyka), parking, tyres, engine oil -> transport. State-imposed or contractual charges (shtraf / jarima / ГАИ / insurance / notary / customs) -> fees, even when a car triggered them.",
+      "communication_vs_utilities": "Billed by a TELECOM (mobile balance, HOME INTERNET, tariff, SIM) -> communication. Billed by the building or the municipality (svet, gaz bill, suv, issiq suv, chiqindi, kommunalka, domofon, lift, TSJ, mahalla puli) -> utilities. Home internet is communication in EVERY file.",
+      "household_vs_other": "Durable goods for the DWELLING (fridge, TV, kettle, furniture, carpet, lamps, remont, tools) -> household. PORTABLE PERSONAL DEVICES and their repairs (phone, laptop, macbook, headphones/naushnik, tablet, chargers, cases) -> other, in every language. The corpus has 8+ lines pleading for a dedicated `electronics` category; until the schema gains one, `other` is the agreed home.",
+      "memberships": "Physical-activity facilities (gym, sportzal, bassein, fitnes) -> health regardless of the word abonement/membership. Media and software recurring charges -> subscriptions. Venues attended for fun (kino, akvapark, bouling, konsert, teatr) -> entertainment.",
+      "beneficiary": "A NON-HUMAN beneficiary (mushuk / it / kuchuk / коту / собаке / cat / dog) -> pets, always. For a human beneficiary: if the object is a gift-type object (sovg'a / podarok / gul / atir / buket / present / flowers / toy) -> gifts; else if the object has its own category (dori -> health, kitob -> education, kiyim -> clothing) -> that category; else (bare cash) -> family.",
+      "ceremonies": "to'y / ma'raka / nikoh / gap / gashtak / xudoyi / beshik to'y / sunnat to'y / yubiley and any named gift object -> gifts. Unconditional cash to a relative -> family. sadaqa / ehson / zakot / masjid / xayriya / fond / yetimxona -> charity.",
+      "child_spend": "A named institution (maktab, bog'cha, universitet, kurs, kontrakt) wins over the physical item: a school uniform is education, a child's contract is education. Ordinary clothes with no institution named stay clothing.",
+      "investment_vs_other_income": "Proceeds from a financial instrument or income-producing asset (deposit interest, dividends, crypto, a flat rented out) -> investment. Proceeds from selling a personal possession -> other_income.",
+      "water": "The item or preposition decides, NEVER the amount size: 'бутылка воды' / 'suv oldim' -> groceries; 'за воду' / 'suv puli' -> utilities. Category-from-magnitude is not a rule a deterministic parser may implement."
+    }
+  },
+  "negation_markers": [
+    {
+      "surface": "nothing",
+      "lang": "en",
+      "notes": "'spent nothing today'"
+    },
+    {
+      "surface": "didnt / didn't",
+      "lang": "en"
+    },
+    {
+      "surface": "almost bought",
+      "lang": "en"
+    },
+    {
+      "surface": "changed my mind",
+      "lang": "en"
+    },
+    {
+      "surface": "not",
+      "lang": "en",
+      "notes": "CAUTION: also the self-correction marker ('300k not 400k'), where the FIRST figure wins"
+    }
+  ],
+  "query_markers": [
+    {
+      "surface": "how much",
+      "lang": "en"
+    },
+    {
+      "surface": "show me",
+      "lang": "en"
+    },
+    {
+      "surface": "what is my balance",
+      "lang": "en"
+    },
+    {
+      "surface": "is ... too much",
+      "lang": "en",
+      "notes": "an opinion question"
+    }
+  ],
+  "intent_markers": [
+    {
+      "surface": "tomorrow",
+      "lang": "en",
+      "meaning": "future"
+    },
+    {
+      "surface": "will spend",
+      "lang": "en",
+      "meaning": "future"
+    },
+    {
+      "surface": "need to pay",
+      "lang": "en",
+      "meaning": "future"
+    },
+    {
+      "surface": "wanted to buy",
+      "lang": "en",
+      "meaning": "cancelled"
+    },
+    {
+      "surface": "i earn",
+      "lang": "en",
+      "meaning": "standing_fact",
+      "notes": "a standing salary figure, not a payday event"
+    }
+  ],
+  "hedge_words": {
+    "notes": "Hedge, polarity and range markers. THESE ARE NOT NOISE WORDS. Stripping them turns 'chut ne kupil kurtku za 900 tysh' into a logged 900 000 purchase and turns every estimate into a hard figure. They must survive tokenisation and lower confidence (approximate -> 0.6) or force a reject (polarity).",
+    "entries": [
+      {
+        "surface": "about",
+        "lang": "en",
+        "effect": "approximate"
+      },
+      {
+        "surface": "around",
+        "lang": "en",
+        "effect": "approximate"
+      },
+      {
+        "surface": "roughly",
+        "lang": "en",
+        "effect": "approximate"
+      },
+      {
+        "surface": "i think",
+        "lang": "en",
+        "effect": "approximate"
+      },
+      {
+        "surface": "or maybe",
+        "lang": "en",
+        "effect": "two_candidates",
+        "notes": "two candidate amounts -> null the amount"
+      }
+    ]
+  },
+  "payment_methods": {
+    "notes": "HOW the money moved. It is metadata, never the merchant and never the category. 'naliсhkoy 200 tysh za produkty' is groceries; the method word must not reach the merchant slot.",
+    "entries": [
+      {
+        "surface": "cash",
+        "lang": "en",
+        "method": "cash"
+      },
+      {
+        "surface": "in cash",
+        "lang": "en",
+        "method": "cash"
+      },
+      {
+        "surface": "by card",
+        "lang": "en",
+        "method": "card"
+      },
+      {
+        "surface": "transferred",
+        "lang": "en",
+        "method": "transfer"
+      }
+    ]
+  },
+  "transfer_markers": {
+    "notes": "Money moving WITHOUT being consumed. The schema has no `transfer` kind, so every member of this class is expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4.",
+    "entries": [
+      {
+        "surface": "withdrew",
+        "lang": "en",
+        "kind": "atm_withdrawal"
+      },
+      {
+        "surface": "borrowed from",
+        "lang": "en",
+        "kind": "borrow"
+      },
+      {
+        "surface": "lent",
+        "lang": "en",
+        "kind": "lend"
+      },
+      {
+        "surface": "to savings",
+        "lang": "en",
+        "kind": "savings"
+      },
+      {
+        "surface": "instalment",
+        "lang": "en",
+        "kind": "instalment"
+      }
+    ]
+  },
+  "per_unit_frames": [
+    {
+      "surface": "at <X> each",
+      "lang": "en",
+      "meaning": "price per item"
+    },
+    {
+      "surface": "split between <N>",
+      "lang": "en",
+      "meaning": "record the user's share"
+    },
+    {
+      "surface": "my share",
+      "lang": "en",
+      "meaning": "the user's share"
+    }
+  ],
+  "self_correction": {
+    "rule": "The speaker restates an amount mid-utterance. Which figure wins depends on the marker: 'no wait' / 'yo'q' / 'emas' / 'нет' / 'ой' / 'то есть' -> the LATER figure is correct. 'not X' / 'X emas Y' with the correction FOLLOWING -> also the later figure. But English 'paid 300k not 400k' puts the correction second and negates it, so the FIRST figure wins. Confidence 0.6.",
+    "examples": [
+      "obedga 50 ming emas 60 ming ketdi",
+      "taksiga 25 ming yo'q 35",
+      "такси 25 нет 35",
+      "потратил 50 ой 60",
+      "300 то есть 350",
+      "i spent 50k no wait 60k",
+      "paid 300k not 400k"
+    ]
+  },
+  "regret_markers": {
+    "notes": "Loss-aversion / regret vocabulary. The app is built on loss aversion, so these are the emotionally loaded utterances it most needs to handle. CRITICAL: affect is NOT a reject signal - 'yana 200 ming behuda ketdi' is a real 200 000 expense. Only 'pulim tugadi' and its kin, which describe a state rather than an event, are rejects.",
+    "entries": [
+      {
+        "surface": "again",
+        "lang": "en"
+      },
+      {
+        "surface": "wasted",
+        "lang": "en"
+      }
+    ]
+  },
+  "bank_sms_paste": {
+    "rule": "A large share of real input is PASTED VERBATIM from a bank push notification. Take the FIRST amount (the debit/credit) and ignore the trailing balance. The merchant often appears as an ALL-CAPS Latin string inside Cyrillic text. 'на сумму' is the most frequent real surface of сумма in payment language - it means 'in the amount of', it is NOT the currency сум.",
+    "examples": [
+      "Списание 45 000 UZS. Korzinka. Баланс 1 234 567",
+      "Оплата на сумму 340 000 сум",
+      "Покупка 120000 UZS YANDEX GO. Доступно 890000",
+      "Popolnenie 5 200 000 UZS. Zarplata"
+    ]
+  },
+  "matching_rules": [
+    {
+      "rule": "'gas' is ambiguous and the VERB/NOUN decides",
+      "detail": "'gas' + bill/utilities context -> utilities; 'gas' + station/tank/filled -> fuel. The noun alone never decides. See conventions.category_rules.gaz."
+    },
+    {
+      "rule": "'outcome' is only an expense marker in the app-command frame",
+      "detail": "'add outcome 12k' is an expense; 'outcome was good yesterday' is the ordinary English noun and must be rejected."
+    },
+    {
+      "rule": "'deposit' removed from rent keywords",
+      "detail": "The bare keyword could never fire correctly - the corpus resolves 'deposit interest' to investment and 'rent deposit returned' to refund. Only the multiword 'rent deposit' stays under rent."
+    },
+    {
+      "rule": "longest match wins",
+      "detail": "'uzum market' beats 'uzum'; 'yandex plus' beats 'yandex'; 'gas bill' beats 'gas'."
+    }
   ]
 }

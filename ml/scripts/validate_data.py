@@ -178,10 +178,17 @@ def check_corpora() -> None:
             if kind not in {"expense", "income"}:
                 errors.append(f"{where}: bad kind '{kind}'")
 
+            # A reject row (confidence exactly 0.0) blanks every slot and pins category to "other"
+            # whichever way the sentence leaned, so the kind/category pairing rule does not apply.
+            is_reject = expected.get("confidence") == 0.0
+
             category = expected.get("category")
             if category is not None:
                 if category not in CATEGORIES:
                     errors.append(f"{where}: unknown category '{category}'")
+                elif is_reject:
+                    if category != "other":
+                        errors.append(f"{where}: reject row must use category 'other', got '{category}'")
                 elif kind == "income" and category not in INCOME_CATEGORIES:
                     errors.append(f"{where}: income labelled with expense category '{category}'")
                 elif kind == "expense" and category not in EXPENSE_CATEGORIES:
@@ -190,6 +197,9 @@ def check_corpora() -> None:
             currency = expected.get("currency")
             if currency is not None and currency not in CURRENCIES:
                 errors.append(f"{where}: unsupported currency '{currency}'")
+
+            if is_reject and expected.get("amount") is not None:
+                errors.append(f"{where}: reject row must blank the amount")
 
             amount = expected.get("amount")
             if amount is not None:

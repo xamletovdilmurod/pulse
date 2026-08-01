@@ -415,17 +415,13 @@
     },
     {
       "surface": "som",
-      "iso": "UZS",
-      "notes": "DICTATION FORM - apostrophe dropped. Collides with Kyrgyz som (KGS); disambiguate by geography words like bishkek/qirgiziston"
+      "iso": null,
+      "notes": "AMBIGUOUS - the apostrophe-less Uzbek so'm OR the Kyrgyz som. No default: resolve only from a place word (bishkek, o'sh, qirg'iziston -> KGS), otherwise leave currency null and lower confidence."
     },
     {
       "surface": "sum",
       "iso": "UZS",
       "notes": "very common latin spelling"
-    },
-    {
-      "surface": "som",
-      "iso": "UZS"
     },
     {
       "surface": "сум",
@@ -481,7 +477,8 @@
     {
       "surface": "ko'k",
       "iso": "USD",
-      "notes": "literally 'green' - slang for dollars, only with an amount"
+      "notes": "LOW-WEIGHT VARIANT - a calque of Russian 'зелень'. The real slang is baks/бакс.",
+      "weight": "low"
     },
     {
       "surface": "dollars",
@@ -528,11 +525,6 @@
       "iso": "KZT"
     },
     {
-      "surface": "som (kgs)",
-      "iso": "KGS",
-      "notes": "Kyrgyz som. Written identically to the dictation form of uzbek so'm - only geography disambiguates"
-    },
-    {
       "surface": "somoni",
       "iso": "TJS",
       "notes": "Tajik. Beware: 'dushanbe' the city looks like 'dushanba' = Monday"
@@ -568,6 +560,30 @@
     {
       "surface": "дирхам",
       "iso": "AED"
+    },
+    {
+      "surface": "бакис",
+      "iso": "USD"
+    },
+    {
+      "surface": "so‘m",
+      "iso": "UZS",
+      "notes": "U+2018 turned comma"
+    },
+    {
+      "surface": "so`m",
+      "iso": "UZS",
+      "notes": "backtick"
+    },
+    {
+      "surface": "so m",
+      "iso": "UZS",
+      "notes": "DICTATION ARTIFACT - the apostrophe becomes a space and the word splits into two tokens"
+    },
+    {
+      "surface": "mingsom",
+      "iso": "UZS",
+      "notes": "magnitude and currency glued into a single token"
     }
   ],
   "expense_markers": [
@@ -801,7 +817,6 @@
         "produkti",
         "produktlar",
         "продукты",
-        "продуктыга",
         "magazin",
         "магазин",
         "magazinga",
@@ -824,7 +839,9 @@
         "myaso",
         "moloko",
         "xleb",
-        "produkt"
+        "produkt",
+        "produktlarga",
+        "nonvoyxonaga"
       ]
     },
     {
@@ -871,7 +888,6 @@
         "kapuchino",
         "капучино",
         "latte",
-        "latte",
         "raf",
         "amerikano",
         "choy",
@@ -910,7 +926,10 @@
         "moyka",
         "мойка",
         "shina",
-        "avtoservis"
+        "avtoservis",
+        "atto kartaga",
+        "moykasi",
+        "shinamontaj"
       ]
     },
     {
@@ -943,7 +962,6 @@
         "ijara",
         "ижара",
         "kvartira uchun",
-        "квартплата",
         "kvartira pul",
         "arendator",
         "rent"
@@ -960,10 +978,6 @@
         "elektr",
         "gaz",
         "газ",
-        "suv",
-        "сув",
-        "voda",
-        "вода",
         "otoplenie",
         "otopleniye",
         "domofon",
@@ -971,9 +985,16 @@
         "musor",
         "мусор",
         "chiqindi",
-        "uy interneti",
-        "internet uchun",
-        "kvartplata"
+        "kvartplata",
+        "lift puli",
+        "domofonga",
+        "chiqindi puli",
+        "mahalla puli",
+        "tsj",
+        "suv puli",
+        "сув пули",
+        "za vodu",
+        "issiq suv"
       ]
     },
     {
@@ -1006,7 +1027,11 @@
         "gym",
         "fitnes",
         "фитнес",
-        "sport zal"
+        "sport zal",
+        "bassein",
+        "bassein abonementi",
+        "sportzal",
+        "sport abonement"
       ]
     },
     {
@@ -1107,7 +1132,13 @@
         "gulga",
         "gul oldim",
         "pul qo'ydim",
-        "ziyofat"
+        "ziyofat",
+        "gap puli",
+        "gapga",
+        "gashtak",
+        "xudoyi",
+        "nikoh to'yi",
+        "ma'raka"
       ]
     },
     {
@@ -1154,7 +1185,11 @@
         "sim karta",
         "tarif",
         "тариф",
-        "svyaz"
+        "svyaz",
+        "uy interneti",
+        "internet uchun",
+        "uy internetiga",
+        "internetga"
       ]
     },
     {
@@ -1172,8 +1207,6 @@
         "chatgpt",
         "claude",
         "apple music",
-        "abonent",
-        "abonement",
         "subscription",
         "avtoprodleniye"
       ]
@@ -1251,7 +1284,8 @@
         "epilyatsiya",
         "barber",
         "стрижка",
-        "strijka"
+        "strijka",
+        "massaj"
       ]
     },
     {
@@ -1260,7 +1294,6 @@
         "mushuk",
         "мушук",
         "mushukka",
-        "it",
         "kuchuk",
         "кучук",
         "korm",
@@ -1273,7 +1306,9 @@
         "кошка",
         "sobaka",
         "akvarium",
-        "baliqcha"
+        "baliqcha",
+        "itga",
+        "itim"
       ]
     },
     {
@@ -1315,7 +1350,11 @@
         "davlat boji",
         "notarius",
         "перевод комиссия",
-        "usluga haqi"
+        "usluga haqi",
+        "gai",
+        "gaiga",
+        "straxovka",
+        "avtostraxovka"
       ]
     },
     {
@@ -1333,7 +1372,19 @@
         "zaryadka",
         "chexol",
         "prochee",
-        "hech nima"
+        "hech nima",
+        "quloqchin",
+        "planshet",
+        "noutbuk",
+        "telefon oldim",
+        "qarz",
+        "kredit",
+        "bo'lib to'lash",
+        "muddatli to'lov",
+        "nasiya",
+        "birinchi to'lov",
+        "perevod qildim",
+        "kartasiga"
       ]
     },
     {
@@ -1467,6 +1518,219 @@
       "meaning": "today"
     },
     {
+      "surface": "hozir",
+      "meaning": "today"
+    },
+    {
+      "surface": "ҳозир",
+      "meaning": "today"
+    },
+    {
+      "surface": "ertalab",
+      "meaning": "today"
+    },
+    {
+      "surface": "эрталаб",
+      "meaning": "today"
+    },
+    {
+      "surface": "tushda",
+      "meaning": "today"
+    },
+    {
+      "surface": "тушда",
+      "meaning": "today"
+    },
+    {
+      "surface": "kechqurun",
+      "meaning": "today"
+    },
+    {
+      "surface": "кечқурун",
+      "meaning": "today"
+    },
+    {
+      "surface": "кечкурун",
+      "meaning": "today"
+    },
+    {
+      "surface": "kechasi",
+      "meaning": "today"
+    },
+    {
+      "surface": "kecha",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "кеча",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "kechagi",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "кечаги",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "avvalgi kuni",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "аввалги куни",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "kechadan oldin",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "indinga oldin",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "<N> kun oldin",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> кун олдин",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> kun burun",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> кун бурун",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> kun avval",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "o'tgan dushanba",
+      "meaning": "last_monday"
+    },
+    {
+      "surface": "shu dushanba",
+      "meaning": "this_monday"
+    },
+    {
+      "surface": "o'tgan seshanba",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "shu seshanba",
+      "meaning": "this_tuesday"
+    },
+    {
+      "surface": "o'tgan chorshanba",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "shu chorshanba",
+      "meaning": "this_wednesday"
+    },
+    {
+      "surface": "o'tgan payshanba",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "shu payshanba",
+      "meaning": "this_thursday"
+    },
+    {
+      "surface": "o'tgan juma",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "shu juma",
+      "meaning": "this_friday"
+    },
+    {
+      "surface": "o'tgan shanba",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "shu shanba",
+      "meaning": "this_saturday"
+    },
+    {
+      "surface": "o'tgan yakshanba",
+      "meaning": "last_sunday"
+    },
+    {
+      "surface": "shu yakshanba",
+      "meaning": "this_sunday"
+    },
+    {
+      "surface": "o'tgan kuni",
+      "meaning": null,
+      "notes": "TRAP: looks like 'avvalgi kuni' but means the vague 'the other day'. NOT day_before_yesterday."
+    },
+    {
+      "surface": "o'tgan hafta",
+      "meaning": null,
+      "notes": "a PERIOD, not a day. 7_days_ago would be an over-precise invention."
+    },
+    {
+      "surface": "ўтган ҳафта",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "o'tgan oy",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "bu oy",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "bu hafta",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "<weekday> kuni",
+      "meaning": null,
+      "notes": "BARE weekday with no o'tgan/shu is genuinely ambiguous between past and future."
+    },
+    {
+      "surface": "ertaga",
+      "meaning": null,
+      "notes": "FUTURE - an intention, not a transaction. See intent_markers."
+    },
+    {
+      "surface": "эртага",
+      "meaning": null,
+      "notes": "FUTURE"
+    },
+    {
+      "surface": "har oy",
+      "meaning": null,
+      "notes": "a RECURRENCE, not a date"
+    },
+    {
+      "surface": "oyiga",
+      "meaning": null,
+      "notes": "recurrence"
+    },
+    {
+      "surface": "kuniga",
+      "meaning": null,
+      "notes": "recurrence"
+    },
+    {
+      "surface": "<N>-sentabr / oyning <N>-si",
+      "meaning": null,
+      "notes": "an ABSOLUTE calendar date; the enum is relative-only. Preserve the phrase in `note`."
+    },
+    {
       "surface": "сегодня",
       "meaning": "today"
     },
@@ -1479,15 +1743,6 @@
       "meaning": "today"
     },
     {
-      "surface": "kecha",
-      "meaning": "yesterday",
-      "notes": "CAUTION: 'kechqurun'/'kechasi' mean evening/at night, not yesterday - prefix collision"
-    },
-    {
-      "surface": "кеча",
-      "meaning": "yesterday"
-    },
-    {
       "surface": "вчера",
       "meaning": "yesterday"
     },
@@ -1496,17 +1751,8 @@
       "meaning": "yesterday"
     },
     {
-      "surface": "kechagi kun",
+      "surface": "yesterday",
       "meaning": "yesterday"
-    },
-    {
-      "surface": "avvalgi kuni",
-      "meaning": "day_before_yesterday"
-    },
-    {
-      "surface": "o'tgan kuni",
-      "meaning": "day_before_yesterday",
-      "notes": "loosely 'the other day'; users mean two days back"
     },
     {
       "surface": "позавчера",
@@ -1517,110 +1763,20 @@
       "meaning": "day_before_yesterday"
     },
     {
-      "surface": "N kun oldin",
-      "meaning": "<N>_days_ago"
+      "surface": "в прошлую пятницу",
+      "meaning": "last_friday"
     },
     {
-      "surface": "N kun avval",
-      "meaning": "<N>_days_ago"
+      "surface": "в прошлую субботу",
+      "meaning": "last_saturday"
     },
     {
-      "surface": "N кун олдин",
+      "surface": "<N> дней назад",
       "meaning": "<N>_days_ago"
     },
     {
       "surface": "N dnya nazad",
       "meaning": "<N>_days_ago"
-    },
-    {
-      "surface": "N дней назад",
-      "meaning": "<N>_days_ago"
-    },
-    {
-      "surface": "o'tgan dushanba",
-      "meaning": "last_monday"
-    },
-    {
-      "surface": "o'tgan juma",
-      "meaning": "last_friday"
-    },
-    {
-      "surface": "o'tgan shanba",
-      "meaning": "last_saturday"
-    },
-    {
-      "surface": "прошлую пятницу",
-      "meaning": "last_friday"
-    },
-    {
-      "surface": "shu dushanba",
-      "meaning": "this_monday"
-    },
-    {
-      "surface": "bu payshanba",
-      "meaning": "this_thursday"
-    },
-    {
-      "surface": "dushanba kuni",
-      "meaning": "this_monday",
-      "notes": "bare weekday+kuni is genuinely ambiguous past/future; lower confidence"
-    },
-    {
-      "surface": "seshanba kuni",
-      "meaning": "this_tuesday"
-    },
-    {
-      "surface": "chorshanba",
-      "meaning": "wednesday"
-    },
-    {
-      "surface": "payshanba",
-      "meaning": "thursday"
-    },
-    {
-      "surface": "juma",
-      "meaning": "friday"
-    },
-    {
-      "surface": "shanba",
-      "meaning": "saturday"
-    },
-    {
-      "surface": "yakshanba",
-      "meaning": "sunday"
-    },
-    {
-      "surface": "пятницу",
-      "meaning": "friday"
-    },
-    {
-      "surface": "субботу",
-      "meaning": "saturday"
-    },
-    {
-      "surface": "ertalab",
-      "meaning": null,
-      "notes": "'in the morning' - a time of day, NOT a date. Must not set date"
-    },
-    {
-      "surface": "kechqurun",
-      "meaning": null,
-      "notes": "'in the evening' - NOT a date, and its prefix looks like 'kecha'"
-    },
-    {
-      "surface": "tushda",
-      "meaning": null,
-      "notes": "'at midday' - not a date"
-    },
-    {
-      "surface": "oyiga",
-      "meaning": null,
-      "notes": "'per month' - a recurrence, not a date"
-    },
-    {
-      "surface": "har oy",
-      "meaning": null,
-      "notes": "'every month' - recurrence"
     }
   ],
   "merchants": [
@@ -1662,7 +1818,11 @@
     {
       "surface": "chorsu",
       "canonical": "Chorsu Bozor",
-      "category": "groceries"
+      "category": "groceries",
+      "variants": [
+        "чорсу",
+        "chorsu bozor"
+      ]
     },
     {
       "surface": "chinoz bozor",
@@ -1671,13 +1831,15 @@
     },
     {
       "surface": "uzum market",
-      "canonical": "Uzum Market",
-      "category": "groceries"
+      "canonical": "Uzum",
+      "category": "other",
+      "notes": "A VARIANT surface of Uzum, never a canonical output."
     },
     {
       "surface": "uzum",
       "canonical": "Uzum",
-      "category": "other"
+      "category": "other",
+      "notes": "Marketplace - the category comes from the item bought."
     },
     {
       "surface": "узум",
@@ -1761,9 +1923,9 @@
     },
     {
       "surface": "atto",
-      "canonical": "ATTO",
-      "category": "transport",
-      "notes": "Tashkent metro/bus fare card"
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees. ATTO is the Tashkent fare card; a top-up is transport with merchant=null."
     },
     {
       "surface": "uzgazoil",
@@ -1813,7 +1975,8 @@
     {
       "surface": "humans",
       "canonical": "Humans",
-      "category": "communication"
+      "category": "communication",
+      "notes": "The TELECOM. Do not confuse with 'humo', the card scheme - they are different entities and the Cyrillic forms (Хуманс vs Хумо) differ too."
     },
     {
       "surface": "netflix",
@@ -1834,25 +1997,25 @@
       "surface": "click",
       "canonical": null,
       "category": null,
-      "notes": "PAYMENT RAIL, not a merchant. 'click orqali to'ladim' - must not fill merchant"
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "payme",
       "canonical": null,
       "category": null,
-      "notes": "PAYMENT RAIL, not a merchant"
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "uzcard",
       "canonical": null,
       "category": null,
-      "notes": "card scheme, not a merchant"
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "humo",
       "canonical": null,
       "category": null,
-      "notes": "card scheme, not a merchant"
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
     },
     {
       "surface": "kapitalbank",
@@ -1863,6 +2026,101 @@
       "surface": "tbc",
       "canonical": "TBC Bank",
       "category": "fees"
+    },
+    {
+      "surface": "oloy bozori",
+      "canonical": "Oloy Bozori",
+      "category": "groceries"
+    },
+    {
+      "surface": "alay",
+      "canonical": "Oloy Bozori",
+      "category": "groceries"
+    },
+    {
+      "surface": "macdonalds",
+      "canonical": "McDonald's",
+      "category": "dining"
+    },
+    {
+      "surface": "starbucks",
+      "canonical": "Starbucks",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "yandex lavka",
+      "canonical": "Yandex Lavka",
+      "category": "groceries"
+    },
+    {
+      "surface": "korzinka go",
+      "canonical": "Korzinka Go",
+      "category": "groceries"
+    },
+    {
+      "surface": "olx",
+      "canonical": "OLX",
+      "category": "other"
+    },
+    {
+      "surface": "wildberries",
+      "canonical": "Wildberries",
+      "category": "clothing"
+    },
+    {
+      "surface": "zara",
+      "canonical": "Zara",
+      "category": "clothing"
+    },
+    {
+      "surface": "uber",
+      "canonical": "Uber",
+      "category": "transport"
+    },
+    {
+      "surface": "alif",
+      "canonical": "Alif",
+      "category": "other"
+    },
+    {
+      "surface": "anor",
+      "canonical": "Anor",
+      "category": "other"
+    },
+    {
+      "surface": "zoomrad",
+      "canonical": "Zoomrad",
+      "category": "other"
+    },
+    {
+      "surface": "upwork",
+      "canonical": "Upwork",
+      "category": "freelance"
+    },
+    {
+      "surface": "icloud",
+      "canonical": "iCloud",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "chatgpt",
+      "canonical": "ChatGPT",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "magnum",
+      "canonical": "Magnum",
+      "category": "groceries"
+    },
+    {
+      "surface": "hududgaz",
+      "canonical": "Hududgaz",
+      "category": "utilities"
+    },
+    {
+      "surface": "uzum tezkor",
+      "canonical": "Uzum Tezkor",
+      "category": "dining"
     }
   ],
   "noise_words": [
@@ -1888,12 +2146,6 @@
     "hozir",
     "shекилли",
     "shekilli",
-    "chamasi",
-    "taxminan",
-    "primerno",
-    "примерно",
-    "okolo",
-    "около",
     "eee",
     "ee",
     "aaa",
@@ -1901,10 +2153,7 @@
     "uf",
     "voy",
     "e",
-    "yo'q",
-    "yoq",
     "menimcha",
-    "aslida",
     "umuman",
     "qisqasi",
     "korche",
@@ -1933,17 +2182,455 @@
     "ozimga",
     "biz",
     "bizga",
-    "pul",
-    "puldan",
-    "naqd",
-    "naxt",
-    "karta",
-    "kartadan",
-    "kartochkadan",
-    "plastikdan",
     "orqali",
     "через",
-    "cherez",
-    "atrofida"
+    "cherez"
+  ],
+  "noise_words_notes": "Hedges (chamasi/taxminan/primerno/okolo/atrofida) moved to hedge_words; polarity/self-correction markers (yo'q) to negation_markers and self_correction; payment methods (naqd/karta/kartadan/plastikdan) to payment_methods; and 'pul' was removed outright because it collides with gaz puli / yo'l puli / uy puli / cho'ntak puli / gap puli.",
+  "inverted_approximation": {
+    "rule": "RUSSIAN INVERTED NUMERAL ORDER = APPROXIMATION. Putting the numeral AFTER the magnitude word means 'about': 'тыщ двадцать' = about 20 000, 'тысяч сто' = about 100 000, 'лямов пять' = about 5 000 000, 'дней пять назад' = about five days ago. A parser that only handles <numeral><magnitude> reads 'тыщ' as an unattached magnitude and loses the amount entirely.",
+    "examples": [
+      "тыщ двадцать на такси",
+      "тысяч сто отдал",
+      "лямов пять",
+      "косарей десять",
+      "дней пять назад"
+    ]
+  },
+  "date_notes": "See conventions.date_enum. Emits only the legal enum; there are no sentinel values.",
+  "conventions": {
+    "purpose": "Decision rules shared by all four lexicons and by every line of the corpus. Where a rule is stated here, no file may contradict it.",
+    "magnitude_ellipsis": "A bare integer < 1000 with NO magnitude word and NO currency word in an expense/income frame means that many THOUSAND so'm ('taksiga 45' / 'такси 25' / 'coffee 15' -> 45000 / 25000 / 15000). THIS APPLIES IN EVERY LANGUAGE - the app is UZS-first and the rule must not depend on a language tag guessed from two tokens. Counter-rules: (a) if an explicit currency word is present the number is literal ('5 dollar' = 5); (b) digits >= 1000 are already literal; (c) a number immediately followed by -ta / kg / kilo / dona / litr / marta / штук / foiz / % is a QUANTITY, not an amount.",
+    "currency": "currency is filled ONLY from an explicit currency token in the text. A bare number yields currency=null and the app applies the user's default later. Never infer UZS from a magnitude word ('ming', 'тыщ', 'k') and never from plausibility.",
+    "reject_convention": "Queries, balance/budget statements, negations, future intentions, cancelled or returned purchases, price commentary, third-party payments and app commands are NOT transactions. They are labelled confidence = 0.0 with EVERY slot blanked: amount, currency, merchant, note and date all null and category 'other'. A single `confidence == 0.0` gate is therefore sufficient to refuse, in all four languages. `kind` has no null case in the schema, so it carries the direction the utterance implies.",
+    "multi_transaction": "When one utterance contains several transactions, expected = the FIRST transaction only. Amounts are NEVER summed (a bill plus a tip is two records, not one total) and the line is scored 0.4. The remaining records cannot be expressed in a one-record schema and must be surfaced by the app.",
+    "transfer_class": "ATM withdrawals, wallet top-ups, moving money to savings, lending, borrowing, repaying a loan, P2P card transfers and currency exchange move money without consuming it. The schema has no `transfer` kind, so they are recorded as expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4 for the whole class.",
+    "date_enum": "The ONLY legal date values are: today, yesterday, day_before_yesterday, last_<weekday>, this_<weekday>, <N>_days_ago, and null. There are no sentinels (no AMBIGUOUS/FUTURE/RECURRING/UNSUPPORTED) and no bare weekday names. Resolution rules: a time of day (ertalab / kechqurun / tushda / hozir / утром / вечером / this morning / tonight) -> today; a BARE weekday with no 'o'tgan'/'shu'/'прошлый'/'этот'/'last'/'this' modifier -> null, because it is genuinely ambiguous between past and future; an explicit day COUNT ('7 kun oldin', 'неделю назад', 'a week ago') -> <N>_days_ago; a PERIOD ('o'tgan hafta', 'на прошлой неделе', 'last week', 'o'tgan oy', 'this month', 'на выходных') -> null, because resolving it to a day would be an invention; an absolute calendar date ('8 mart', '1-sentabr', 'the 12th') -> null, with the phrase preserved in `note`; a recurrence ('har oy', 'oyiga', 'kuniga') -> null.",
+    "confidence_scale": "Six points only, each with a written meaning. 0.95 = unambiguous, every slot recoverable. 0.8 = one small inference (fuzzy merchant match, cross-script token, spoken numeral, hedged amount). 0.6 = exactly one genuinely underdetermined slot (magnitude ellipsis, contested category, approximation). 0.4 = two or more underdetermined slots, a missing amount, a multi-transaction line, or the transfer class. 0.2 = intent is present but nothing is loggable - the app must prompt. 0.0 = not a transaction; refuse. `difficulty` is derived from this: 0.95 easy, 0.8 medium, <= 0.6 hard.",
+    "note_field": "`note` is a SHORT EXTRACTIVE span of the user's own words - the item or service, in the language and script of the utterance - or null. It is never annotator commentary, never a translation, never a meta-description of the parse, and never a date phrase (except an absolute calendar date, which has nowhere else to go). All explanation belongs in the corpus row's `notes` field, which is not a model output.",
+    "merchant_canonicalisation": "One brand yields exactly ONE gold string in every file: Korzinka, Korzinka Go, Makro, Havas, Chorsu Bozor, Oloy Bozori, Uzum ('uzum market' is a VARIANT surface of it, never a canonical), Evos, Oqtepa Lavash, Chopar Pizza, Max Way, Les Ailes, KFC, McDonald's, Express24, Yandex Eats, Yandex Taxi (bare 'yandex' in a spending context resolves here), Yandex Go, Yandex Plus, Yandex Lavka, Bolt, Uber, MyTaxi, Beeline, Ucell, Uzmobile, Mobiuz, Humans, Texnomart, Mediapark, Idea, Artel, Netflix, Spotify, iCloud, ChatGPT, Zara, Starbucks, Black Bear Coffee, OLX, Wildberries, Upwork, Kapitalbank, TBC Bank, Alif, Anor, Zoomrad, UzGasOil, Hududgaz. A personal name is NEVER a merchant.",
+    "category_rules": {
+      "cafe_vs_dining": "The VENUE word wins over the amount and over what was eaten. cafe / kafe / кафе / kofeynya / choy / kofe and the drink nouns -> cafe_coffee. restoran / choyxona / osh / lavash / somsa / burger / pizza / obed / tushlik and the meal nouns -> dining.",
+      "groceries_vs_dining": "Raw ingredients and supermarket/bozor merchants -> groceries, including supermarket DELIVERY. Prepared food, food delivery and eat-in venues -> dining.",
+      "gaz": "The VERB decides, never the noun: quydim / заправил / залил / 'filled the tank' -> fuel; to'ladim / заплатил / 'gaz puli' / 'за газ' / 'gas bill' -> utilities.",
+      "car_spend": "Consumed into the tank -> fuel. Service, parts, wash (moyka), parking, tyres, engine oil -> transport. State-imposed or contractual charges (shtraf / jarima / ГАИ / insurance / notary / customs) -> fees, even when a car triggered them.",
+      "communication_vs_utilities": "Billed by a TELECOM (mobile balance, HOME INTERNET, tariff, SIM) -> communication. Billed by the building or the municipality (svet, gaz bill, suv, issiq suv, chiqindi, kommunalka, domofon, lift, TSJ, mahalla puli) -> utilities. Home internet is communication in EVERY file.",
+      "household_vs_other": "Durable goods for the DWELLING (fridge, TV, kettle, furniture, carpet, lamps, remont, tools) -> household. PORTABLE PERSONAL DEVICES and their repairs (phone, laptop, macbook, headphones/naushnik, tablet, chargers, cases) -> other, in every language. The corpus has 8+ lines pleading for a dedicated `electronics` category; until the schema gains one, `other` is the agreed home.",
+      "memberships": "Physical-activity facilities (gym, sportzal, bassein, fitnes) -> health regardless of the word abonement/membership. Media and software recurring charges -> subscriptions. Venues attended for fun (kino, akvapark, bouling, konsert, teatr) -> entertainment.",
+      "beneficiary": "A NON-HUMAN beneficiary (mushuk / it / kuchuk / коту / собаке / cat / dog) -> pets, always. For a human beneficiary: if the object is a gift-type object (sovg'a / podarok / gul / atir / buket / present / flowers / toy) -> gifts; else if the object has its own category (dori -> health, kitob -> education, kiyim -> clothing) -> that category; else (bare cash) -> family.",
+      "ceremonies": "to'y / ma'raka / nikoh / gap / gashtak / xudoyi / beshik to'y / sunnat to'y / yubiley and any named gift object -> gifts. Unconditional cash to a relative -> family. sadaqa / ehson / zakot / masjid / xayriya / fond / yetimxona -> charity.",
+      "child_spend": "A named institution (maktab, bog'cha, universitet, kurs, kontrakt) wins over the physical item: a school uniform is education, a child's contract is education. Ordinary clothes with no institution named stay clothing.",
+      "investment_vs_other_income": "Proceeds from a financial instrument or income-producing asset (deposit interest, dividends, crypto, a flat rented out) -> investment. Proceeds from selling a personal possession -> other_income.",
+      "water": "The item or preposition decides, NEVER the amount size: 'бутылка воды' / 'suv oldim' -> groceries; 'за воду' / 'suv puli' -> utilities. Category-from-magnitude is not a rule a deterministic parser may implement."
+    }
+  },
+  "negation_markers": [
+    {
+      "surface": "-madim / -medim",
+      "lang": "uz",
+      "notes": "verbal negation suffix: sarflamadim, olmadim, to'lamadim"
+    },
+    {
+      "surface": "hech narsa",
+      "lang": "uz",
+      "notes": "'nothing' - with a negated verb, nothing was spent"
+    },
+    {
+      "surface": "ҳеч нарса",
+      "lang": "uz"
+    },
+    {
+      "surface": "yo'q",
+      "lang": "uz",
+      "notes": "CAUTION: also the self-correction marker ('25 ming yo'q 35'), where it does NOT reject"
+    },
+    {
+      "surface": "emas",
+      "lang": "uz",
+      "notes": "CAUTION: also the self-correction marker ('50 ming emas 60 ming')"
+    },
+    {
+      "surface": "-gani yo'q",
+      "lang": "uz",
+      "notes": "TRAP: this construction already carries the negation and attaches to the POSITIVE stem. 'tushgani yo'q' = it has not arrived; 'tushmagani yo'q' means the opposite."
+    },
+    {
+      "surface": "kelmadi",
+      "lang": "uz",
+      "notes": "'did not come' - negated income"
+    }
+  ],
+  "query_markers": [
+    {
+      "surface": "qancha",
+      "lang": "uz",
+      "notes": "'how much' - a question, never a log"
+    },
+    {
+      "surface": "қанча",
+      "lang": "uz"
+    },
+    {
+      "surface": "qoldi",
+      "lang": "uz",
+      "notes": "'is left' - a BALANCE statement: 'kartamda 200 ming qoldi'"
+    },
+    {
+      "surface": "yetadimi",
+      "lang": "uz",
+      "notes": "'will it be enough' - a budget question"
+    },
+    {
+      "surface": "ko'rsat",
+      "lang": "uz",
+      "notes": "'show me' - a report request"
+    },
+    {
+      "surface": "bormi",
+      "lang": "uz",
+      "notes": "'is there' - balance query"
+    }
+  ],
+  "intent_markers": [
+    {
+      "surface": "ertaga",
+      "lang": "uz",
+      "meaning": "future",
+      "notes": "'tomorrow' - an intention, never a transaction"
+    },
+    {
+      "surface": "эртага",
+      "lang": "uz",
+      "meaning": "future"
+    },
+    {
+      "surface": "kerak",
+      "lang": "uz",
+      "meaning": "future",
+      "notes": "'-shim kerak' = I have to pay"
+    },
+    {
+      "surface": "olmoqchi edim",
+      "lang": "uz",
+      "meaning": "cancelled",
+      "notes": "'I was going to buy'"
+    },
+    {
+      "surface": "moqchiman",
+      "lang": "uz",
+      "meaning": "future",
+      "notes": "intentive suffix"
+    },
+    {
+      "surface": "ishlayman",
+      "lang": "uz",
+      "meaning": "standing_fact",
+      "notes": "'I work at X' - not a transaction, and X must not become the merchant"
+    }
+  ],
+  "hedge_words": {
+    "notes": "Hedge, polarity and range markers. THESE ARE NOT NOISE WORDS. Stripping them turns 'chut ne kupil kurtku za 900 tysh' into a logged 900 000 purchase and turns every estimate into a hard figure. They must survive tokenisation and lower confidence (approximate -> 0.6) or force a reject (polarity).",
+    "entries": [
+      {
+        "surface": "taxminan",
+        "lang": "uz",
+        "effect": "approximate"
+      },
+      {
+        "surface": "chamasi",
+        "lang": "uz",
+        "effect": "approximate"
+      },
+      {
+        "surface": "atrofida",
+        "lang": "uz",
+        "effect": "approximate"
+      },
+      {
+        "surface": "-cha",
+        "lang": "uz",
+        "effect": "approximate",
+        "notes": "'50 mingcha', '10 dollarcha'"
+      },
+      {
+        "surface": "-lar",
+        "lang": "uz",
+        "effect": "approximate",
+        "notes": "plural on an AMOUNT marks approximation: '50 minglar'"
+      },
+      {
+        "surface": "-ga yaqin",
+        "lang": "uz",
+        "effect": "approximate"
+      },
+      {
+        "surface": "ancha",
+        "lang": "uz",
+        "effect": "vague_quantity",
+        "notes": "'quite a lot' - carries NO number"
+      }
+    ]
+  },
+  "payment_methods": {
+    "notes": "HOW the money moved. It is metadata, never the merchant and never the category. 'naliсhkoy 200 tysh za produkty' is groceries; the method word must not reach the merchant slot.",
+    "entries": [
+      {
+        "surface": "naqd",
+        "lang": "uz",
+        "method": "cash"
+      },
+      {
+        "surface": "naxt",
+        "lang": "uz",
+        "method": "cash"
+      },
+      {
+        "surface": "нақд",
+        "lang": "uz",
+        "method": "cash"
+      },
+      {
+        "surface": "karta bilan",
+        "lang": "uz",
+        "method": "card"
+      },
+      {
+        "surface": "kartadan",
+        "lang": "uz",
+        "method": "card"
+      },
+      {
+        "surface": "plastikdan",
+        "lang": "uz",
+        "method": "card"
+      },
+      {
+        "surface": "perevod qildim",
+        "lang": "uz",
+        "method": "transfer"
+      },
+      {
+        "surface": "o'tkazdim",
+        "lang": "uz",
+        "method": "transfer"
+      },
+      {
+        "surface": "kartasiga tashladim",
+        "lang": "uz",
+        "method": "p2p",
+        "notes": "P2P to another person's card - the transfer class, not an expense"
+      },
+      {
+        "surface": "raqamiga o'tkazdim",
+        "lang": "uz",
+        "method": "p2p"
+      }
+    ]
+  },
+  "transfer_markers": {
+    "notes": "Money moving WITHOUT being consumed. The schema has no `transfer` kind, so every member of this class is expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4.",
+    "entries": [
+      {
+        "surface": "yechdim",
+        "lang": "uz",
+        "kind": "atm_withdrawal"
+      },
+      {
+        "surface": "ечдим",
+        "lang": "uz",
+        "kind": "atm_withdrawal"
+      },
+      {
+        "surface": "qarz oldim",
+        "lang": "uz",
+        "kind": "borrow"
+      },
+      {
+        "surface": "qarz berdim",
+        "lang": "uz",
+        "kind": "lend"
+      },
+      {
+        "surface": "qarzimni uzdim",
+        "lang": "uz",
+        "kind": "repay"
+      },
+      {
+        "surface": "bo'lib to'lash",
+        "lang": "uz",
+        "kind": "instalment"
+      },
+      {
+        "surface": "muddatli to'lov",
+        "lang": "uz",
+        "kind": "instalment"
+      },
+      {
+        "surface": "nasiya",
+        "lang": "uz",
+        "kind": "instalment"
+      },
+      {
+        "surface": "birinchi to'lov",
+        "lang": "uz",
+        "kind": "instalment",
+        "notes": "the down payment"
+      },
+      {
+        "surface": "foizsiz",
+        "lang": "uz",
+        "kind": "instalment",
+        "notes": "'interest-free' - BNPL marketing, carries no amount"
+      },
+      {
+        "surface": "ayirboshladim",
+        "lang": "uz",
+        "kind": "fx"
+      },
+      {
+        "surface": "kursdan",
+        "lang": "uz",
+        "kind": "fx",
+        "notes": "'12900 kursdan' - the RATE, never an amount"
+      },
+      {
+        "surface": "qora kurs",
+        "lang": "uz",
+        "kind": "fx",
+        "notes": "the black-market rate"
+      }
+    ]
+  },
+  "per_unit_frames": [
+    {
+      "surface": "kilosi <X>",
+      "lang": "uz",
+      "meaning": "price per kilo",
+      "example": "kilosi 100 mingdan 2 kilo go'sht oldim -> 200000"
+    },
+    {
+      "surface": "donasi <X>",
+      "lang": "uz",
+      "meaning": "price per item"
+    },
+    {
+      "surface": "bittasi <X>",
+      "lang": "uz",
+      "meaning": "price per item"
+    },
+    {
+      "surface": "<X> mingdan",
+      "lang": "uz",
+      "meaning": "DISTRIBUTIVE: X EACH, not X total",
+      "example": "50 mingdan 3 ta oldim -> 150000. The classic 'is 50 the unit price or the total' trap."
+    },
+    {
+      "surface": "nafariga <X>",
+      "lang": "uz",
+      "meaning": "per person - the user's own share"
+    },
+    {
+      "surface": "kuniga <X>",
+      "lang": "uz",
+      "meaning": "per day - a RATE, date stays null"
+    },
+    {
+      "surface": "oyiga <X>",
+      "lang": "uz",
+      "meaning": "per month - a RATE, date stays null"
+    }
+  ],
+  "self_correction": {
+    "rule": "The speaker restates an amount mid-utterance. Which figure wins depends on the marker: 'no wait' / 'yo'q' / 'emas' / 'нет' / 'ой' / 'то есть' -> the LATER figure is correct. 'not X' / 'X emas Y' with the correction FOLLOWING -> also the later figure. But English 'paid 300k not 400k' puts the correction second and negates it, so the FIRST figure wins. Confidence 0.6.",
+    "examples": [
+      "obedga 50 ming emas 60 ming ketdi",
+      "taksiga 25 ming yo'q 35",
+      "такси 25 нет 35",
+      "потратил 50 ой 60",
+      "300 то есть 350",
+      "i spent 50k no wait 60k",
+      "paid 300k not 400k"
+    ]
+  },
+  "regret_markers": {
+    "notes": "Loss-aversion / regret vocabulary. The app is built on loss aversion, so these are the emotionally loaded utterances it most needs to handle. CRITICAL: affect is NOT a reject signal - 'yana 200 ming behuda ketdi' is a real 200 000 expense. Only 'pulim tugadi' and its kin, which describe a state rather than an event, are rejects.",
+    "entries": [
+      {
+        "surface": "behuda ketdi",
+        "lang": "uz",
+        "notes": "'it went to waste'"
+      },
+      {
+        "surface": "isrof qildim",
+        "lang": "uz",
+        "notes": "'I squandered it'"
+      },
+      {
+        "surface": "afsus",
+        "lang": "uz",
+        "notes": "'what a pity' - an interjection carrying no amount"
+      },
+      {
+        "surface": "yana",
+        "lang": "uz",
+        "notes": "'again' - the regret marker"
+      },
+      {
+        "surface": "qayerga ketdi bilmayman",
+        "lang": "uz",
+        "notes": "'I don't know where it went'"
+      },
+      {
+        "surface": "pulim tugadi",
+        "lang": "uz",
+        "notes": "'my money ran out' - a STATE, not a transaction: reject"
+      },
+      {
+        "surface": "yedirdim",
+        "lang": "uz",
+        "notes": "lit. 'I fed it' - money burned on something"
+      }
+    ]
+  },
+  "bank_sms_paste": {
+    "rule": "A large share of real input is PASTED VERBATIM from a bank push notification. Take the FIRST amount (the debit/credit) and ignore the trailing balance. The merchant often appears as an ALL-CAPS Latin string inside Cyrillic text. 'на сумму' is the most frequent real surface of сумма in payment language - it means 'in the amount of', it is NOT the currency сум.",
+    "examples": [
+      "Списание 45 000 UZS. Korzinka. Баланс 1 234 567",
+      "Оплата на сумму 340 000 сум",
+      "Покупка 120000 UZS YANDEX GO. Доступно 890000",
+      "Popolnenie 5 200 000 UZS. Zarplata"
+    ]
+  },
+  "code_switch_rules": [
+    {
+      "rule": "switch points are CONTENT NOUNS and phrase boundaries, never digits",
+      "detail": "Tashkent bilinguals code-switch on content nouns ('produkt', 'obed', 'zapravka', 'nasiya') and at clause boundaries. They keep numbers in ONE language, and overwhelmingly as digits or with the 'k' suffix. Fully spelled-out RUSSIAN numerals inside an Uzbek frame are real (especially in voice input) and a handful are kept. Fully spelled-out ENGLISH numerals inside an Uzbek frame do NOT occur and have been removed from the corpus."
+    },
+    {
+      "rule": "Uzbek suffixes attach to Uzbek stems",
+      "detail": "'produktlarga' is well formed; 'продуктыга' is not - you cannot hang -га off a Russian nominative plural -ы. The Cyrillic-stem-plus-Uzbek-suffix pattern IS real for singulars (магазинга, аптекага)."
+    },
+    {
+      "rule": "izafet is required in noun-noun compounds",
+      "detail": "'poyezd bileti', 'bank komissiyasi', 'kvartira arendasi', 'uy remonti' - not 'poyezd bilet', 'bank komissiya', 'arenda kvartira', 'uydagi remont'."
+    },
+    {
+      "rule": "script mixing happens at WORD boundaries or as a single stray character",
+      "detail": "'Korzinkadan 90 минг' (word boundary) and 'невaрамга' (one stray Latin 'a') are real. Letter-by-letter interleaving such as 'prошlуyu пятницу' is not producible by any keyboard or dictation mechanism and has been removed. TRUE wrong-layout typing garbles a whole word through a consistent mapping: продукты -> 'ghjlerns', прошлую пятницу -> 'ghjike. gznybwe'."
+    },
+    {
+      "rule": "matrix language decides the `lang` tag",
+      "detail": "The language of the verb, the copula and the case suffixes - not the language of the brand name. 'black bear coffee 45 ming' is uz; '45k taksiga' is uz; 'coffee 22 ming today' is uz and its script is LATIN."
+    }
+  ],
+  "matching_rules": [
+    {
+      "rule": "no surface may sit in two categories",
+      "detail": "'kafe' was in BOTH cafe_coffee and dining, and 'kvartplata' in BOTH rent and utilities, making any lookup order-dependent. Both are fixed: kafe -> cafe_coffee only, kvartplata -> utilities only."
+    },
+    {
+      "rule": "longest match wins",
+      "detail": "'uzum market' beats 'uzum'; 'yandex plus' beats 'yandex'; 'gaz quydim' beats 'gaz'."
+    }
   ]
 }

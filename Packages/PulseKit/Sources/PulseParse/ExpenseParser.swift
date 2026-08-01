@@ -63,6 +63,7 @@ public struct ExpenseParser: Sendable {
     private let nonMerchants: PhraseIndex<Bool>
     private let uncompleted: PhraseIndex<Bool>
     private let daysAgo: PhraseIndex<Bool>
+    private let nothingMoved: PhraseIndex<Bool>
 
     public init(lexicon: MergedLexicon, configuration: Configuration = Configuration()) {
         self.lexicon = lexicon
@@ -87,6 +88,7 @@ public struct ExpenseParser: Sendable {
         self.nonMerchants = PhraseIndex(lexicon.nonMerchants)
         self.uncompleted = PhraseIndex(lexicon.uncompletedMarkers)
         self.daysAgo = PhraseIndex(lexicon.daysAgoPhrases)
+        self.nothingMoved = PhraseIndex(lexicon.nothingMovedMarkers)
     }
 
     // MARK: - Entry points
@@ -122,6 +124,7 @@ public struct ExpenseParser: Sendable {
         // stray digit beside a real amount does not compete with it — it merges into it.
         let dateHit = dateHit(in: tokens)
         var notMoney = Self.fuelGradeIndices(in: tokens)
+        notMoney.formUnion(Self.quantityIndices(in: tokens))
         if let dateHit, dateHit.range.count > 1 {
             // The "3" of "3 kun oldin" belongs to the date, not the price.
             notMoney.formUnion(dateHit.range)
@@ -168,11 +171,10 @@ public struct ExpenseParser: Sendable {
         var amount = amountMatch?.value
         var appliedImpliedThousands = false
         if let raw = amount, let match = amountMatch, !match.hadExplicitMagnitude {
+            let namedACurrency =
+                currency != nil || !Set(tokens).isDisjoint(with: lexicon.ambiguousCurrencyWords)
             if shouldApplyImpliedThousands(
-                to: raw,
-                currency: resolvedCurrency,
-                explicit: currency != nil,
-                languages: lexicon.languageProfile(for: tokens)
+                to: raw, currency: resolvedCurrency, explicit: namedACurrency
             ) {
                 amount = raw * 1_000
                 appliedImpliedThousands = true
@@ -321,8 +323,7 @@ public struct ExpenseParser: Sendable {
     private func shouldApplyImpliedThousands(
         to amount: Decimal,
         currency: Currency,
-        explicit: Bool,
-        languages: [String: Int]
+        explicit: Bool
     ) -> Bool {
         guard configuration.impliedThousandsCurrencies.contains(currency.code) else { return false }
         guard amount > 0, amount < configuration.impliedThousandsCeiling else { return false }
@@ -333,12 +334,9 @@ public struct ExpenseParser: Sendable {
         // A decimal is already precise. Nobody means fifty thousand five hundred by "50.5".
         guard Self.isInteger(amount) else { return false }
 
-        // The convention is Uzbek and Russian, not English. "obedga 50" is fifty thousand so'm;
-        // "spent 15 on coffee" is fifteen. Only skip when the evidence is English and *only* English.
-        let english = languages["en"] ?? 0
-        let local = (languages["uz"] ?? 0) + (languages["ru"] ?? 0)
-        guard !(english > 0 && local == 0) else { return false }
-
+        // Applied in every language, deliberately. The app is UZS-first, and gating this on a language
+        // tag inferred from two or three tokens made the answer swing by a factor of a thousand on a
+        // guess that the benchmark showed is unreliable on exactly the short utterances where it matters.
         return true
     }
 
@@ -347,6 +345,31 @@ public struct ExpenseParser: Sendable {
         var rounded = Decimal()
         NSDecimalRound(&rounded, &input, 0, .down)
         return rounded == value
+    }
+
+    /// Token positions holding a count or a weight rather than a price.
+    ///
+    /// "3 ta non", "2 kg go'sht", "5 штук" — the number counts the thing bought, and the price is
+    /// elsewhere in the sentence or absent entirely. Uzbek attaches the classifier `-ta` directly, and
+    /// tokenization already splits it off.
+    private static func quantityIndices(in tokens: [String]) -> Set<Int> {
+        let classifiers: Set<String> = [
+            "ta", "та", "dona", "дона", "kg", "кг", "kilo", "кило", "kilogramm", "килограмм",
+            "gramm", "грамм", "gr", "гр", "litr", "литр", "l", "л", "marta", "марта",
+            "штук", "штуки", "шт", "dona", "foiz", "фоиз", "%", "процент", "процентов",
+        ]
+        var indices: Set<Int> = []
+        for index in tokens.indices.dropLast() where classifiers.contains(tokens[index + 1]) {
+            if decimalIsPlainCount(tokens[index]) { indices.insert(index) }
+        }
+        return indices
+    }
+
+    private static func decimalIsPlainCount(_ token: String) -> Bool {
+        guard let value = AmountParser.decimalFromDigits(token) else { return false }
+        // A four-figure number beside a classifier is still a price ("1500 gramm" is unusual; "1500
+        // so'm" beside a stray unit word is not), so only small counts are treated as quantities.
+        return value > 0 && value < 1000
     }
 
     /// Token positions holding a petrol octane grade rather than a price.
@@ -397,6 +420,11 @@ public struct ExpenseParser: Sendable {
     /// would add income that never arrived on a day it never arrived.
     private func mentionsFuture(_ tokens: [String]) -> Bool {
         if uncompleted.containsMatch(tokens, stems: UzbekMorphology.stems(of:)) { return true }
+        if nothingMoved.containsMatch(tokens, stems: UzbekMorphology.stems(of:)) { return true }
+        // Uzbek negates with a suffix: "sarflamadim" is "I did not spend".
+        if tokens.contains(where: { token in
+            lexicon.negationSuffixes.contains { token.count > $0.count + 2 && token.hasSuffix($0) }
+        }) { return true }
         if !Set(tokens).isDisjoint(with: Self.futureOrHabitualWords) { return true }
         return Self.recurrencePhrases.containsMatch(tokens)
     }
@@ -427,6 +455,7 @@ public struct ExpenseParser: Sendable {
     private func looksLikeQuestion(_ normalized: TextNormalizer.Normalized) -> Bool {
         if normalized.original.contains("?") { return true }
         let tokens = Set(normalized.tokens + TextNormalizer.tokenize(normalized.transliterated))
+        if !tokens.isDisjoint(with: lexicon.queryMarkers) { return true }
         return !tokens.isDisjoint(with: Self.questionWords)
     }
 

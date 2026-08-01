@@ -1,358 +1,2762 @@
 {
   "language": "ru",
-  "scripts": ["cyrillic", "latin"],
+  "scripts": [
+    "cyrillic",
+    "latin"
+  ],
   "notes": "Russian as spoken in Uzbekistan (Tashkent) and the wider post-Soviet space. Cyrillic dominates, but phone-typed translit (latin) is common. Amounts are huge because UZS is a low-value currency, so colloquial magnitude words and BARE numbers with implied thousands are the norm: 'taksi 25' = 25 000. Code-switching with Uzbek nouns (той, гап, садака, нон, сомса, нася) is normal in this register and must be lexicalised.",
-
   "magnitude_words": [
-    {"surface": "тысяча", "multiplier": 1000, "notes": "nominative sg, follows numeral 1 / одна"},
-    {"surface": "тысячи", "multiplier": 1000, "notes": "genitive sg after 2-4 (две тысячи, три тысячи)"},
-    {"surface": "тысяч", "multiplier": 1000, "notes": "genitive pl after 5+ and after 'сколько-то'"},
-    {"surface": "тысячу", "multiplier": 1000, "notes": "accusative sg — 'отдал тысячу'"},
-    {"surface": "тысячей", "multiplier": 1000, "notes": "instrumental, rare in this register"},
-    {"surface": "тыс", "multiplier": 1000, "notes": "written abbreviation, often with or without dot"},
-    {"surface": "тыс.", "multiplier": 1000, "notes": "written abbreviation with dot"},
-    {"surface": "тыща", "multiplier": 1000, "notes": "colloquial spoken form of тысяча — extremely frequent"},
-    {"surface": "тыщи", "multiplier": 1000, "notes": "colloquial, after 2-4"},
-    {"surface": "тыщ", "multiplier": 1000, "notes": "colloquial gen pl — the single most common magnitude token in speech"},
-    {"surface": "тыщу", "multiplier": 1000, "notes": "colloquial accusative"},
-    {"surface": "тыш", "multiplier": 1000, "notes": "common typo / speech-to-text artifact for тыщ"},
-    {"surface": "тыщь", "multiplier": 1000, "notes": "typo variant"},
-    {"surface": "к", "multiplier": 1000, "notes": "chat/SMS shorthand: '25к' = 25 000. Beware: 'к' is also the preposition 'to' — only treat as magnitude when glued to or directly after a number"},
-    {"surface": "k", "multiplier": 1000, "notes": "latin shorthand in translit typing"},
-    {"surface": "косарь", "multiplier": 1000, "notes": "slang, = 1 000, used with count 1"},
-    {"surface": "косаря", "multiplier": 1000, "notes": "slang after 2-4: 'три косаря' = 3 000"},
-    {"surface": "косарей", "multiplier": 1000, "notes": "slang after 5+"},
-    {"surface": "штука", "multiplier": 1000, "notes": "slang 1 000; ALSO means 'piece/item' ('пять штук яиц') — disambiguate by whether a countable noun follows"},
-    {"surface": "штуки", "multiplier": 1000, "notes": "slang after 2-4, same ambiguity"},
-    {"surface": "штук", "multiplier": 1000, "notes": "slang after 5+, same ambiguity — high false-positive risk"},
-    {"surface": "миллион", "multiplier": 1000000, "notes": "nominative sg"},
-    {"surface": "миллиона", "multiplier": 1000000, "notes": "after 2-4"},
-    {"surface": "миллионов", "multiplier": 1000000, "notes": "after 5+"},
-    {"surface": "мильон", "multiplier": 1000000, "notes": "colloquial/typo spelling"},
-    {"surface": "млн", "multiplier": 1000000, "notes": "written abbreviation"},
-    {"surface": "млн.", "multiplier": 1000000, "notes": "written abbreviation with dot"},
-    {"surface": "лям", "multiplier": 1000000, "notes": "slang million — very frequent in Tashkent speech"},
-    {"surface": "ляма", "multiplier": 1000000, "notes": "slang after 2-4 and after полтора: 'полтора ляма' = 1 500 000"},
-    {"surface": "лямов", "multiplier": 1000000, "notes": "slang after 5+"},
-    {"surface": "лимон", "multiplier": 1000000, "notes": "slang million (lit. 'lemon')"},
-    {"surface": "мио", "multiplier": 1000000, "notes": "rare written shorthand"},
-    {"surface": "миллиард", "multiplier": 1000000000, "notes": "rare, only for property/car talk"},
-    {"surface": "млрд", "multiplier": 1000000000, "notes": "written abbreviation"}
+    {
+      "surface": "тысяча",
+      "multiplier": 1000,
+      "notes": "nominative sg, follows numeral 1 / одна"
+    },
+    {
+      "surface": "тысячи",
+      "multiplier": 1000,
+      "notes": "genitive sg after 2-4 (две тысячи, три тысячи)"
+    },
+    {
+      "surface": "тысяч",
+      "multiplier": 1000,
+      "notes": "genitive pl after 5+ and after 'сколько-то'"
+    },
+    {
+      "surface": "тысячу",
+      "multiplier": 1000,
+      "notes": "accusative sg — 'отдал тысячу'"
+    },
+    {
+      "surface": "тысячей",
+      "multiplier": 1000,
+      "notes": "instrumental, rare in this register"
+    },
+    {
+      "surface": "тыс",
+      "multiplier": 1000,
+      "notes": "written abbreviation, often with or without dot"
+    },
+    {
+      "surface": "тыс.",
+      "multiplier": 1000,
+      "notes": "written abbreviation with dot"
+    },
+    {
+      "surface": "тыща",
+      "multiplier": 1000,
+      "notes": "colloquial spoken form of тысяча — extremely frequent"
+    },
+    {
+      "surface": "тыщи",
+      "multiplier": 1000,
+      "notes": "colloquial, after 2-4"
+    },
+    {
+      "surface": "тыщ",
+      "multiplier": 1000,
+      "notes": "colloquial gen pl — the single most common magnitude token in speech"
+    },
+    {
+      "surface": "тыщу",
+      "multiplier": 1000,
+      "notes": "colloquial accusative"
+    },
+    {
+      "surface": "тыш",
+      "multiplier": 1000,
+      "notes": "common typo / speech-to-text artifact for тыщ"
+    },
+    {
+      "surface": "тыщь",
+      "multiplier": 1000,
+      "notes": "typo variant"
+    },
+    {
+      "surface": "к",
+      "multiplier": 1000,
+      "notes": "chat/SMS shorthand: '25к' = 25 000. Beware: 'к' is also the preposition 'to' — only treat as magnitude when glued to or directly after a number"
+    },
+    {
+      "surface": "k",
+      "multiplier": 1000,
+      "notes": "latin shorthand in translit typing"
+    },
+    {
+      "surface": "косарь",
+      "multiplier": 1000,
+      "notes": "slang, = 1 000, used with count 1"
+    },
+    {
+      "surface": "косаря",
+      "multiplier": 1000,
+      "notes": "slang after 2-4: 'три косаря' = 3 000"
+    },
+    {
+      "surface": "косарей",
+      "multiplier": 1000,
+      "notes": "slang after 5+"
+    },
+    {
+      "surface": "штука",
+      "multiplier": 1000,
+      "notes": "slang 1 000; ALSO means 'piece/item' ('пять штук яиц') — disambiguate by whether a countable noun follows"
+    },
+    {
+      "surface": "штуки",
+      "multiplier": 1000,
+      "notes": "slang after 2-4, same ambiguity"
+    },
+    {
+      "surface": "штук",
+      "multiplier": 1000,
+      "notes": "slang after 5+, same ambiguity — high false-positive risk"
+    },
+    {
+      "surface": "миллион",
+      "multiplier": 1000000,
+      "notes": "nominative sg"
+    },
+    {
+      "surface": "миллиона",
+      "multiplier": 1000000,
+      "notes": "after 2-4"
+    },
+    {
+      "surface": "миллионов",
+      "multiplier": 1000000,
+      "notes": "after 5+"
+    },
+    {
+      "surface": "мильон",
+      "multiplier": 1000000,
+      "notes": "colloquial/typo spelling"
+    },
+    {
+      "surface": "млн",
+      "multiplier": 1000000,
+      "notes": "written abbreviation"
+    },
+    {
+      "surface": "млн.",
+      "multiplier": 1000000,
+      "notes": "written abbreviation with dot"
+    },
+    {
+      "surface": "лям",
+      "multiplier": 1000000,
+      "notes": "slang million — very frequent in Tashkent speech"
+    },
+    {
+      "surface": "ляма",
+      "multiplier": 1000000,
+      "notes": "slang after 2-4 and after полтора: 'полтора ляма' = 1 500 000"
+    },
+    {
+      "surface": "лямов",
+      "multiplier": 1000000,
+      "notes": "slang after 5+"
+    },
+    {
+      "surface": "лимон",
+      "multiplier": 1000000,
+      "notes": "slang million (lit. 'lemon')"
+    },
+    {
+      "surface": "мио",
+      "multiplier": 1000000,
+      "notes": "rare written shorthand"
+    },
+    {
+      "surface": "миллиард",
+      "multiplier": 1000000000,
+      "notes": "rare, only for property/car talk"
+    },
+    {
+      "surface": "млрд",
+      "multiplier": 1000000000,
+      "notes": "written abbreviation"
+    },
+    {
+      "surface": "пол-ляма",
+      "multiplier": 500000,
+      "notes": "single token, = 500 000"
+    },
+    {
+      "surface": "полляма",
+      "multiplier": 500000
+    },
+    {
+      "surface": "пол ляма",
+      "multiplier": 500000
+    },
+    {
+      "surface": "полтос",
+      "multiplier": 50000,
+      "notes": "slang 50; under implied thousands = 50 000"
+    },
+    {
+      "surface": "двадцатка",
+      "multiplier": 20000,
+      "notes": "slang 20"
+    },
+    {
+      "surface": "сотка",
+      "multiplier": 100000,
+      "notes": "slang 100; 'сотку закинул на телефон' = 100 000. Tashkent Russian uses сотка, NOT the Moscow 'стольник'."
+    },
+    {
+      "surface": "косарика",
+      "multiplier": 1000
+    },
+    {
+      "surface": "ляме",
+      "multiplier": 1000000,
+      "notes": "prepositional 'в ляме'"
+    }
   ],
-
   "number_words": [
-    {"surface": "ноль", "value": 0},
-    {"surface": "один", "value": 1},
-    {"surface": "одна", "value": 1},
-    {"surface": "одну", "value": 1},
-    {"surface": "два", "value": 2},
-    {"surface": "две", "value": 2},
-    {"surface": "двух", "value": 2},
-    {"surface": "пара", "value": 2},
-    {"surface": "три", "value": 3},
-    {"surface": "трёх", "value": 3},
-    {"surface": "трех", "value": 3},
-    {"surface": "четыре", "value": 4},
-    {"surface": "четырёх", "value": 4},
-    {"surface": "пять", "value": 5},
-    {"surface": "пяти", "value": 5},
-    {"surface": "шесть", "value": 6},
-    {"surface": "семь", "value": 7},
-    {"surface": "восемь", "value": 8},
-    {"surface": "девять", "value": 9},
-    {"surface": "десять", "value": 10},
-    {"surface": "десяток", "value": 10},
-    {"surface": "одиннадцать", "value": 11},
-    {"surface": "двенадцать", "value": 12},
-    {"surface": "тринадцать", "value": 13},
-    {"surface": "четырнадцать", "value": 14},
-    {"surface": "пятнадцать", "value": 15},
-    {"surface": "шестнадцать", "value": 16},
-    {"surface": "семнадцать", "value": 17},
-    {"surface": "восемнадцать", "value": 18},
-    {"surface": "девятнадцать", "value": 19},
-    {"surface": "двадцать", "value": 20},
-    {"surface": "тридцать", "value": 30},
-    {"surface": "сорок", "value": 40},
-    {"surface": "пятьдесят", "value": 50},
-    {"surface": "шестьдесят", "value": 60},
-    {"surface": "семьдесят", "value": 70},
-    {"surface": "восемьдесят", "value": 80},
-    {"surface": "девяносто", "value": 90},
-    {"surface": "сто", "value": 100},
-    {"surface": "двести", "value": 200},
-    {"surface": "триста", "value": 300},
-    {"surface": "четыреста", "value": 400},
-    {"surface": "пятьсот", "value": 500},
-    {"surface": "шестьсот", "value": 600},
-    {"surface": "семьсот", "value": 700},
-    {"surface": "восемьсот", "value": 800},
-    {"surface": "девятьсот", "value": 900},
-    {"surface": "полтора", "value": 1.5},
-    {"surface": "полторы", "value": 1.5},
-    {"surface": "пол", "value": 0.5},
-    {"surface": "половина", "value": 0.5},
-    {"surface": "полтинник", "value": 50},
-    {"surface": "стольник", "value": 100},
-    {"surface": "сотка", "value": 100},
-    {"surface": "сотня", "value": 100},
-    {"surface": "пятихатка", "value": 500},
-    {"surface": "пятихат", "value": 500}
+    {
+      "surface": "ноль",
+      "value": 0
+    },
+    {
+      "surface": "один",
+      "value": 1
+    },
+    {
+      "surface": "одна",
+      "value": 1
+    },
+    {
+      "surface": "одну",
+      "value": 1
+    },
+    {
+      "surface": "два",
+      "value": 2
+    },
+    {
+      "surface": "две",
+      "value": 2
+    },
+    {
+      "surface": "двух",
+      "value": 2
+    },
+    {
+      "surface": "пара",
+      "value": 2
+    },
+    {
+      "surface": "три",
+      "value": 3
+    },
+    {
+      "surface": "трёх",
+      "value": 3
+    },
+    {
+      "surface": "трех",
+      "value": 3
+    },
+    {
+      "surface": "четыре",
+      "value": 4
+    },
+    {
+      "surface": "четырёх",
+      "value": 4
+    },
+    {
+      "surface": "пять",
+      "value": 5
+    },
+    {
+      "surface": "пяти",
+      "value": 5
+    },
+    {
+      "surface": "шесть",
+      "value": 6
+    },
+    {
+      "surface": "семь",
+      "value": 7
+    },
+    {
+      "surface": "восемь",
+      "value": 8
+    },
+    {
+      "surface": "девять",
+      "value": 9
+    },
+    {
+      "surface": "десять",
+      "value": 10
+    },
+    {
+      "surface": "десяток",
+      "value": 10
+    },
+    {
+      "surface": "одиннадцать",
+      "value": 11
+    },
+    {
+      "surface": "двенадцать",
+      "value": 12
+    },
+    {
+      "surface": "тринадцать",
+      "value": 13
+    },
+    {
+      "surface": "четырнадцать",
+      "value": 14
+    },
+    {
+      "surface": "пятнадцать",
+      "value": 15
+    },
+    {
+      "surface": "шестнадцать",
+      "value": 16
+    },
+    {
+      "surface": "семнадцать",
+      "value": 17
+    },
+    {
+      "surface": "восемнадцать",
+      "value": 18
+    },
+    {
+      "surface": "девятнадцать",
+      "value": 19
+    },
+    {
+      "surface": "двадцать",
+      "value": 20
+    },
+    {
+      "surface": "тридцать",
+      "value": 30
+    },
+    {
+      "surface": "сорок",
+      "value": 40
+    },
+    {
+      "surface": "пятьдесят",
+      "value": 50
+    },
+    {
+      "surface": "шестьдесят",
+      "value": 60
+    },
+    {
+      "surface": "семьдесят",
+      "value": 70
+    },
+    {
+      "surface": "восемьдесят",
+      "value": 80
+    },
+    {
+      "surface": "девяносто",
+      "value": 90
+    },
+    {
+      "surface": "сто",
+      "value": 100
+    },
+    {
+      "surface": "двести",
+      "value": 200
+    },
+    {
+      "surface": "триста",
+      "value": 300
+    },
+    {
+      "surface": "четыреста",
+      "value": 400
+    },
+    {
+      "surface": "пятьсот",
+      "value": 500
+    },
+    {
+      "surface": "шестьсот",
+      "value": 600
+    },
+    {
+      "surface": "семьсот",
+      "value": 700
+    },
+    {
+      "surface": "восемьсот",
+      "value": 800
+    },
+    {
+      "surface": "девятьсот",
+      "value": 900
+    },
+    {
+      "surface": "полтора",
+      "value": 1.5
+    },
+    {
+      "surface": "полторы",
+      "value": 1.5
+    },
+    {
+      "surface": "пол",
+      "value": 0.5
+    },
+    {
+      "surface": "половина",
+      "value": 0.5
+    },
+    {
+      "surface": "полтинник",
+      "value": 50
+    },
+    {
+      "surface": "стольник",
+      "value": 100
+    },
+    {
+      "surface": "сотка",
+      "value": 100
+    },
+    {
+      "surface": "сотня",
+      "value": 100
+    },
+    {
+      "surface": "пятихатка",
+      "value": 500
+    },
+    {
+      "surface": "пятихат",
+      "value": 500
+    }
   ],
-
   "currency_words": [
-    {"surface": "сум", "iso": "UZS", "notes": "nom sg AND gen pl — 'сто тысяч сум'. DO NOT confuse with 'сумма' (= amount) or Kyrgyz 'сом'"},
-    {"surface": "сума", "iso": "UZS", "notes": "gen sg; also a typo for 'сумма'"},
-    {"surface": "сумы", "iso": "UZS", "notes": "nom pl"},
-    {"surface": "сумов", "iso": "UZS", "notes": "gen pl variant, very common"},
-    {"surface": "сумах", "iso": "UZS", "notes": "prepositional — 'в сумах'"},
-    {"surface": "сўм", "iso": "UZS", "notes": "Uzbek Cyrillic spelling, appears in mixed typing"},
-    {"surface": "so'm", "iso": "UZS", "notes": "Uzbek Latin, appears in translit typing"},
-    {"surface": "sum", "iso": "UZS", "notes": "latin translit"},
-    {"surface": "сумчиков", "iso": "UZS", "notes": "jocular diminutive"},
-    {"surface": "UZS", "iso": "UZS", "notes": "ISO code, rare in speech"},
-    {"surface": "доллар", "iso": "USD", "notes": "nom sg"},
-    {"surface": "доллара", "iso": "USD", "notes": "after 2-4"},
-    {"surface": "долларов", "iso": "USD", "notes": "after 5+"},
-    {"surface": "баксов", "iso": "USD", "notes": "slang, most common spoken form"},
-    {"surface": "бакса", "iso": "USD", "notes": "slang after 2-4"},
-    {"surface": "бакс", "iso": "USD", "notes": "slang sg"},
-    {"surface": "$", "iso": "USD", "notes": "symbol, may precede or follow the number"},
-    {"surface": "USD", "iso": "USD", "notes": "ISO code"},
-    {"surface": "у.е.", "iso": "USD", "notes": "'условные единицы' — post-Soviet euphemism that in practice ALWAYS means USD"},
-    {"surface": "уе", "iso": "USD", "notes": "same, written without dots"},
-    {"surface": "евро", "iso": "EUR", "notes": "indeclinable — same form in all cases"},
-    {"surface": "€", "iso": "EUR", "notes": "symbol"},
-    {"surface": "EUR", "iso": "EUR", "notes": "ISO code"},
-    {"surface": "рубль", "iso": "RUB", "notes": "nom sg"},
-    {"surface": "рубля", "iso": "RUB", "notes": "after 2-4"},
-    {"surface": "рублей", "iso": "RUB", "notes": "after 5+, most common"},
-    {"surface": "руб", "iso": "RUB", "notes": "abbreviation"},
-    {"surface": "руб.", "iso": "RUB", "notes": "abbreviation with dot"},
-    {"surface": "р", "iso": "RUB", "notes": "single-letter abbreviation, usually right after digits: '300р'"},
-    {"surface": "р.", "iso": "RUB", "notes": "abbreviation with dot"},
-    {"surface": "₽", "iso": "RUB", "notes": "symbol"},
-    {"surface": "деревянных", "iso": "RUB", "notes": "slang for roubles"},
-    {"surface": "тенге", "iso": "KZT", "notes": "indeclinable; Kazakhstan — common for trips to Almaty/Shymkent"},
-    {"surface": "KZT", "iso": "KZT", "notes": "ISO code"},
-    {"surface": "сом", "iso": "KGS", "notes": "Kyrgyz som. DANGEROUS: one letter away from Uzbek 'сум' and a very frequent typo for it. Default to UZS unless a Kyrgyz place/context word is present"},
-    {"surface": "сомов", "iso": "KGS", "notes": "gen pl"},
-    {"surface": "сомони", "iso": "TJS", "notes": "Tajikistan, indeclinable"},
-    {"surface": "лир", "iso": "TRY", "notes": "gen pl — Turkey trips are common"},
-    {"surface": "лира", "iso": "TRY", "notes": "nom sg"},
-    {"surface": "лиры", "iso": "TRY", "notes": "after 2-4"},
-    {"surface": "дирхам", "iso": "AED", "notes": "UAE"},
-    {"surface": "дирхамов", "iso": "AED", "notes": "gen pl"},
-    {"surface": "фунт", "iso": "GBP", "notes": "nom sg"},
-    {"surface": "фунтов", "iso": "GBP", "notes": "gen pl"}
+    {
+      "surface": "сум",
+      "iso": "UZS",
+      "notes": "nom sg AND gen pl — 'сто тысяч сум'. DO NOT confuse with 'сумма' (= amount) or Kyrgyz 'сом'"
+    },
+    {
+      "surface": "сума",
+      "iso": "UZS",
+      "notes": "DANGEROUS: this is also the everyday typo for 'сумма' (= total). Do NOT emit UZS from 'сума чека 340 тыщ' - that is the noun, not the currency."
+    },
+    {
+      "surface": "сумы",
+      "iso": "UZS",
+      "notes": "nom pl"
+    },
+    {
+      "surface": "сумов",
+      "iso": "UZS",
+      "notes": "gen pl variant, very common"
+    },
+    {
+      "surface": "сумах",
+      "iso": "UZS",
+      "notes": "prepositional — 'в сумах'"
+    },
+    {
+      "surface": "сўм",
+      "iso": "UZS",
+      "notes": "Uzbek Cyrillic spelling, appears in mixed typing"
+    },
+    {
+      "surface": "so'm",
+      "iso": "UZS",
+      "notes": "Uzbek Latin, appears in translit typing"
+    },
+    {
+      "surface": "sum",
+      "iso": "UZS",
+      "notes": "latin translit"
+    },
+    {
+      "surface": "сумчиков",
+      "iso": "UZS",
+      "notes": "jocular diminutive"
+    },
+    {
+      "surface": "UZS",
+      "iso": "UZS",
+      "notes": "ISO code, rare in speech"
+    },
+    {
+      "surface": "доллар",
+      "iso": "USD",
+      "notes": "nom sg"
+    },
+    {
+      "surface": "доллара",
+      "iso": "USD",
+      "notes": "after 2-4"
+    },
+    {
+      "surface": "долларов",
+      "iso": "USD",
+      "notes": "after 5+"
+    },
+    {
+      "surface": "баксов",
+      "iso": "USD",
+      "notes": "slang, most common spoken form"
+    },
+    {
+      "surface": "бакса",
+      "iso": "USD",
+      "notes": "slang after 2-4"
+    },
+    {
+      "surface": "бакс",
+      "iso": "USD",
+      "notes": "slang sg"
+    },
+    {
+      "surface": "$",
+      "iso": "USD",
+      "notes": "symbol, may precede or follow the number"
+    },
+    {
+      "surface": "USD",
+      "iso": "USD",
+      "notes": "ISO code"
+    },
+    {
+      "surface": "у.е.",
+      "iso": "USD",
+      "notes": "'условные единицы' — post-Soviet euphemism that in practice ALWAYS means USD"
+    },
+    {
+      "surface": "уе",
+      "iso": "USD",
+      "notes": "same, written without dots"
+    },
+    {
+      "surface": "евро",
+      "iso": "EUR",
+      "notes": "indeclinable — same form in all cases"
+    },
+    {
+      "surface": "€",
+      "iso": "EUR",
+      "notes": "symbol"
+    },
+    {
+      "surface": "EUR",
+      "iso": "EUR",
+      "notes": "ISO code"
+    },
+    {
+      "surface": "рубль",
+      "iso": "RUB",
+      "notes": "nom sg"
+    },
+    {
+      "surface": "рубля",
+      "iso": "RUB",
+      "notes": "after 2-4"
+    },
+    {
+      "surface": "рублей",
+      "iso": "RUB",
+      "notes": "after 5+, most common"
+    },
+    {
+      "surface": "руб",
+      "iso": "RUB",
+      "notes": "abbreviation"
+    },
+    {
+      "surface": "руб.",
+      "iso": "RUB",
+      "notes": "abbreviation with dot"
+    },
+    {
+      "surface": "р",
+      "iso": "RUB",
+      "notes": "single-letter abbreviation, usually right after digits: '300р'"
+    },
+    {
+      "surface": "р.",
+      "iso": "RUB",
+      "notes": "abbreviation with dot"
+    },
+    {
+      "surface": "₽",
+      "iso": "RUB",
+      "notes": "symbol"
+    },
+    {
+      "surface": "деревянных",
+      "iso": "RUB",
+      "notes": "slang for roubles"
+    },
+    {
+      "surface": "тенге",
+      "iso": "KZT",
+      "notes": "indeclinable; Kazakhstan — common for trips to Almaty/Shymkent"
+    },
+    {
+      "surface": "KZT",
+      "iso": "KZT",
+      "notes": "ISO code"
+    },
+    {
+      "surface": "сом",
+      "iso": null,
+      "notes": "AMBIGUOUS - the Kyrgyz som OR the single most common typo for Uzbek сум. There is NO default: resolve only from a place/context word (бишкек, ош, кыргызстан -> KGS), otherwise leave currency null and lower confidence."
+    },
+    {
+      "surface": "сомов",
+      "iso": "KGS",
+      "notes": "gen pl"
+    },
+    {
+      "surface": "сомони",
+      "iso": "TJS",
+      "notes": "Tajikistan, indeclinable"
+    },
+    {
+      "surface": "лир",
+      "iso": "TRY",
+      "notes": "gen pl — Turkey trips are common"
+    },
+    {
+      "surface": "лира",
+      "iso": "TRY",
+      "notes": "nom sg"
+    },
+    {
+      "surface": "лиры",
+      "iso": "TRY",
+      "notes": "after 2-4"
+    },
+    {
+      "surface": "дирхам",
+      "iso": "AED",
+      "notes": "UAE"
+    },
+    {
+      "surface": "дирхамов",
+      "iso": "AED",
+      "notes": "gen pl"
+    },
+    {
+      "surface": "фунт",
+      "iso": "GBP",
+      "notes": "nom sg"
+    },
+    {
+      "surface": "фунтов",
+      "iso": "GBP",
+      "notes": "gen pl"
+    },
+    {
+      "surface": "теньге",
+      "iso": "KZT",
+      "notes": "the near-universal misspelling of тенге"
+    },
+    {
+      "surface": "долл.",
+      "iso": "USD"
+    },
+    {
+      "surface": "дирхамы",
+      "iso": "AED"
+    },
+    {
+      "surface": "баксы",
+      "iso": "USD"
+    }
   ],
-
   "expense_markers": [
-    {"surface": "потратил", "notes": "spent, masc past — canonical expense verb"},
-    {"surface": "потратила", "notes": "spent, fem past"},
-    {"surface": "потратили", "notes": "spent, plural past ('мы потратили')"},
-    {"surface": "потратился", "notes": "spent (reflexive) — 'потратился на подарки'"},
-    {"surface": "трачу", "notes": "1sg present"},
-    {"surface": "тратил", "notes": "imperfective past — often signals habit, not one event"},
-    {"surface": "потрачено", "notes": "impersonal passive"},
-    {"surface": "купил", "notes": "bought, masc"},
-    {"surface": "купила", "notes": "bought, fem"},
-    {"surface": "купили", "notes": "bought, plural"},
-    {"surface": "покупал", "notes": "imperfective bought"},
-    {"surface": "взял", "notes": "took/bought — 'взял кофе'"},
-    {"surface": "взяла", "notes": "fem"},
-    {"surface": "брал", "notes": "imperfective took"},
-    {"surface": "заплатил", "notes": "paid, masc — usually followed by 'за' + accusative"},
-    {"surface": "заплатила", "notes": "paid, fem"},
-    {"surface": "заплотил", "notes": "very common misspelling of заплатил"},
-    {"surface": "оплатил", "notes": "paid for — followed by DIRECT accusative object, no preposition: 'оплатил интернет'"},
-    {"surface": "оплатила", "notes": "fem"},
-    {"surface": "оплата", "notes": "noun 'payment'"},
-    {"surface": "платил", "notes": "imperfective paid"},
-    {"surface": "отдал", "notes": "gave away/paid — 'отдал 200 тыщ за'"},
-    {"surface": "отдала", "notes": "fem"},
-    {"surface": "отдали", "notes": "plural"},
-    {"surface": "скинул", "notes": "sent money (1sg past) = EXPENSE. Contrast with 'скинули' = someone sent me = INCOME. Direction is carried only by the verb ending"},
-    {"surface": "перевёл", "notes": "transferred (1sg) = expense"},
-    {"surface": "перевел", "notes": "same without ё"},
-    {"surface": "перекинул", "notes": "slang transferred = expense"},
-    {"surface": "кинул", "notes": "slang sent money = expense"},
-    {"surface": "закинул", "notes": "topped up — 'закинул на телефон'; if 'закинул на карту/кошелёк' it is a transfer, not a real expense"},
-    {"surface": "пополнил", "notes": "topped up balance"},
-    {"surface": "ушло", "notes": "impersonal 'went out' — 'ушло 300 тыщ'"},
-    {"surface": "ушли", "notes": "plural"},
-    {"surface": "вышло", "notes": "'came out to' — total"},
-    {"surface": "обошлось", "notes": "'cost me' — 'обошлось в 400 тыщ' takes В + accusative"},
-    {"surface": "стоило", "notes": "cost"},
-    {"surface": "встало", "notes": "slang 'cost' — 'встало в 2 ляма'"},
-    {"surface": "списали", "notes": "was debited (bank) — 'списали 15 тыщ'"},
-    {"surface": "списалось", "notes": "reflexive form of the above"},
-    {"surface": "вычли", "notes": "deducted"},
-    {"surface": "спустил", "notes": "slang blew money"},
-    {"surface": "слил", "notes": "slang blew money"},
-    {"surface": "дал", "notes": "gave — expense when the recipient is a person"},
-    {"surface": "дала", "notes": "fem"},
-    {"surface": "занёс", "notes": "paid/delivered cash"},
-    {"surface": "расход", "notes": "noun 'expense'"},
-    {"surface": "минус", "notes": "used as a bare marker: 'минус 200 тыщ'"}
+    {
+      "surface": "потратил",
+      "notes": "spent, masc past — canonical expense verb"
+    },
+    {
+      "surface": "потратила",
+      "notes": "spent, fem past"
+    },
+    {
+      "surface": "потратили",
+      "notes": "spent, plural past ('мы потратили')"
+    },
+    {
+      "surface": "потратился",
+      "notes": "spent (reflexive) — 'потратился на подарки'"
+    },
+    {
+      "surface": "трачу",
+      "notes": "1sg present"
+    },
+    {
+      "surface": "тратил",
+      "notes": "imperfective past — often signals habit, not one event"
+    },
+    {
+      "surface": "потрачено",
+      "notes": "impersonal passive"
+    },
+    {
+      "surface": "купил",
+      "notes": "bought, masc"
+    },
+    {
+      "surface": "купила",
+      "notes": "bought, fem"
+    },
+    {
+      "surface": "купили",
+      "notes": "bought, plural"
+    },
+    {
+      "surface": "покупал",
+      "notes": "imperfective bought"
+    },
+    {
+      "surface": "взял",
+      "notes": "took/bought — 'взял кофе'"
+    },
+    {
+      "surface": "взяла",
+      "notes": "fem"
+    },
+    {
+      "surface": "брал",
+      "notes": "imperfective took"
+    },
+    {
+      "surface": "заплатил",
+      "notes": "paid, masc — usually followed by 'за' + accusative"
+    },
+    {
+      "surface": "заплатила",
+      "notes": "paid, fem"
+    },
+    {
+      "surface": "заплотил",
+      "notes": "very common misspelling of заплатил"
+    },
+    {
+      "surface": "оплатил",
+      "notes": "paid for — followed by DIRECT accusative object, no preposition: 'оплатил интернет'"
+    },
+    {
+      "surface": "оплатила",
+      "notes": "fem"
+    },
+    {
+      "surface": "оплата",
+      "notes": "noun 'payment'"
+    },
+    {
+      "surface": "платил",
+      "notes": "imperfective paid"
+    },
+    {
+      "surface": "отдал",
+      "notes": "gave away/paid — 'отдал 200 тыщ за'"
+    },
+    {
+      "surface": "отдала",
+      "notes": "fem"
+    },
+    {
+      "surface": "отдали",
+      "notes": "plural"
+    },
+    {
+      "surface": "скинул",
+      "notes": "sent money (1sg past) = EXPENSE. Contrast with 'скинули' = someone sent me = INCOME. Direction is carried only by the verb ending"
+    },
+    {
+      "surface": "перевёл",
+      "notes": "transferred (1sg) = expense"
+    },
+    {
+      "surface": "перевел",
+      "notes": "same without ё"
+    },
+    {
+      "surface": "перекинул",
+      "notes": "slang transferred = expense"
+    },
+    {
+      "surface": "кинул",
+      "notes": "slang sent money = expense"
+    },
+    {
+      "surface": "закинул",
+      "notes": "topped up — 'закинул на телефон'; if 'закинул на карту/кошелёк' it is a transfer, not a real expense"
+    },
+    {
+      "surface": "пополнил",
+      "notes": "topped up balance"
+    },
+    {
+      "surface": "ушло",
+      "notes": "impersonal 'went out' — 'ушло 300 тыщ'"
+    },
+    {
+      "surface": "ушли",
+      "notes": "plural"
+    },
+    {
+      "surface": "вышло",
+      "notes": "'came out to' — total"
+    },
+    {
+      "surface": "обошлось",
+      "notes": "'cost me' — 'обошлось в 400 тыщ' takes В + accusative"
+    },
+    {
+      "surface": "стоило",
+      "notes": "cost"
+    },
+    {
+      "surface": "встало",
+      "notes": "slang 'cost' — 'встало в 2 ляма'"
+    },
+    {
+      "surface": "списали",
+      "notes": "was debited (bank) — 'списали 15 тыщ'"
+    },
+    {
+      "surface": "списалось",
+      "notes": "reflexive form of the above"
+    },
+    {
+      "surface": "вычли",
+      "notes": "deducted"
+    },
+    {
+      "surface": "спустил",
+      "notes": "slang blew money"
+    },
+    {
+      "surface": "слил",
+      "notes": "slang blew money"
+    },
+    {
+      "surface": "дал",
+      "notes": "gave — expense when the recipient is a person"
+    },
+    {
+      "surface": "дала",
+      "notes": "fem"
+    },
+    {
+      "surface": "занёс",
+      "notes": "paid/delivered cash"
+    },
+    {
+      "surface": "расход",
+      "notes": "noun 'expense'"
+    },
+    {
+      "surface": "минус",
+      "notes": "used as a bare marker: 'минус 200 тыщ'"
+    }
   ],
-
   "income_markers": [
-    {"surface": "получил зарплату", "notes": "got salary — canonical"},
-    {"surface": "получил", "notes": "received, masc"},
-    {"surface": "получила", "notes": "received, fem"},
-    {"surface": "пришла зарплата", "notes": "salary arrived"},
-    {"surface": "пришло", "notes": "'came in' — impersonal income"},
-    {"surface": "пришли", "notes": "plural"},
-    {"surface": "капнуло", "notes": "slang 'dropped in' (money landed)"},
-    {"surface": "капнула", "notes": "'зп капнула'"},
-    {"surface": "упало", "notes": "slang 'landed' — 'зп упала'"},
-    {"surface": "скинули", "notes": "they sent me money = INCOME (3pl). Minimal pair with 'скинул' = expense"},
-    {"surface": "перевели", "notes": "they transferred to me = income"},
-    {"surface": "закинули", "notes": "they topped me up = income"},
-    {"surface": "вернули", "notes": "they returned/refunded to me = income"},
-    {"surface": "вернули долг", "notes": "debt repaid TO me = income. Contrast 'вернул долг' = I repaid = expense"},
-    {"surface": "начислили", "notes": "was credited"},
-    {"surface": "заплатили", "notes": "they paid me = income (3pl); 'заплатил' 1sg is an expense"},
-    {"surface": "подарили", "notes": "they gifted me = income"},
-    {"surface": "заработал", "notes": "earned"},
-    {"surface": "выиграл", "notes": "won"},
-    {"surface": "продал", "notes": "sold — income; category depends on whether it is business stock or personal stuff"},
-    {"surface": "аванс", "notes": "salary advance"},
-    {"surface": "премия", "notes": "bonus"},
-    {"surface": "получка", "notes": "colloquial payday/salary"},
-    {"surface": "зп", "notes": "written abbreviation for зарплата"},
-    {"surface": "зряплата", "notes": "jocular misspelling of зарплата"},
-    {"surface": "кэшбэк", "notes": "cashback"},
-    {"surface": "кешбек", "notes": "alternative spelling"},
-    {"surface": "возврат", "notes": "refund"},
-    {"surface": "плюс", "notes": "bare marker: 'плюс 2 млн'"},
-    {"surface": "доход", "notes": "noun 'income'"},
-    {"surface": "выручка", "notes": "revenue (business)"}
+    {
+      "surface": "получил зарплату",
+      "notes": "got salary — canonical"
+    },
+    {
+      "surface": "получил",
+      "notes": "received, masc"
+    },
+    {
+      "surface": "получила",
+      "notes": "received, fem"
+    },
+    {
+      "surface": "пришла зарплата",
+      "notes": "salary arrived"
+    },
+    {
+      "surface": "пришло",
+      "notes": "'came in' — impersonal income"
+    },
+    {
+      "surface": "пришли",
+      "notes": "plural"
+    },
+    {
+      "surface": "капнуло",
+      "notes": "slang 'dropped in' (money landed)"
+    },
+    {
+      "surface": "капнула",
+      "notes": "'зп капнула'"
+    },
+    {
+      "surface": "упало",
+      "notes": "slang 'landed' — 'зп упала'"
+    },
+    {
+      "surface": "скинули",
+      "notes": "they sent me money = INCOME (3pl). Minimal pair with 'скинул' = expense"
+    },
+    {
+      "surface": "перевели",
+      "notes": "they transferred to me = income"
+    },
+    {
+      "surface": "закинули",
+      "notes": "they topped me up = income"
+    },
+    {
+      "surface": "вернули",
+      "notes": "they returned/refunded to me = income"
+    },
+    {
+      "surface": "вернули долг",
+      "notes": "debt repaid TO me = income. Contrast 'вернул долг' = I repaid = expense"
+    },
+    {
+      "surface": "начислили",
+      "notes": "was credited"
+    },
+    {
+      "surface": "заплатили",
+      "notes": "they paid me = income (3pl); 'заплатил' 1sg is an expense"
+    },
+    {
+      "surface": "подарили",
+      "notes": "they gifted me = income"
+    },
+    {
+      "surface": "заработал",
+      "notes": "earned"
+    },
+    {
+      "surface": "выиграл",
+      "notes": "won"
+    },
+    {
+      "surface": "продал",
+      "notes": "sold — income; category depends on whether it is business stock or personal stuff"
+    },
+    {
+      "surface": "аванс",
+      "notes": "salary advance"
+    },
+    {
+      "surface": "премия",
+      "notes": "bonus"
+    },
+    {
+      "surface": "получка",
+      "notes": "colloquial payday/salary"
+    },
+    {
+      "surface": "зп",
+      "notes": "written abbreviation for зарплата"
+    },
+    {
+      "surface": "зряплата",
+      "notes": "jocular misspelling of зарплата"
+    },
+    {
+      "surface": "кэшбэк",
+      "notes": "cashback"
+    },
+    {
+      "surface": "кешбек",
+      "notes": "alternative spelling"
+    },
+    {
+      "surface": "возврат",
+      "notes": "refund"
+    },
+    {
+      "surface": "плюс",
+      "notes": "bare marker: 'плюс 2 млн'"
+    },
+    {
+      "surface": "доход",
+      "notes": "noun 'income'"
+    },
+    {
+      "surface": "выручка",
+      "notes": "revenue (business)"
+    }
   ],
-
   "category_keywords": [
-    {"category": "groceries", "keywords": ["продукты", "продуктов", "продукты купил", "продуктовый", "магазин", "магазине", "магаз", "супермаркет", "гастроном", "базар", "базаре", "бозор", "рынок", "рынке", "овощи", "фрукты", "мясо", "курица", "молоко", "яйца", "хлеб", "лепёшка", "лепёшки", "нон", "сахар", "масло", "крупа", "рис", "картошка", "помидоры", "лук", "зелень", "чай", "вода бутылка", "корзинка", "макро", "хавас", "чорсу", "алайский"]},
-    {"category": "dining", "keywords": ["обед", "обеда", "обедал", "обедали", "пообедал", "ужин", "ужинал", "поужинали", "завтрак", "позавтракал", "ресторан", "ресторане", "столовая", "столовке", "чайхана", "чойхона", "ошхона", "плов", "шашлык", "сомса", "самса", "лагман", "манты", "шаурма", "бургер", "пицца", "фастфуд", "доставка еды", "поел", "покушал", "перекусил", "перекус", "бизнес ланч", "ланч", "эвос", "макс вей", "kfc", "чаевые"]},
-    {"category": "cafe_coffee", "keywords": ["кофе", "кофеёк", "кофейня", "капучино", "латте", "американо", "эспрессо", "раф", "флэт уайт", "кафе", "кафешка", "кофе с собой", "чай в кафе", "старбакс", "десерт", "тортик"]},
-    {"category": "transport", "keywords": ["такси", "таксо", "таксист", "яндекс", "яндекс такси", "яндекс го", "mytaxi", "май такси", "метро", "жетон", "автобус", "маршрутка", "маршрутке", "дамас", "троллейбус", "проезд", "доехал", "довёз", "водителю", "поезд", "электричка", "афросиаб", "парковка", "штрафстоянка", "ремонт машины", "шиномонтаж", "мойка"]},
-    {"category": "fuel", "keywords": ["бензин", "бензина", "заправка", "заправке", "заправился", "заправил", "залил", "метан", "пропан", "газ заправил", "солярка", "дизель", "аи 92", "аи 80", "восьмидесятый", "литров"]},
-    {"category": "rent", "keywords": ["аренда", "аренду", "за квартиру", "квартплата", "съём", "снимаю", "хозяйке", "хозяину", "ижара", "залог за квартиру"]},
-    {"category": "utilities", "keywords": ["коммуналка", "коммуналку", "комуналка", "жкх", "за свет", "свет", "электричество", "электроэнергия", "за воду", "вода", "за газ", "газ", "отопление", "мусор", "вывоз мусора", "тсж", "махаллинский сбор", "счётчик"]},
-    {"category": "health", "keywords": ["аптека", "аптеке", "лекарства", "таблетки", "витамины", "врач", "врачу", "доктор", "приём", "анализы", "узи", "стоматолог", "зубной", "зубы", "больница", "клиника", "поликлиника", "укол", "капельница", "операция", "страховка мед", "спортзал", "фитнес", "тренажёрка"]},
-    {"category": "education", "keywords": ["курсы", "курс", "репетитор", "учебники", "тетради", "школа", "за школу", "универ", "университет", "институт", "контракт", "контракт универа", "семестр", "английский", "ielts", "садик", "детский сад", "кружок", "секция", "онлайн курс", "вебинар"]},
-    {"category": "clothing", "keywords": ["одежда", "одежду", "кроссовки", "кеды", "туфли", "обувь", "футболка", "футболки", "джинсы", "куртка", "пальто", "рубашка", "платье", "юбка", "носки", "бельё", "шапка", "сумка", "ремень", "костюм", "шмотки"]},
-    {"category": "entertainment", "keywords": ["кино", "киношка", "билет в кино", "боулинг", "бильярд", "караоке", "клуб", "концерт", "театр", "парк", "аттракционы", "аквапарк", "игра", "стим", "playstation", "приставка", "квест", "тусовка"]},
-    {"category": "gifts", "keywords": ["подарок", "подарки", "подарил", "подарила", "на день рождения", "на др", "цветы", "букет", "открытка", "конверт", "той", "тўй", "на той", "свадьба", "гап", "на гап", "юбилей", "никох", "туйга"]},
-    {"category": "travel", "keywords": ["билет", "билеты", "авиабилет", "самолёт", "отель", "гостиница", "хостел", "бронь", "поездка", "путёвка", "виза", "загранник", "багаж", "трансфер", "экскурсия", "дубай", "стамбул", "алматы", "москва", "самарканд", "бухара"]},
-    {"category": "communication", "keywords": ["интернет", "за интернет", "связь", "мобильный", "на телефон", "баланс", "пополнил телефон", "симка", "тариф", "трафик", "гигабайты", "роутер", "вайфай", "wifi", "билайн", "beeline", "ucell", "юселл", "uzmobile", "mobiuz", "мобиуз", "perfectum", "uztelecom", "sarkor", "east telecom"]},
-    {"category": "subscriptions", "keywords": ["подписка", "подписку", "продлил подписку", "нетфликс", "netflix", "spotify", "спотифай", "яндекс плюс", "youtube premium", "ютуб премиум", "icloud", "apple", "chatgpt", "впн", "vpn", "хостинг", "домен", "премиум"]},
-    {"category": "family", "keywords": ["жене", "мужу", "маме", "папе", "отцу", "родителям", "детям", "ребёнку", "сыну", "дочке", "дочери", "брату", "сестре", "племяннику", "бабушке", "внуку", "карманные", "на детей", "алименты", "домой отправил"]},
-    {"category": "household", "keywords": ["бытовая химия", "хозтовары", "порошок", "мыло", "шампунь для дома", "туалетная бумага", "салфетки", "губки", "лампочка", "лампочки", "гвозди", "краска", "обои", "ремонт", "инструменты", "дрель", "посуда", "кастрюля", "мебель", "диван", "матрас", "шторы", "пылесос", "утюг", "чайник электрический"]},
-    {"category": "beauty", "keywords": ["парикмахерская", "стрижка", "постригся", "барбершоп", "маникюр", "педикюр", "косметика", "салон", "брови", "ресницы", "эпиляция", "спа", "массаж", "крем", "духи", "парфюм", "помада", "шампунь", "солярий"]},
-    {"category": "pets", "keywords": ["корм", "коту", "кошке", "собаке", "щенку", "ветеринар", "ветклиника", "наполнитель", "лоток", "поводок", "прививка коту", "груминг"]},
-    {"category": "charity", "keywords": ["садака", "садақа", "закят", "закат", "пожертвование", "пожертвовал", "милостыня", "нищему", "бедным", "хайрия", "благотворительность", "фонд", "помог деньгами", "эҳсон"]},
-    {"category": "fees", "keywords": ["комиссия", "комиссию", "за перевод", "процент банка", "обслуживание карты", "выпуск карты", "штраф", "гаи", "пеня", "налог", "госпошлина", "нотариус", "справка", "пошлина", "конвертация"]},
-    {"category": "other", "keywords": ["разное", "прочее", "непонятно", "наушники", "телефон купил", "ноутбук", "техника", "рассрочка", "нася", "кредит", "долг отдал", "снял с банкомата", "обменял"]},
-    {"category": "salary", "keywords": ["зарплата", "зарплату", "зп", "получка", "оклад", "аванс", "премия", "премию", "тринадцатая", "выплата с работы"]},
-    {"category": "freelance", "keywords": ["фриланс", "халтура", "халтурка", "подработка", "заказ сделал", "гонорар", "шабашка", "upwork", "апворк", "проект сдал"]},
-    {"category": "business", "keywords": ["выручка", "выручку", "прибыль", "оборот", "продажи", "с магазина", "с точки", "клиент заплатил", "доход с бизнеса"]},
-    {"category": "gift_received", "keywords": ["подарили", "дали денег", "скинули просто так", "на др подарили", "родители дали", "той пули", "конверт дали"]},
-    {"category": "refund", "keywords": ["вернули", "возврат", "рефанд", "кэшбэк", "кешбек", "отменили заказ", "вернули деньги", "вернули долг", "компенсация", "перерасчёт"]},
-    {"category": "investment", "keywords": ["дивиденды", "проценты по вкладу", "вклад", "депозит", "акции", "облигации", "крипта продал", "сдал квартиру"]},
-    {"category": "other_income", "keywords": ["продал", "нашёл деньги", "выиграл", "приз", "лотерея", "сдал бутылки", "непонятный приход"]}
+    {
+      "category": "groceries",
+      "keywords": [
+        "продукты",
+        "продуктов",
+        "продукты купил",
+        "продуктовый",
+        "магазин",
+        "магазине",
+        "магаз",
+        "супермаркет",
+        "гастроном",
+        "базар",
+        "базаре",
+        "бозор",
+        "рынок",
+        "рынке",
+        "овощи",
+        "фрукты",
+        "мясо",
+        "курица",
+        "молоко",
+        "яйца",
+        "хлеб",
+        "лепёшка",
+        "лепёшки",
+        "нон",
+        "сахар",
+        "масло",
+        "крупа",
+        "рис",
+        "картошка",
+        "помидоры",
+        "лук",
+        "зелень",
+        "чай",
+        "вода бутылка",
+        "корзинка",
+        "макро",
+        "хавас",
+        "чорсу",
+        "алайский",
+        "лепешка",
+        "лепешки",
+        "продуктлар"
+      ]
+    },
+    {
+      "category": "dining",
+      "keywords": [
+        "обед",
+        "обеда",
+        "обедал",
+        "обедали",
+        "пообедал",
+        "ужин",
+        "ужинал",
+        "поужинали",
+        "завтрак",
+        "позавтракал",
+        "ресторан",
+        "ресторане",
+        "столовая",
+        "столовке",
+        "чайхана",
+        "чойхона",
+        "ошхона",
+        "плов",
+        "шашлык",
+        "сомса",
+        "самса",
+        "лагман",
+        "манты",
+        "шаурма",
+        "бургер",
+        "пицца",
+        "фастфуд",
+        "доставка еды",
+        "поел",
+        "покушал",
+        "перекусил",
+        "перекус",
+        "бизнес ланч",
+        "ланч",
+        "эвос",
+        "макс вей",
+        "kfc",
+        "чаевые"
+      ]
+    },
+    {
+      "category": "cafe_coffee",
+      "keywords": [
+        "кофе",
+        "кофеёк",
+        "кофейня",
+        "капучино",
+        "латте",
+        "американо",
+        "эспрессо",
+        "раф",
+        "флэт уайт",
+        "кафе",
+        "кафешка",
+        "кофе с собой",
+        "чай в кафе",
+        "старбакс",
+        "десерт",
+        "тортик",
+        "кофеек"
+      ]
+    },
+    {
+      "category": "transport",
+      "keywords": [
+        "такси",
+        "таксо",
+        "таксист",
+        "яндекс",
+        "яндекс такси",
+        "яндекс го",
+        "mytaxi",
+        "май такси",
+        "метро",
+        "жетон",
+        "автобус",
+        "маршрутка",
+        "маршрутке",
+        "дамас",
+        "троллейбус",
+        "проезд",
+        "доехал",
+        "довёз",
+        "водителю",
+        "поезд",
+        "электричка",
+        "афросиаб",
+        "парковка",
+        "штрафстоянка",
+        "ремонт машины",
+        "шиномонтаж",
+        "мойка"
+      ]
+    },
+    {
+      "category": "fuel",
+      "keywords": [
+        "бензин",
+        "бензина",
+        "заправка",
+        "заправке",
+        "заправился",
+        "заправил",
+        "залил",
+        "метан",
+        "пропан",
+        "газ заправил",
+        "солярка",
+        "дизель",
+        "аи 92",
+        "аи 80",
+        "восьмидесятый",
+        "литров"
+      ]
+    },
+    {
+      "category": "rent",
+      "keywords": [
+        "аренда",
+        "аренду",
+        "за квартиру",
+        "квартплата",
+        "съём",
+        "снимаю",
+        "хозяйке",
+        "хозяину",
+        "ижара",
+        "залог за квартиру"
+      ]
+    },
+    {
+      "category": "utilities",
+      "keywords": [
+        "коммуналка",
+        "коммуналку",
+        "комуналка",
+        "жкх",
+        "за свет",
+        "свет",
+        "электричество",
+        "электроэнергия",
+        "за воду",
+        "вода",
+        "за газ",
+        "газ",
+        "отопление",
+        "мусор",
+        "вывоз мусора",
+        "тсж",
+        "махаллинский сбор",
+        "счётчик",
+        "домофон",
+        "лифт",
+        "счетчик"
+      ]
+    },
+    {
+      "category": "health",
+      "keywords": [
+        "аптека",
+        "аптеке",
+        "лекарства",
+        "таблетки",
+        "витамины",
+        "врач",
+        "врачу",
+        "доктор",
+        "приём",
+        "анализы",
+        "узи",
+        "стоматолог",
+        "зубной",
+        "зубы",
+        "больница",
+        "клиника",
+        "поликлиника",
+        "укол",
+        "капельница",
+        "операция",
+        "страховка мед",
+        "спортзал",
+        "фитнес",
+        "тренажёрка",
+        "прием",
+        "тренажерка"
+      ]
+    },
+    {
+      "category": "education",
+      "keywords": [
+        "курсы",
+        "курс",
+        "репетитор",
+        "учебники",
+        "тетради",
+        "школа",
+        "за школу",
+        "универ",
+        "университет",
+        "институт",
+        "контракт",
+        "контракт универа",
+        "семестр",
+        "английский",
+        "ielts",
+        "садик",
+        "детский сад",
+        "кружок",
+        "секция",
+        "онлайн курс",
+        "вебинар"
+      ]
+    },
+    {
+      "category": "clothing",
+      "keywords": [
+        "одежда",
+        "одежду",
+        "кроссовки",
+        "кеды",
+        "туфли",
+        "обувь",
+        "футболка",
+        "футболки",
+        "джинсы",
+        "куртка",
+        "пальто",
+        "рубашка",
+        "платье",
+        "юбка",
+        "носки",
+        "бельё",
+        "шапка",
+        "сумка",
+        "ремень",
+        "костюм",
+        "шмотки",
+        "белье"
+      ]
+    },
+    {
+      "category": "entertainment",
+      "keywords": [
+        "кино",
+        "киношка",
+        "билет в кино",
+        "боулинг",
+        "бильярд",
+        "караоке",
+        "клуб",
+        "концерт",
+        "театр",
+        "парк",
+        "аттракционы",
+        "аквапарк",
+        "игра",
+        "стим",
+        "playstation",
+        "приставка",
+        "квест",
+        "тусовка"
+      ]
+    },
+    {
+      "category": "gifts",
+      "keywords": [
+        "подарок",
+        "подарки",
+        "подарил",
+        "подарила",
+        "на день рождения",
+        "на др",
+        "цветы",
+        "букет",
+        "открытка",
+        "конверт",
+        "той",
+        "тўй",
+        "на той",
+        "свадьба",
+        "гап",
+        "на гап",
+        "юбилей",
+        "никох",
+        "туйга",
+        "гаштак",
+        "на гаштак"
+      ]
+    },
+    {
+      "category": "travel",
+      "keywords": [
+        "билет",
+        "билеты",
+        "авиабилет",
+        "самолёт",
+        "отель",
+        "гостиница",
+        "хостел",
+        "бронь",
+        "поездка",
+        "путёвка",
+        "виза",
+        "загранник",
+        "багаж",
+        "трансфер",
+        "экскурсия",
+        "дубай",
+        "стамбул",
+        "алматы",
+        "москва",
+        "самарканд",
+        "бухара",
+        "самолет",
+        "путевка"
+      ]
+    },
+    {
+      "category": "communication",
+      "keywords": [
+        "интернет",
+        "за интернет",
+        "связь",
+        "мобильный",
+        "на телефон",
+        "баланс",
+        "пополнил телефон",
+        "симка",
+        "тариф",
+        "трафик",
+        "гигабайты",
+        "роутер",
+        "вайфай",
+        "wifi",
+        "билайн",
+        "beeline",
+        "ucell",
+        "юселл",
+        "uzmobile",
+        "mobiuz",
+        "мобиуз",
+        "perfectum",
+        "uztelecom",
+        "sarkor",
+        "east telecom"
+      ]
+    },
+    {
+      "category": "subscriptions",
+      "keywords": [
+        "подписка",
+        "подписку",
+        "продлил подписку",
+        "нетфликс",
+        "netflix",
+        "spotify",
+        "спотифай",
+        "яндекс плюс",
+        "youtube premium",
+        "ютуб премиум",
+        "icloud",
+        "apple",
+        "chatgpt",
+        "впн",
+        "vpn",
+        "хостинг",
+        "домен",
+        "премиум"
+      ]
+    },
+    {
+      "category": "family",
+      "keywords": [
+        "жене",
+        "мужу",
+        "маме",
+        "папе",
+        "отцу",
+        "родителям",
+        "детям",
+        "ребёнку",
+        "сыну",
+        "дочке",
+        "дочери",
+        "брату",
+        "сестре",
+        "племяннику",
+        "бабушке",
+        "внуку",
+        "карманные",
+        "на детей",
+        "алименты",
+        "домой отправил",
+        "ребенку",
+        "внучке"
+      ]
+    },
+    {
+      "category": "household",
+      "keywords": [
+        "бытовая химия",
+        "хозтовары",
+        "порошок",
+        "мыло",
+        "шампунь для дома",
+        "туалетная бумага",
+        "салфетки",
+        "губки",
+        "лампочка",
+        "лампочки",
+        "гвозди",
+        "краска",
+        "обои",
+        "ремонт",
+        "инструменты",
+        "дрель",
+        "посуда",
+        "кастрюля",
+        "мебель",
+        "диван",
+        "матрас",
+        "шторы",
+        "пылесос",
+        "утюг",
+        "чайник электрический"
+      ]
+    },
+    {
+      "category": "beauty",
+      "keywords": [
+        "парикмахерская",
+        "стрижка",
+        "постригся",
+        "барбершоп",
+        "маникюр",
+        "педикюр",
+        "косметика",
+        "салон",
+        "брови",
+        "ресницы",
+        "эпиляция",
+        "спа",
+        "массаж",
+        "крем",
+        "духи",
+        "парфюм",
+        "помада",
+        "шампунь",
+        "солярий"
+      ]
+    },
+    {
+      "category": "pets",
+      "keywords": [
+        "корм",
+        "коту",
+        "кошке",
+        "собаке",
+        "щенку",
+        "ветеринар",
+        "ветклиника",
+        "наполнитель",
+        "лоток",
+        "поводок",
+        "прививка коту",
+        "груминг"
+      ]
+    },
+    {
+      "category": "charity",
+      "keywords": [
+        "садака",
+        "садақа",
+        "закят",
+        "закат",
+        "пожертвование",
+        "пожертвовал",
+        "милостыня",
+        "нищему",
+        "бедным",
+        "хайрия",
+        "благотворительность",
+        "фонд",
+        "помог деньгами",
+        "эҳсон",
+        "ехсон",
+        "фонд помощи",
+        "детдому"
+      ]
+    },
+    {
+      "category": "fees",
+      "keywords": [
+        "комиссия",
+        "комиссию",
+        "за перевод",
+        "процент банка",
+        "обслуживание карты",
+        "выпуск карты",
+        "штраф",
+        "гаи",
+        "пеня",
+        "налог",
+        "госпошлина",
+        "нотариус",
+        "справка",
+        "пошлина",
+        "конвертация",
+        "перерасчет"
+      ]
+    },
+    {
+      "category": "other",
+      "keywords": [
+        "разное",
+        "прочее",
+        "непонятно",
+        "наушники",
+        "телефон купил",
+        "ноутбук",
+        "техника",
+        "рассрочка",
+        "нася",
+        "кредит",
+        "долг отдал",
+        "снял с банкомата",
+        "обменял",
+        "планшет",
+        "зарядка",
+        "чехол",
+        "валюта",
+        "обмен валюты",
+        "перевод на карту"
+      ]
+    },
+    {
+      "category": "salary",
+      "keywords": [
+        "зарплата",
+        "зарплату",
+        "зп",
+        "получка",
+        "оклад",
+        "аванс",
+        "премия",
+        "премию",
+        "тринадцатая",
+        "выплата с работы"
+      ]
+    },
+    {
+      "category": "freelance",
+      "keywords": [
+        "фриланс",
+        "халтура",
+        "халтурка",
+        "подработка",
+        "заказ сделал",
+        "гонорар",
+        "шабашка",
+        "upwork",
+        "апворк",
+        "проект сдал"
+      ]
+    },
+    {
+      "category": "business",
+      "keywords": [
+        "выручка",
+        "выручку",
+        "прибыль",
+        "оборот",
+        "продажи",
+        "с магазина",
+        "с точки",
+        "клиент заплатил",
+        "доход с бизнеса",
+        "выручка за день"
+      ]
+    },
+    {
+      "category": "gift_received",
+      "keywords": [
+        "подарили",
+        "дали денег",
+        "скинули просто так",
+        "на др подарили",
+        "родители дали",
+        "той пули",
+        "конверт дали"
+      ]
+    },
+    {
+      "category": "refund",
+      "keywords": [
+        "вернули",
+        "возврат",
+        "рефанд",
+        "кэшбэк",
+        "кешбек",
+        "отменили заказ",
+        "вернули деньги",
+        "вернули долг",
+        "компенсация",
+        "перерасчёт"
+      ]
+    },
+    {
+      "category": "investment",
+      "keywords": [
+        "дивиденды",
+        "проценты по вкладу",
+        "вклад",
+        "депозит",
+        "акции",
+        "облигации",
+        "крипта продал",
+        "сдал квартиру"
+      ]
+    },
+    {
+      "category": "other_income",
+      "keywords": [
+        "продал",
+        "выиграл",
+        "приз",
+        "лотерея",
+        "сдал бутылки",
+        "непонятный приход",
+        "нашел деньги",
+        "нашёл деньги",
+        "занял",
+        "взял в долг"
+      ]
+    }
   ],
-
   "date_expressions": [
-    {"surface": "сегодня", "meaning": "today"},
-    {"surface": "сёдня", "meaning": "today"},
-    {"surface": "седня", "meaning": "today"},
-    {"surface": "сегодняшний", "meaning": "today"},
-    {"surface": "щас", "meaning": "today"},
-    {"surface": "ща", "meaning": "today"},
-    {"surface": "сейчас", "meaning": "today"},
-    {"surface": "только что", "meaning": "today"},
-    {"surface": "утром", "meaning": "today"},
-    {"surface": "днём", "meaning": "today"},
-    {"surface": "вечером", "meaning": "today"},
-    {"surface": "ночью", "meaning": "today"},
-    {"surface": "вчера", "meaning": "yesterday"},
-    {"surface": "вчерась", "meaning": "yesterday"},
-    {"surface": "вчера вечером", "meaning": "yesterday"},
-    {"surface": "позавчера", "meaning": "day_before_yesterday"},
-    {"surface": "третьего дня", "meaning": "day_before_yesterday", "notes": "bookish idiom, still heard from older speakers"},
-    {"surface": "в понедельник", "meaning": "last_monday", "notes": "with a past-tense verb this means the most recent Monday"},
-    {"surface": "во вторник", "meaning": "last_tuesday", "notes": "preposition surfaces as 'во' before в/ф clusters"},
-    {"surface": "в среду", "meaning": "last_wednesday"},
-    {"surface": "в четверг", "meaning": "last_thursday"},
-    {"surface": "в пятницу", "meaning": "last_friday"},
-    {"surface": "в субботу", "meaning": "last_saturday"},
-    {"surface": "в воскресенье", "meaning": "last_sunday"},
-    {"surface": "в прошлую пятницу", "meaning": "last_friday"},
-    {"surface": "в эту пятницу", "meaning": "this_friday"},
-    {"surface": "в этот вторник", "meaning": "this_tuesday"},
-    {"surface": "на прошлой неделе", "meaning": "7_days_ago", "notes": "approximate — no exact slot in the schema"},
-    {"surface": "неделю назад", "meaning": "7_days_ago"},
-    {"surface": "пару дней назад", "meaning": "2_days_ago"},
-    {"surface": "три дня назад", "meaning": "3_days_ago"},
-    {"surface": "3 дня назад", "meaning": "3_days_ago"},
-    {"surface": "дней пять назад", "meaning": "5_days_ago", "notes": "inverted numeral order = approximation"},
-    {"surface": "на выходных", "meaning": "last_saturday", "notes": "vague — parser should treat as low confidence"},
-    {"surface": "в выходные", "meaning": "last_saturday"}
+    {
+      "surface": "сегодня",
+      "meaning": "today"
+    },
+    {
+      "surface": "сёдня",
+      "meaning": "today"
+    },
+    {
+      "surface": "седня",
+      "meaning": "today"
+    },
+    {
+      "surface": "сегодняшний",
+      "meaning": "today"
+    },
+    {
+      "surface": "щас",
+      "meaning": "today"
+    },
+    {
+      "surface": "ща",
+      "meaning": "today"
+    },
+    {
+      "surface": "сейчас",
+      "meaning": "today"
+    },
+    {
+      "surface": "только что",
+      "meaning": "today"
+    },
+    {
+      "surface": "утром",
+      "meaning": "today"
+    },
+    {
+      "surface": "днём",
+      "meaning": "today"
+    },
+    {
+      "surface": "днем",
+      "meaning": "today"
+    },
+    {
+      "surface": "вечером",
+      "meaning": "today"
+    },
+    {
+      "surface": "ночью",
+      "meaning": "today"
+    },
+    {
+      "surface": "вчера",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "вчерась",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "вчера вечером",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "позавчера",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "<N> дня назад",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> дней назад",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "неделю назад",
+      "meaning": "7_days_ago"
+    },
+    {
+      "surface": "дней <N> назад",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "в прошлый понедельник",
+      "meaning": "last_monday"
+    },
+    {
+      "surface": "в понедельник",
+      "meaning": "last_monday"
+    },
+    {
+      "surface": "в этот понедельник",
+      "meaning": "this_monday"
+    },
+    {
+      "surface": "в прошлый вторник",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "во вторник",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "в этот вторник",
+      "meaning": "this_tuesday"
+    },
+    {
+      "surface": "в прошлую среду",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "в среду",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "в эту среду",
+      "meaning": "this_wednesday"
+    },
+    {
+      "surface": "в прошлый четверг",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "в четверг",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "в этот четверг",
+      "meaning": "this_thursday"
+    },
+    {
+      "surface": "в прошлую пятницу",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "в пятницу",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "в эту пятницу",
+      "meaning": "this_friday"
+    },
+    {
+      "surface": "в прошлую субботу",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "в субботу",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "в эту субботу",
+      "meaning": "this_saturday"
+    },
+    {
+      "surface": "в прошлое воскресенье",
+      "meaning": "last_sunday"
+    },
+    {
+      "surface": "в воскресенье",
+      "meaning": "last_sunday"
+    },
+    {
+      "surface": "в это воскресенье",
+      "meaning": "this_sunday"
+    },
+    {
+      "surface": "третьего дня",
+      "meaning": null,
+      "notes": "a dead literary idiom; if it does appear, treat as vague -> null"
+    },
+    {
+      "surface": "на днях",
+      "meaning": null,
+      "notes": "'the other day' - vague"
+    },
+    {
+      "surface": "на прошлой неделе",
+      "meaning": null,
+      "notes": "a PERIOD; 7_days_ago would be an over-precise invention"
+    },
+    {
+      "surface": "на выходных",
+      "meaning": null,
+      "notes": "Saturday OR Sunday - inventing last_saturday is over-precision"
+    },
+    {
+      "surface": "в выходные",
+      "meaning": null,
+      "notes": "same"
+    },
+    {
+      "surface": "в этом месяце",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "за неделю",
+      "meaning": null,
+      "notes": "period"
+    },
+    {
+      "surface": "завтра",
+      "meaning": null,
+      "notes": "FUTURE"
+    },
+    {
+      "surface": "каждый месяц",
+      "meaning": null,
+      "notes": "recurrence"
+    }
   ],
-
   "merchants": [
-    {"surface": "корзинка", "canonical": "Korzinka", "category": "groceries"},
-    {"surface": "korzinka", "canonical": "Korzinka", "category": "groceries"},
-    {"surface": "в корзинке", "canonical": "Korzinka", "category": "groceries"},
-    {"surface": "макро", "canonical": "Makro", "category": "groceries"},
-    {"surface": "makro", "canonical": "Makro", "category": "groceries"},
-    {"surface": "хавас", "canonical": "Havas", "category": "groceries"},
-    {"surface": "havas", "canonical": "Havas", "category": "groceries"},
-    {"surface": "чорсу", "canonical": "Chorsu", "category": "groceries"},
-    {"surface": "алайский", "canonical": "Alayskiy Bazaar", "category": "groceries"},
-    {"surface": "яндекс такси", "canonical": "Yandex Taxi", "category": "transport"},
-    {"surface": "яндекс го", "canonical": "Yandex Go", "category": "transport"},
-    {"surface": "яндекс", "canonical": "Yandex Taxi", "category": "transport", "notes": "bare 'яндекс' in a spending context nearly always means the taxi"},
-    {"surface": "mytaxi", "canonical": "MyTaxi", "category": "transport"},
-    {"surface": "эвос", "canonical": "Evos", "category": "dining"},
-    {"surface": "evos", "canonical": "Evos", "category": "dining"},
-    {"surface": "макс вей", "canonical": "Max Way", "category": "dining"},
-    {"surface": "kfc", "canonical": "KFC", "category": "dining"},
-    {"surface": "узум", "canonical": "Uzum", "category": "other"},
-    {"surface": "uzum", "canonical": "Uzum", "category": "other"},
-    {"surface": "узум маркет", "canonical": "Uzum Market", "category": "other"},
-    {"surface": "клик", "canonical": "Click", "category": "fees", "notes": "PAYMENT RAIL, not a merchant. 'оплатил через клик' must NOT set merchant=Click"},
-    {"surface": "click", "canonical": "Click", "category": "fees", "notes": "see above"},
-    {"surface": "пейми", "canonical": "Payme", "category": "fees", "notes": "payment rail, same caveat"},
-    {"surface": "payme", "canonical": "Payme", "category": "fees", "notes": "payment rail, same caveat"},
-    {"surface": "хумо", "canonical": "Humo", "category": "fees", "notes": "card scheme, not a merchant"},
-    {"surface": "узкард", "canonical": "Uzcard", "category": "fees", "notes": "card scheme, not a merchant"},
-    {"surface": "вайлдберриз", "canonical": "Wildberries", "category": "clothing"},
-    {"surface": "вб", "canonical": "Wildberries", "category": "clothing"},
-    {"surface": "wildberries", "canonical": "Wildberries", "category": "clothing"},
-    {"surface": "озон", "canonical": "Ozon", "category": "other"},
-    {"surface": "ozon", "canonical": "Ozon", "category": "other"},
-    {"surface": "билайн", "canonical": "Beeline", "category": "communication"},
-    {"surface": "beeline", "canonical": "Beeline", "category": "communication"},
-    {"surface": "юселл", "canonical": "Ucell", "category": "communication"},
-    {"surface": "ucell", "canonical": "Ucell", "category": "communication"},
-    {"surface": "мобиуз", "canonical": "Mobiuz", "category": "communication"},
-    {"surface": "mobiuz", "canonical": "Mobiuz", "category": "communication"},
-    {"surface": "узмобайл", "canonical": "Uzmobile", "category": "communication"},
-    {"surface": "нетфликс", "canonical": "Netflix", "category": "subscriptions"},
-    {"surface": "netflix", "canonical": "Netflix", "category": "subscriptions"},
-    {"surface": "спотифай", "canonical": "Spotify", "category": "subscriptions"},
-    {"surface": "spotify", "canonical": "Spotify", "category": "subscriptions"},
-    {"surface": "яндекс плюс", "canonical": "Yandex Plus", "category": "subscriptions", "notes": "'яндекс плюс' must beat the bare 'яндекс' -> taxi rule"}
+    {
+      "surface": "корзинка",
+      "canonical": "Korzinka",
+      "category": "groceries"
+    },
+    {
+      "surface": "korzinka",
+      "canonical": "Korzinka",
+      "category": "groceries"
+    },
+    {
+      "surface": "в корзинке",
+      "canonical": "Korzinka",
+      "category": "groceries"
+    },
+    {
+      "surface": "макро",
+      "canonical": "Makro",
+      "category": "groceries"
+    },
+    {
+      "surface": "makro",
+      "canonical": "Makro",
+      "category": "groceries"
+    },
+    {
+      "surface": "хавас",
+      "canonical": "Havas",
+      "category": "groceries"
+    },
+    {
+      "surface": "havas",
+      "canonical": "Havas",
+      "category": "groceries"
+    },
+    {
+      "surface": "чорсу",
+      "canonical": "Chorsu Bozor",
+      "category": "groceries"
+    },
+    {
+      "surface": "алайский",
+      "canonical": "Oloy Bozori",
+      "category": "groceries",
+      "notes": "'Алайский' is the Russified name; the canonical string across all four files is Oloy Bozori."
+    },
+    {
+      "surface": "яндекс такси",
+      "canonical": "Yandex Taxi",
+      "category": "transport"
+    },
+    {
+      "surface": "яндекс го",
+      "canonical": "Yandex Go",
+      "category": "transport"
+    },
+    {
+      "surface": "яндекс",
+      "canonical": "Yandex Taxi",
+      "category": "transport",
+      "notes": "bare 'яндекс' in a spending context nearly always means the taxi"
+    },
+    {
+      "surface": "mytaxi",
+      "canonical": "MyTaxi",
+      "category": "transport"
+    },
+    {
+      "surface": "эвос",
+      "canonical": "Evos",
+      "category": "dining"
+    },
+    {
+      "surface": "evos",
+      "canonical": "Evos",
+      "category": "dining"
+    },
+    {
+      "surface": "макс вей",
+      "canonical": "Max Way",
+      "category": "dining"
+    },
+    {
+      "surface": "kfc",
+      "canonical": "KFC",
+      "category": "dining"
+    },
+    {
+      "surface": "узум",
+      "canonical": "Uzum",
+      "category": "other"
+    },
+    {
+      "surface": "uzum",
+      "canonical": "Uzum",
+      "category": "other"
+    },
+    {
+      "surface": "узум маркет",
+      "canonical": "Uzum",
+      "category": "other",
+      "notes": "A VARIANT surface of Uzum, never a canonical output."
+    },
+    {
+      "surface": "клик",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "click",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "пейми",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "payme",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "хумо",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "узкард",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees."
+    },
+    {
+      "surface": "вайлдберриз",
+      "canonical": "Wildberries",
+      "category": "clothing"
+    },
+    {
+      "surface": "вб",
+      "canonical": "Wildberries",
+      "category": "clothing"
+    },
+    {
+      "surface": "wildberries",
+      "canonical": "Wildberries",
+      "category": "clothing"
+    },
+    {
+      "surface": "озон",
+      "canonical": "Ozon",
+      "category": "other"
+    },
+    {
+      "surface": "ozon",
+      "canonical": "Ozon",
+      "category": "other"
+    },
+    {
+      "surface": "билайн",
+      "canonical": "Beeline",
+      "category": "communication"
+    },
+    {
+      "surface": "beeline",
+      "canonical": "Beeline",
+      "category": "communication"
+    },
+    {
+      "surface": "юселл",
+      "canonical": "Ucell",
+      "category": "communication"
+    },
+    {
+      "surface": "ucell",
+      "canonical": "Ucell",
+      "category": "communication"
+    },
+    {
+      "surface": "мобиуз",
+      "canonical": "Mobiuz",
+      "category": "communication"
+    },
+    {
+      "surface": "mobiuz",
+      "canonical": "Mobiuz",
+      "category": "communication"
+    },
+    {
+      "surface": "узмобайл",
+      "canonical": "Uzmobile",
+      "category": "communication"
+    },
+    {
+      "surface": "нетфликс",
+      "canonical": "Netflix",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "netflix",
+      "canonical": "Netflix",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "спотифай",
+      "canonical": "Spotify",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "spotify",
+      "canonical": "Spotify",
+      "category": "subscriptions"
+    },
+    {
+      "surface": "яндекс плюс",
+      "canonical": "Yandex Plus",
+      "category": "subscriptions",
+      "notes": "'яндекс плюс' must beat the bare 'яндекс' -> taxi rule"
+    },
+    {
+      "surface": "chorsu",
+      "canonical": "Chorsu Bozor",
+      "category": "groceries"
+    },
+    {
+      "surface": "экспресс24",
+      "canonical": "Express24",
+      "category": "dining"
+    },
+    {
+      "surface": "express24",
+      "canonical": "Express24",
+      "category": "dining"
+    },
+    {
+      "surface": "октепа",
+      "canonical": "Oqtepa Lavash",
+      "category": "dining"
+    },
+    {
+      "surface": "oqtepa",
+      "canonical": "Oqtepa Lavash",
+      "category": "dining"
+    },
+    {
+      "surface": "чопар",
+      "canonical": "Chopar Pizza",
+      "category": "dining"
+    },
+    {
+      "surface": "chopar",
+      "canonical": "Chopar Pizza",
+      "category": "dining"
+    },
+    {
+      "surface": "техномарт",
+      "canonical": "Texnomart",
+      "category": "household"
+    },
+    {
+      "surface": "texnomart",
+      "canonical": "Texnomart",
+      "category": "household"
+    },
+    {
+      "surface": "болт",
+      "canonical": "Bolt",
+      "category": "transport"
+    },
+    {
+      "surface": "bolt",
+      "canonical": "Bolt",
+      "category": "transport"
+    },
+    {
+      "surface": "олх",
+      "canonical": "OLX",
+      "category": "other"
+    },
+    {
+      "surface": "olx",
+      "canonical": "OLX",
+      "category": "other"
+    },
+    {
+      "surface": "яндекс еда",
+      "canonical": "Yandex Eats",
+      "category": "dining"
+    },
+    {
+      "surface": "яндекс лавка",
+      "canonical": "Yandex Lavka",
+      "category": "groceries"
+    },
+    {
+      "surface": "атто",
+      "canonical": null,
+      "category": null,
+      "notes": "PAYMENT RAIL / CARD SCHEME, NOT A MERCHANT. 'X orqali to'ladim' / 'оплатил через X' must leave merchant=null and take the category from the real payee. THE ONE EXCEPTION: when the rail is itself the party charging - its own commission or transfer fee - it does occupy the merchant slot with category=fees. ATTO is the Tashkent fare card."
+    },
+    {
+      "surface": "блэк бир",
+      "canonical": "Black Bear Coffee",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "black bear",
+      "canonical": "Black Bear Coffee",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "идея",
+      "canonical": "Idea",
+      "category": "household"
+    },
+    {
+      "surface": "медиапарк",
+      "canonical": "Mediapark",
+      "category": "household"
+    },
+    {
+      "surface": "артель",
+      "canonical": "Artel",
+      "category": "household"
+    },
+    {
+      "surface": "лес айлес",
+      "canonical": "Les Ailes",
+      "category": "dining"
+    },
+    {
+      "surface": "бон",
+      "canonical": "Bon!",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "чорсу базар",
+      "canonical": "Chorsu Bozor",
+      "category": "groceries"
+    },
+    {
+      "surface": "чиноз",
+      "canonical": "Chinoz bozor",
+      "category": "groceries"
+    },
+    {
+      "surface": "капиталбанк",
+      "canonical": "Kapitalbank",
+      "category": "fees"
+    },
+    {
+      "surface": "тбс",
+      "canonical": "TBC Bank",
+      "category": "fees"
+    },
+    {
+      "surface": "узгазойл",
+      "canonical": "UzGasOil",
+      "category": "fuel"
+    },
+    {
+      "surface": "узум тезкор",
+      "canonical": "Uzum Tezkor",
+      "category": "dining"
+    },
+    {
+      "surface": "корзинка го",
+      "canonical": "Korzinka Go",
+      "category": "groceries"
+    },
+    {
+      "surface": "анхор",
+      "canonical": "Anhor",
+      "category": "entertainment"
+    },
+    {
+      "surface": "магнум",
+      "canonical": "Magnum",
+      "category": "groceries"
+    },
+    {
+      "surface": "старбакс",
+      "canonical": "Starbucks",
+      "category": "cafe_coffee"
+    },
+    {
+      "surface": "макдональдс",
+      "canonical": "McDonald's",
+      "category": "dining"
+    },
+    {
+      "surface": "алиф",
+      "canonical": "Alif",
+      "category": "other"
+    },
+    {
+      "surface": "анор",
+      "canonical": "Anor",
+      "category": "other"
+    },
+    {
+      "surface": "зумрад",
+      "canonical": "Zoomrad",
+      "category": "other"
+    },
+    {
+      "surface": "апворк",
+      "canonical": "Upwork",
+      "category": "freelance"
+    },
+    {
+      "surface": "upwork",
+      "canonical": "Upwork",
+      "category": "freelance"
+    }
   ],
-
   "noise_words": [
-    "на", "за", "в", "во", "по", "с", "со", "из", "для", "к", "у", "о", "об", "при", "до",
-    "и", "а", "но", "же", "ли", "бы", "вот", "ну", "там", "тут", "это", "эт", "эта",
-    "типа", "тип", "короче", "кароче", "вообще", "вобщем", "в общем", "блин", "ещё", "еще",
-    "тоже", "просто", "прям", "чуть", "около", "примерно", "где-то", "гдето", "приблизительно",
-    "кажется", "вроде", "походу", "наверно", "наверное", "сегодня уже", "опять", "снова",
-    "ааа", "эмм", "ммм", "ага", "угу", "хоп", "майли", "ладно", "значит", "как бы", "стало быть"
+    "на",
+    "за",
+    "в",
+    "во",
+    "по",
+    "с",
+    "со",
+    "из",
+    "для",
+    "у",
+    "о",
+    "об",
+    "при",
+    "до",
+    "и",
+    "а",
+    "но",
+    "же",
+    "ли",
+    "бы",
+    "вот",
+    "ну",
+    "там",
+    "тут",
+    "это",
+    "эт",
+    "эта",
+    "типа",
+    "тип",
+    "короче",
+    "кароче",
+    "вообще",
+    "вобщем",
+    "в общем",
+    "блин",
+    "тоже",
+    "просто",
+    "прям",
+    "сегодня уже",
+    "ааа",
+    "эмм",
+    "ммм",
+    "ага",
+    "угу",
+    "хоп",
+    "майли",
+    "ладно",
+    "значит",
+    "как бы",
+    "стало быть"
+  ],
+  "noise_words_notes": "'к' was removed: it is a MAGNITUDE token ('25к' = 25 000) and stripping it as a preposition silently destroyed the amount. The hedge/polarity words (чуть, около, примерно, где-то, вроде, ещё) were removed to hedge_words - see that section for why.",
+  "yo_spelling_rule": "Ё/Е: most phone keyboards do not surface ё, so the е-form is the MORE COMMON input. Every ё-entry in this file must have an е-counterpart, and both must hash to the same key: лепёшка/лепешка, приём/прием, съём/съем, бельё/белье, самолёт/самолет, путёвка/путевка, ребёнку/ребенку, счётчик/счетчик, кофеёк/кофеек, довёз/довез, тренажёрка/тренажерка, перерасчёт/перерасчет, нашёл/нашел, занёс/занес, днём/днем, четырёх/четырех, перевёл/перевел, ещё/еще.",
+  "inverted_approximation": {
+    "rule": "RUSSIAN INVERTED NUMERAL ORDER = APPROXIMATION. Putting the numeral AFTER the magnitude word means 'about': 'тыщ двадцать' = about 20 000, 'тысяч сто' = about 100 000, 'лямов пять' = about 5 000 000, 'дней пять назад' = about five days ago. A parser that only handles <numeral><magnitude> reads 'тыщ' as an unattached magnitude and loses the amount entirely.",
+    "examples": [
+      "тыщ двадцать на такси",
+      "тысяч сто отдал",
+      "лямов пять",
+      "косарей десять",
+      "дней пять назад"
+    ]
+  },
+  "date_notes": "See conventions.date_enum. Emits only the legal enum; there are no sentinel values.",
+  "conventions": {
+    "purpose": "Decision rules shared by all four lexicons and by every line of the corpus. Where a rule is stated here, no file may contradict it.",
+    "magnitude_ellipsis": "A bare integer < 1000 with NO magnitude word and NO currency word in an expense/income frame means that many THOUSAND so'm ('taksiga 45' / 'такси 25' / 'coffee 15' -> 45000 / 25000 / 15000). THIS APPLIES IN EVERY LANGUAGE - the app is UZS-first and the rule must not depend on a language tag guessed from two tokens. Counter-rules: (a) if an explicit currency word is present the number is literal ('5 dollar' = 5); (b) digits >= 1000 are already literal; (c) a number immediately followed by -ta / kg / kilo / dona / litr / marta / штук / foiz / % is a QUANTITY, not an amount.",
+    "currency": "currency is filled ONLY from an explicit currency token in the text. A bare number yields currency=null and the app applies the user's default later. Never infer UZS from a magnitude word ('ming', 'тыщ', 'k') and never from plausibility.",
+    "reject_convention": "Queries, balance/budget statements, negations, future intentions, cancelled or returned purchases, price commentary, third-party payments and app commands are NOT transactions. They are labelled confidence = 0.0 with EVERY slot blanked: amount, currency, merchant, note and date all null and category 'other'. A single `confidence == 0.0` gate is therefore sufficient to refuse, in all four languages. `kind` has no null case in the schema, so it carries the direction the utterance implies.",
+    "multi_transaction": "When one utterance contains several transactions, expected = the FIRST transaction only. Amounts are NEVER summed (a bill plus a tip is two records, not one total) and the line is scored 0.4. The remaining records cannot be expressed in a one-record schema and must be surfaced by the app.",
+    "transfer_class": "ATM withdrawals, wallet top-ups, moving money to savings, lending, borrowing, repaying a loan, P2P card transfers and currency exchange move money without consuming it. The schema has no `transfer` kind, so they are recorded as expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4 for the whole class.",
+    "date_enum": "The ONLY legal date values are: today, yesterday, day_before_yesterday, last_<weekday>, this_<weekday>, <N>_days_ago, and null. There are no sentinels (no AMBIGUOUS/FUTURE/RECURRING/UNSUPPORTED) and no bare weekday names. Resolution rules: a time of day (ertalab / kechqurun / tushda / hozir / утром / вечером / this morning / tonight) -> today; a BARE weekday with no 'o'tgan'/'shu'/'прошлый'/'этот'/'last'/'this' modifier -> null, because it is genuinely ambiguous between past and future; an explicit day COUNT ('7 kun oldin', 'неделю назад', 'a week ago') -> <N>_days_ago; a PERIOD ('o'tgan hafta', 'на прошлой неделе', 'last week', 'o'tgan oy', 'this month', 'на выходных') -> null, because resolving it to a day would be an invention; an absolute calendar date ('8 mart', '1-sentabr', 'the 12th') -> null, with the phrase preserved in `note`; a recurrence ('har oy', 'oyiga', 'kuniga') -> null.",
+    "confidence_scale": "Six points only, each with a written meaning. 0.95 = unambiguous, every slot recoverable. 0.8 = one small inference (fuzzy merchant match, cross-script token, spoken numeral, hedged amount). 0.6 = exactly one genuinely underdetermined slot (magnitude ellipsis, contested category, approximation). 0.4 = two or more underdetermined slots, a missing amount, a multi-transaction line, or the transfer class. 0.2 = intent is present but nothing is loggable - the app must prompt. 0.0 = not a transaction; refuse. `difficulty` is derived from this: 0.95 easy, 0.8 medium, <= 0.6 hard.",
+    "note_field": "`note` is a SHORT EXTRACTIVE span of the user's own words - the item or service, in the language and script of the utterance - or null. It is never annotator commentary, never a translation, never a meta-description of the parse, and never a date phrase (except an absolute calendar date, which has nowhere else to go). All explanation belongs in the corpus row's `notes` field, which is not a model output.",
+    "merchant_canonicalisation": "One brand yields exactly ONE gold string in every file: Korzinka, Korzinka Go, Makro, Havas, Chorsu Bozor, Oloy Bozori, Uzum ('uzum market' is a VARIANT surface of it, never a canonical), Evos, Oqtepa Lavash, Chopar Pizza, Max Way, Les Ailes, KFC, McDonald's, Express24, Yandex Eats, Yandex Taxi (bare 'yandex' in a spending context resolves here), Yandex Go, Yandex Plus, Yandex Lavka, Bolt, Uber, MyTaxi, Beeline, Ucell, Uzmobile, Mobiuz, Humans, Texnomart, Mediapark, Idea, Artel, Netflix, Spotify, iCloud, ChatGPT, Zara, Starbucks, Black Bear Coffee, OLX, Wildberries, Upwork, Kapitalbank, TBC Bank, Alif, Anor, Zoomrad, UzGasOil, Hududgaz. A personal name is NEVER a merchant.",
+    "category_rules": {
+      "cafe_vs_dining": "The VENUE word wins over the amount and over what was eaten. cafe / kafe / кафе / kofeynya / choy / kofe and the drink nouns -> cafe_coffee. restoran / choyxona / osh / lavash / somsa / burger / pizza / obed / tushlik and the meal nouns -> dining.",
+      "groceries_vs_dining": "Raw ingredients and supermarket/bozor merchants -> groceries, including supermarket DELIVERY. Prepared food, food delivery and eat-in venues -> dining.",
+      "gaz": "The VERB decides, never the noun: quydim / заправил / залил / 'filled the tank' -> fuel; to'ladim / заплатил / 'gaz puli' / 'за газ' / 'gas bill' -> utilities.",
+      "car_spend": "Consumed into the tank -> fuel. Service, parts, wash (moyka), parking, tyres, engine oil -> transport. State-imposed or contractual charges (shtraf / jarima / ГАИ / insurance / notary / customs) -> fees, even when a car triggered them.",
+      "communication_vs_utilities": "Billed by a TELECOM (mobile balance, HOME INTERNET, tariff, SIM) -> communication. Billed by the building or the municipality (svet, gaz bill, suv, issiq suv, chiqindi, kommunalka, domofon, lift, TSJ, mahalla puli) -> utilities. Home internet is communication in EVERY file.",
+      "household_vs_other": "Durable goods for the DWELLING (fridge, TV, kettle, furniture, carpet, lamps, remont, tools) -> household. PORTABLE PERSONAL DEVICES and their repairs (phone, laptop, macbook, headphones/naushnik, tablet, chargers, cases) -> other, in every language. The corpus has 8+ lines pleading for a dedicated `electronics` category; until the schema gains one, `other` is the agreed home.",
+      "memberships": "Physical-activity facilities (gym, sportzal, bassein, fitnes) -> health regardless of the word abonement/membership. Media and software recurring charges -> subscriptions. Venues attended for fun (kino, akvapark, bouling, konsert, teatr) -> entertainment.",
+      "beneficiary": "A NON-HUMAN beneficiary (mushuk / it / kuchuk / коту / собаке / cat / dog) -> pets, always. For a human beneficiary: if the object is a gift-type object (sovg'a / podarok / gul / atir / buket / present / flowers / toy) -> gifts; else if the object has its own category (dori -> health, kitob -> education, kiyim -> clothing) -> that category; else (bare cash) -> family.",
+      "ceremonies": "to'y / ma'raka / nikoh / gap / gashtak / xudoyi / beshik to'y / sunnat to'y / yubiley and any named gift object -> gifts. Unconditional cash to a relative -> family. sadaqa / ehson / zakot / masjid / xayriya / fond / yetimxona -> charity.",
+      "child_spend": "A named institution (maktab, bog'cha, universitet, kurs, kontrakt) wins over the physical item: a school uniform is education, a child's contract is education. Ordinary clothes with no institution named stay clothing.",
+      "investment_vs_other_income": "Proceeds from a financial instrument or income-producing asset (deposit interest, dividends, crypto, a flat rented out) -> investment. Proceeds from selling a personal possession -> other_income.",
+      "water": "The item or preposition decides, NEVER the amount size: 'бутылка воды' / 'suv oldim' -> groceries; 'за воду' / 'suv puli' -> utilities. Category-from-magnitude is not a rule a deterministic parser may implement."
+    }
+  },
+  "negation_markers": [
+    {
+      "surface": "не",
+      "lang": "ru",
+      "notes": "'не платил', 'не куплено'"
+    },
+    {
+      "surface": "ничего",
+      "lang": "ru",
+      "notes": "'ничего не потратил'"
+    },
+    {
+      "surface": "чуть не",
+      "lang": "ru",
+      "notes": "'almost' - the purchase did NOT happen. MUST NOT be stripped as noise."
+    },
+    {
+      "surface": "передумал",
+      "lang": "ru",
+      "notes": "'changed my mind' - cancelled purchase"
+    },
+    {
+      "surface": "не дали",
+      "lang": "ru",
+      "notes": "negated income"
+    },
+    {
+      "surface": "вернул",
+      "lang": "ru",
+      "notes": "CAUTION: 'но я вернул' = returned the goods (reject); 'вернул долг' = repaid a debt (transfer)"
+    }
+  ],
+  "query_markers": [
+    {
+      "surface": "сколько",
+      "lang": "ru"
+    },
+    {
+      "surface": "покажи",
+      "lang": "ru"
+    },
+    {
+      "surface": "осталось",
+      "lang": "ru",
+      "notes": "balance"
+    },
+    {
+      "surface": "остаток",
+      "lang": "ru",
+      "notes": "balance"
+    },
+    {
+      "surface": "сколько стоит",
+      "lang": "ru",
+      "notes": "a PRICE question, not a payment"
+    }
+  ],
+  "intent_markers": [
+    {
+      "surface": "завтра",
+      "lang": "ru",
+      "meaning": "future"
+    },
+    {
+      "surface": "потрачу",
+      "lang": "ru",
+      "meaning": "future",
+      "notes": "perfective future"
+    },
+    {
+      "surface": "хотел купить",
+      "lang": "ru",
+      "meaning": "cancelled"
+    },
+    {
+      "surface": "собираюсь",
+      "lang": "ru",
+      "meaning": "future"
+    }
+  ],
+  "hedge_words": {
+    "notes": "Hedge, polarity and range markers. THESE ARE NOT NOISE WORDS. Stripping them turns 'chut ne kupil kurtku za 900 tysh' into a logged 900 000 purchase and turns every estimate into a hard figure. They must survive tokenisation and lower confidence (approximate -> 0.6) or force a reject (polarity).",
+    "entries": [
+      {
+        "surface": "около",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "примерно",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "где-то",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "гдето",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "вроде",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "приблизительно",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "кажется",
+        "lang": "ru",
+        "effect": "approximate"
+      },
+      {
+        "surface": "с чем-то",
+        "lang": "ru",
+        "effect": "lower_bound",
+        "notes": "'двести с чем-то' - the stated figure is a floor"
+      },
+      {
+        "surface": "с копейками",
+        "lang": "ru",
+        "effect": "lower_bound"
+      },
+      {
+        "surface": "под",
+        "lang": "ru",
+        "effect": "upper_bound",
+        "notes": "'под 500 тыщ' = getting on for 500"
+      },
+      {
+        "surface": "больше",
+        "lang": "ru",
+        "effect": "lower_bound"
+      },
+      {
+        "surface": "ещё / еще",
+        "lang": "ru",
+        "effect": "polarity",
+        "notes": "'не платил ещё' - part of the negation, NOT filler"
+      }
+    ]
+  },
+  "payment_methods": {
+    "notes": "HOW the money moved. It is metadata, never the merchant and never the category. 'naliсhkoy 200 tysh za produkty' is groceries; the method word must not reach the merchant slot.",
+    "entries": [
+      {
+        "surface": "наличкой",
+        "lang": "ru",
+        "method": "cash"
+      },
+      {
+        "surface": "налом",
+        "lang": "ru",
+        "method": "cash"
+      },
+      {
+        "surface": "наличными",
+        "lang": "ru",
+        "method": "cash"
+      },
+      {
+        "surface": "по карте",
+        "lang": "ru",
+        "method": "card"
+      },
+      {
+        "surface": "картой",
+        "lang": "ru",
+        "method": "card"
+      },
+      {
+        "surface": "с карты",
+        "lang": "ru",
+        "method": "card"
+      },
+      {
+        "surface": "переводом",
+        "lang": "ru",
+        "method": "transfer"
+      },
+      {
+        "surface": "перечислением",
+        "lang": "ru",
+        "method": "transfer"
+      },
+      {
+        "surface": "через терминал",
+        "lang": "ru",
+        "method": "terminal"
+      }
+    ]
+  },
+  "transfer_markers": {
+    "notes": "Money moving WITHOUT being consumed. The schema has no `transfer` kind, so every member of this class is expense/other (out) or income/other_income (in) at a FIXED confidence of 0.4.",
+    "entries": [
+      {
+        "surface": "снял с банкомата",
+        "lang": "ru",
+        "kind": "atm_withdrawal"
+      },
+      {
+        "surface": "занял",
+        "lang": "ru",
+        "kind": "borrow"
+      },
+      {
+        "surface": "взял в долг",
+        "lang": "ru",
+        "kind": "borrow"
+      },
+      {
+        "surface": "дал в долг",
+        "lang": "ru",
+        "kind": "lend"
+      },
+      {
+        "surface": "одолжил",
+        "lang": "ru",
+        "kind": "lend"
+      },
+      {
+        "surface": "вернул долг",
+        "lang": "ru",
+        "kind": "repay"
+      },
+      {
+        "surface": "рассрочка",
+        "lang": "ru",
+        "kind": "instalment"
+      },
+      {
+        "surface": "насия",
+        "lang": "ru",
+        "kind": "instalment"
+      },
+      {
+        "surface": "обменял",
+        "lang": "ru",
+        "kind": "fx"
+      },
+      {
+        "surface": "поменял",
+        "lang": "ru",
+        "kind": "fx"
+      },
+      {
+        "surface": "разменял",
+        "lang": "ru",
+        "kind": "fx",
+        "notes": "breaking a note"
+      },
+      {
+        "surface": "пополнил кошелёк",
+        "lang": "ru",
+        "kind": "wallet_topup"
+      }
+    ]
+  },
+  "per_unit_frames": [
+    {
+      "surface": "по <X> за штуку",
+      "lang": "ru",
+      "meaning": "price per item"
+    },
+    {
+      "surface": "<N> по <X>",
+      "lang": "ru",
+      "meaning": "N items at X each",
+      "example": "3 по 15 тыщ -> 45000"
+    },
+    {
+      "surface": "скинулись по <X>",
+      "lang": "ru",
+      "meaning": "per person - the user's share is X, not the pot"
+    },
+    {
+      "surface": "моя часть",
+      "lang": "ru",
+      "meaning": "the user's share of a split bill"
+    },
+    {
+      "surface": "пополам / на двоих",
+      "lang": "ru",
+      "meaning": "split - record the share, not the total"
+    }
+  ],
+  "self_correction": {
+    "rule": "The speaker restates an amount mid-utterance. Which figure wins depends on the marker: 'no wait' / 'yo'q' / 'emas' / 'нет' / 'ой' / 'то есть' -> the LATER figure is correct. 'not X' / 'X emas Y' with the correction FOLLOWING -> also the later figure. But English 'paid 300k not 400k' puts the correction second and negates it, so the FIRST figure wins. Confidence 0.6.",
+    "examples": [
+      "obedga 50 ming emas 60 ming ketdi",
+      "taksiga 25 ming yo'q 35",
+      "такси 25 нет 35",
+      "потратил 50 ой 60",
+      "300 то есть 350",
+      "i spent 50k no wait 60k",
+      "paid 300k not 400k"
+    ]
+  },
+  "regret_markers": {
+    "notes": "Loss-aversion / regret vocabulary. The app is built on loss aversion, so these are the emotionally loaded utterances it most needs to handle. CRITICAL: affect is NOT a reject signal - 'yana 200 ming behuda ketdi' is a real 200 000 expense. Only 'pulim tugadi' and its kin, which describe a state rather than an event, are rejects.",
+    "entries": [
+      {
+        "surface": "опять",
+        "lang": "ru"
+      },
+      {
+        "surface": "снова",
+        "lang": "ru"
+      },
+      {
+        "surface": "впустую",
+        "lang": "ru"
+      }
+    ]
+  },
+  "bank_sms_paste": {
+    "rule": "A large share of real input is PASTED VERBATIM from a bank push notification. Take the FIRST amount (the debit/credit) and ignore the trailing balance. The merchant often appears as an ALL-CAPS Latin string inside Cyrillic text. 'на сумму' is the most frequent real surface of сумма in payment language - it means 'in the amount of', it is NOT the currency сум.",
+    "examples": [
+      "Списание 45 000 UZS. Korzinka. Баланс 1 234 567",
+      "Оплата на сумму 340 000 сум",
+      "Покупка 120000 UZS YANDEX GO. Доступно 890000",
+      "Popolnenie 5 200 000 UZS. Zarplata"
+    ]
+  },
+  "matching_rules": [
+    {
+      "rule": "magnitude 'к' beats the preposition 'к'",
+      "detail": "'25к' / '25 к' after a number is the thousand suffix. It was listed in BOTH magnitude_words and noise_words, so whichever list ran first silently won; it is now a magnitude token only."
+    },
+    {
+      "rule": "longest match wins",
+      "detail": "'яндекс плюс' / 'яндекс лавка' / 'яндекс еда' beat the bare 'яндекс' -> taxi rule."
+    },
+    {
+      "rule": "hedges are not noise",
+      "detail": "See hedge_words. чуть / около / примерно / где-то / вроде / ещё are polarity and estimate markers; the reject half of the gold depends on them surviving."
+    }
   ]
 }
