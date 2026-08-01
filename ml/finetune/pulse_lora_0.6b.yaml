@@ -1,0 +1,29 @@
+model: "mlx-community/Qwen3-0.6B-bf16"
+train: true
+fine_tune_type: lora
+optimizer: adamw
+data: "data"
+seed: 0
+num_layers: -1
+batch_size: 8
+iters: 1500
+val_batches: 25
+learning_rate: 1e-4
+steps_per_report: 100
+steps_per_eval: 250
+grad_accumulation_steps: 1
+adapter_path: "adapters/pulse-0.6b"
+save_every: 500
+max_seq_length: 512
+grad_checkpoint: false
+mask_prompt: true
+lora_parameters:
+  keys: ["self_attn.q_proj", "self_attn.k_proj", "self_attn.v_proj", "self_attn.o_proj", "mlp.gate_proj", "mlp.up_proj", "mlp.down_proj"]
+  rank: 16
+  scale: 20.0
+  dropout: 0.0
+lr_schedule:
+  name: cosine_decay
+  warmup: 60
+  warmup_init: 1e-6
+  arguments: [1e-4, 1500, 1e-6]

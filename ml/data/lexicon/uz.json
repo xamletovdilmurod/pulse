@@ -1,105 +1,533 @@
 {
   "language": "uz",
-  "scripts": ["latin", "cyrillic"],
+  "scripts": [
+    "latin",
+    "cyrillic"
+  ],
   "notes": "Uzbek as actually spoken/typed in Tashkent. Latin is the official script but Cyrillic is still typed constantly (older users, older keyboards, Telegram habits). Apostrophes in Latin (o', g') are frequently typed as a straight quote ', a backtick `, a curly ’, or dropped entirely (so'm -> som -> sum). The parser MUST normalise all four forms to one before lookup. Uzbek is agglutinative: every surface below can appear with case suffixes glued on, so match by PREFIX after stripping the suffix set in `suffixes`.",
   "suffixes": [
-    {"surface": "-ga", "role": "dative", "example": "taksiga = to the taxi, kafega, benzinga, Beelinega", "notes": "also attaches to AMOUNTS: '40 mingga oldim' = bought for 40 thousand. Voicing/assimilation variants: -qa, -ka (bozorga, tashkentga, ishga; but 'oshxonaga')."},
-    {"surface": "-da", "role": "locative", "example": "kafeda, restoranda, korzinkada, bozorda", "notes": "'-da' means AT/IN. 'korzinkada 90 ming' = spent 90k at Korzinka."},
-    {"surface": "-dan", "role": "ablative", "example": "korzinkadan, bozordan, dorixonadan, kartadan", "notes": "FROM. Most common merchant marker: '<merchant>dan <amount>' is the single most frequent expense pattern. Variant -tan after voiceless stems (Makrotan is rare, Makrodan is normal)."},
-    {"surface": "-ni", "role": "accusative", "example": "go'shtni, pulni, kontraktni", "notes": "often dropped in speech."},
-    {"surface": "-lik", "role": "worth-of / denomination", "example": "20 minglik, 50 minglik, 100 dollarlik", "notes": "TRAP: '20 minglik non' = 20 thousand's WORTH of bread (amount 20000), but '20 minglik pul' can mean a 20k banknote."},
-    {"surface": "-cha", "role": "approximative", "example": "50 mingcha, 100 dollarcha", "notes": "'about/around'. Amount is approximate -> lower confidence."},
-    {"surface": "-im / -m", "role": "1sg possessive", "example": "oyligim, maoshim, pulim", "notes": "oylik + im = my salary. Strong income marker."},
-    {"surface": "-ning", "role": "genitive", "example": "uyning puli, bolamning kiyimi"},
-    {"surface": "-lar", "role": "plural", "example": "bolalarga, mahsulotlar"},
-    {"surface": "-siz / -sez", "role": "2pl", "example": "to'ladingiz", "notes": "rare in self-logging"},
-    {"surface": "-ta", "role": "numeral classifier", "example": "3 ta non, 2 ta burger", "notes": "CRITICAL TRAP: the number before -ta is a COUNT, never a price. '3 ta non 6 ming' -> amount 6000, quantity 3."},
-    {"surface": "-gacha", "role": "terminative", "example": "oyoxirigacha", "notes": "'until' — usually not amount-bearing"}
+    {
+      "surface": "-ga",
+      "role": "dative",
+      "example": "taksiga = to the taxi, kafega, benzinga, Beelinega",
+      "notes": "also attaches to AMOUNTS: '40 mingga oldim' = bought for 40 thousand. Voicing/assimilation variants: -qa, -ka (bozorga, tashkentga, ishga; but 'oshxonaga')."
+    },
+    {
+      "surface": "-da",
+      "role": "locative",
+      "example": "kafeda, restoranda, korzinkada, bozorda",
+      "notes": "'-da' means AT/IN. 'korzinkada 90 ming' = spent 90k at Korzinka."
+    },
+    {
+      "surface": "-dan",
+      "role": "ablative",
+      "example": "korzinkadan, bozordan, dorixonadan, kartadan",
+      "notes": "FROM. Most common merchant marker: '<merchant>dan <amount>' is the single most frequent expense pattern. Variant -tan after voiceless stems (Makrotan is rare, Makrodan is normal)."
+    },
+    {
+      "surface": "-ni",
+      "role": "accusative",
+      "example": "go'shtni, pulni, kontraktni",
+      "notes": "often dropped in speech."
+    },
+    {
+      "surface": "-lik",
+      "role": "worth-of / denomination",
+      "example": "20 minglik, 50 minglik, 100 dollarlik",
+      "notes": "TRAP: '20 minglik non' = 20 thousand's WORTH of bread (amount 20000), but '20 minglik pul' can mean a 20k banknote."
+    },
+    {
+      "surface": "-cha",
+      "role": "approximative",
+      "example": "50 mingcha, 100 dollarcha",
+      "notes": "'about/around'. Amount is approximate -> lower confidence."
+    },
+    {
+      "surface": "-im / -m",
+      "role": "1sg possessive",
+      "example": "oyligim, maoshim, pulim",
+      "notes": "oylik + im = my salary. Strong income marker."
+    },
+    {
+      "surface": "-ning",
+      "role": "genitive",
+      "example": "uyning puli, bolamning kiyimi"
+    },
+    {
+      "surface": "-lar",
+      "role": "plural",
+      "example": "bolalarga, mahsulotlar"
+    },
+    {
+      "surface": "-siz / -sez",
+      "role": "2pl",
+      "example": "to'ladingiz",
+      "notes": "rare in self-logging"
+    },
+    {
+      "surface": "-ta",
+      "role": "numeral classifier",
+      "example": "3 ta non, 2 ta burger",
+      "notes": "CRITICAL TRAP: the number before -ta is a COUNT, never a price. '3 ta non 6 ming' -> amount 6000, quantity 3."
+    },
+    {
+      "surface": "-gacha",
+      "role": "terminative",
+      "example": "oyoxirigacha",
+      "notes": "'until' — usually not amount-bearing"
+    }
   ],
   "magnitude_words": [
-    {"surface": "ming", "multiplier": 1000, "notes": "thousand. By far the most common. Latin."},
-    {"surface": "минг", "multiplier": 1000, "notes": "Cyrillic 'ming'."},
-    {"surface": "min", "multiplier": 1000, "notes": "very common typo/clipping of 'ming' when typing fast."},
-    {"surface": "mng", "multiplier": 1000, "notes": "keyboard-mangled 'ming'."},
-    {"surface": "k", "multiplier": 1000, "notes": "chat shorthand: '45k'. Growing among under-30s."},
-    {"surface": "million", "multiplier": 1000000, "notes": "Latin, full form."},
-    {"surface": "millon", "multiplier": 1000000, "notes": "common misspelling."},
-    {"surface": "milion", "multiplier": 1000000, "notes": "common misspelling."},
-    {"surface": "mln", "multiplier": 1000000, "notes": "written abbreviation, extremely common."},
-    {"surface": "mln.", "multiplier": 1000000, "notes": "with period."},
-    {"surface": "миллион", "multiplier": 1000000, "notes": "Cyrillic."},
-    {"surface": "млн", "multiplier": 1000000, "notes": "Cyrillic abbreviation."},
-    {"surface": "лям", "multiplier": 1000000, "notes": "Russian-origin slang 'lyam' = a million, used by Tashkent speakers in both scripts (also 'lyam' in Latin)."},
-    {"surface": "lyam", "multiplier": 1000000, "notes": "Latin spelling of the same slang."},
-    {"surface": "milliard", "multiplier": 1000000000, "notes": "billion. Rare in personal finance, appears for property/car talk."},
-    {"surface": "mlrd", "multiplier": 1000000000, "notes": "abbreviation."},
-    {"surface": "миллиард", "multiplier": 1000000000},
-    {"surface": "млрд", "multiplier": 1000000000},
-    {"surface": "yarim", "multiplier": 0.5, "notes": "MODIFIER, not a standalone magnitude. 'yarim million' = 500000. 'bir yarim million' = 1500000 (one-and-a-half). Position matters: 'yarim X' = 0.5*X, 'N yarim X' = (N+0.5)*X."},
-    {"surface": "ярим", "multiplier": 0.5, "notes": "Cyrillic 'yarim'."},
-    {"surface": "yarm", "multiplier": 0.5, "notes": "clipped colloquial form."}
+    {
+      "surface": "ming",
+      "multiplier": 1000,
+      "notes": "thousand. By far the most common. Latin."
+    },
+    {
+      "surface": "минг",
+      "multiplier": 1000,
+      "notes": "Cyrillic 'ming'."
+    },
+    {
+      "surface": "min",
+      "multiplier": 1000,
+      "notes": "very common typo/clipping of 'ming' when typing fast."
+    },
+    {
+      "surface": "mng",
+      "multiplier": 1000,
+      "notes": "keyboard-mangled 'ming'."
+    },
+    {
+      "surface": "k",
+      "multiplier": 1000,
+      "notes": "chat shorthand: '45k'. Growing among under-30s."
+    },
+    {
+      "surface": "million",
+      "multiplier": 1000000,
+      "notes": "Latin, full form."
+    },
+    {
+      "surface": "millon",
+      "multiplier": 1000000,
+      "notes": "common misspelling."
+    },
+    {
+      "surface": "milion",
+      "multiplier": 1000000,
+      "notes": "common misspelling."
+    },
+    {
+      "surface": "mln",
+      "multiplier": 1000000,
+      "notes": "written abbreviation, extremely common."
+    },
+    {
+      "surface": "mln.",
+      "multiplier": 1000000,
+      "notes": "with period."
+    },
+    {
+      "surface": "миллион",
+      "multiplier": 1000000,
+      "notes": "Cyrillic."
+    },
+    {
+      "surface": "млн",
+      "multiplier": 1000000,
+      "notes": "Cyrillic abbreviation."
+    },
+    {
+      "surface": "лям",
+      "multiplier": 1000000,
+      "notes": "Russian-origin slang 'lyam' = a million, used by Tashkent speakers in both scripts (also 'lyam' in Latin)."
+    },
+    {
+      "surface": "lyam",
+      "multiplier": 1000000,
+      "notes": "Latin spelling of the same slang."
+    },
+    {
+      "surface": "milliard",
+      "multiplier": 1000000000,
+      "notes": "billion. Rare in personal finance, appears for property/car talk."
+    },
+    {
+      "surface": "mlrd",
+      "multiplier": 1000000000,
+      "notes": "abbreviation."
+    },
+    {
+      "surface": "миллиард",
+      "multiplier": 1000000000
+    },
+    {
+      "surface": "млрд",
+      "multiplier": 1000000000
+    },
+    {
+      "surface": "yarim",
+      "multiplier": 0.5,
+      "notes": "MODIFIER, not a standalone magnitude. 'yarim million' = 500000. 'bir yarim million' = 1500000 (one-and-a-half). Position matters: 'yarim X' = 0.5*X, 'N yarim X' = (N+0.5)*X."
+    },
+    {
+      "surface": "ярим",
+      "multiplier": 0.5,
+      "notes": "Cyrillic 'yarim'."
+    },
+    {
+      "surface": "yarm",
+      "multiplier": 0.5,
+      "notes": "clipped colloquial form."
+    }
   ],
   "number_words": [
-    {"surface": "bir", "value": 1}, {"surface": "бир", "value": 1},
-    {"surface": "ikki", "value": 2}, {"surface": "икки", "value": 2}, {"surface": "ikkita", "value": 2},
-    {"surface": "uch", "value": 3}, {"surface": "уч", "value": 3},
-    {"surface": "to'rt", "value": 4}, {"surface": "tort", "value": 4}, {"surface": "тўрт", "value": 4},
-    {"surface": "besh", "value": 5}, {"surface": "беш", "value": 5},
-    {"surface": "olti", "value": 6}, {"surface": "олти", "value": 6},
-    {"surface": "yetti", "value": 7}, {"surface": "етти", "value": 7}, {"surface": "етти", "value": 7},
-    {"surface": "sakkiz", "value": 8}, {"surface": "саккиз", "value": 8},
-    {"surface": "to'qqiz", "value": 9}, {"surface": "тўққиз", "value": 9},
-    {"surface": "o'n", "value": 10}, {"surface": "on", "value": 10}, {"surface": "ўн", "value": 10},
-    {"surface": "o'n besh", "value": 15}, {"surface": "ўн беш", "value": 15},
-    {"surface": "yigirma", "value": 20}, {"surface": "йигирма", "value": 20},
-    {"surface": "o'ttiz", "value": 30}, {"surface": "ўттиз", "value": 30},
-    {"surface": "qirq", "value": 40}, {"surface": "қирқ", "value": 40},
-    {"surface": "ellik", "value": 50}, {"surface": "эллик", "value": 50},
-    {"surface": "oltmish", "value": 60}, {"surface": "олтмиш", "value": 60},
-    {"surface": "yetmish", "value": 70}, {"surface": "етмиш", "value": 70},
-    {"surface": "sakson", "value": 80}, {"surface": "саксон", "value": 80},
-    {"surface": "to'qson", "value": 90}, {"surface": "тўқсон", "value": 90},
-    {"surface": "yuz", "value": 100}, {"surface": "юз", "value": 100}
+    {
+      "surface": "bir",
+      "value": 1
+    },
+    {
+      "surface": "бир",
+      "value": 1
+    },
+    {
+      "surface": "ikki",
+      "value": 2
+    },
+    {
+      "surface": "икки",
+      "value": 2
+    },
+    {
+      "surface": "ikkita",
+      "value": 2
+    },
+    {
+      "surface": "uch",
+      "value": 3
+    },
+    {
+      "surface": "уч",
+      "value": 3
+    },
+    {
+      "surface": "to'rt",
+      "value": 4
+    },
+    {
+      "surface": "tort",
+      "value": 4
+    },
+    {
+      "surface": "тўрт",
+      "value": 4
+    },
+    {
+      "surface": "besh",
+      "value": 5
+    },
+    {
+      "surface": "беш",
+      "value": 5
+    },
+    {
+      "surface": "olti",
+      "value": 6
+    },
+    {
+      "surface": "олти",
+      "value": 6
+    },
+    {
+      "surface": "yetti",
+      "value": 7
+    },
+    {
+      "surface": "етти",
+      "value": 7
+    },
+    {
+      "surface": "етти",
+      "value": 7
+    },
+    {
+      "surface": "sakkiz",
+      "value": 8
+    },
+    {
+      "surface": "саккиз",
+      "value": 8
+    },
+    {
+      "surface": "to'qqiz",
+      "value": 9
+    },
+    {
+      "surface": "тўққиз",
+      "value": 9
+    },
+    {
+      "surface": "o'n",
+      "value": 10
+    },
+    {
+      "surface": "on",
+      "value": 10
+    },
+    {
+      "surface": "ўн",
+      "value": 10
+    },
+    {
+      "surface": "o'n besh",
+      "value": 15
+    },
+    {
+      "surface": "ўн беш",
+      "value": 15
+    },
+    {
+      "surface": "yigirma",
+      "value": 20
+    },
+    {
+      "surface": "йигирма",
+      "value": 20
+    },
+    {
+      "surface": "o'ttiz",
+      "value": 30
+    },
+    {
+      "surface": "ўттиз",
+      "value": 30
+    },
+    {
+      "surface": "qirq",
+      "value": 40
+    },
+    {
+      "surface": "қирқ",
+      "value": 40
+    },
+    {
+      "surface": "ellik",
+      "value": 50
+    },
+    {
+      "surface": "эллик",
+      "value": 50
+    },
+    {
+      "surface": "oltmish",
+      "value": 60
+    },
+    {
+      "surface": "олтмиш",
+      "value": 60
+    },
+    {
+      "surface": "yetmish",
+      "value": 70
+    },
+    {
+      "surface": "етмиш",
+      "value": 70
+    },
+    {
+      "surface": "sakson",
+      "value": 80
+    },
+    {
+      "surface": "саксон",
+      "value": 80
+    },
+    {
+      "surface": "to'qson",
+      "value": 90
+    },
+    {
+      "surface": "тўқсон",
+      "value": 90
+    },
+    {
+      "surface": "yuz",
+      "value": 100
+    },
+    {
+      "surface": "юз",
+      "value": 100
+    }
   ],
   "number_word_notes": "Uzbek numerals are additive-concatenative with NO conjunction: 'yigirma besh ming' = 25 000, 'yuz ellik ming' = 150 000, 'ikki yuz o'ttiz ming' = 230 000. Parser must accumulate left-to-right: sum tens+units, then multiply by the following magnitude word. Digits and words mix freely in one utterance ('2 yuz ming', '3 mln 500 ming').",
   "currency_words": [
-    {"surface": "so'm", "iso": "UZS", "notes": "canonical Latin spelling"},
-    {"surface": "so`m", "iso": "UZS", "notes": "backtick apostrophe — very common on phone keyboards"},
-    {"surface": "so’m", "iso": "UZS", "notes": "curly apostrophe from iOS autocorrect"},
-    {"surface": "som", "iso": "UZS", "notes": "apostrophe dropped — the most common typed form"},
-    {"surface": "sum", "iso": "UZS", "notes": "Russian-influenced spelling, extremely common"},
-    {"surface": "сўм", "iso": "UZS", "notes": "canonical Cyrillic"},
-    {"surface": "сум", "iso": "UZS", "notes": "common Cyrillic variant"},
-    {"surface": "сom", "iso": "UZS", "notes": "mixed-script typo (Cyrillic с + Latin om) — real STT/keyboard artifact"},
-    {"surface": "uzs", "iso": "UZS"},
-    {"surface": "dollar", "iso": "USD"},
-    {"surface": "dollor", "iso": "USD", "notes": "very common misspelling"},
-    {"surface": "dol", "iso": "USD", "notes": "clipped"},
-    {"surface": "доллар", "iso": "USD"},
-    {"surface": "долл", "iso": "USD"},
-    {"surface": "$", "iso": "USD"},
-    {"surface": "ko'k", "iso": "USD", "notes": "SLANG, literally 'green' = US dollars. '200 ko'k' = 200 USD. Only counts as currency when it directly follows or precedes a number; 'ko'k ko'ylak' = blue shirt, NOT currency."},
-    {"surface": "kok", "iso": "USD", "notes": "apostrophe-less form of the slang"},
-    {"surface": "кўк", "iso": "USD", "notes": "Cyrillic slang for dollars"},
-    {"surface": "кук", "iso": "USD"},
-    {"surface": "yevro", "iso": "EUR"},
-    {"surface": "evro", "iso": "EUR"},
-    {"surface": "евро", "iso": "EUR"},
-    {"surface": "eur", "iso": "EUR"},
-    {"surface": "rubl", "iso": "RUB", "notes": "relevant — huge labour-migration remittance flow from Russia"},
-    {"surface": "рубл", "iso": "RUB"},
-    {"surface": "рубль", "iso": "RUB"},
-    {"surface": "tenge", "iso": "KZT", "notes": "Kazakh tenge — border trade / Almaty trips"},
-    {"surface": "теңге", "iso": "KZT"},
-    {"surface": "тенге", "iso": "KZT"},
-    {"surface": "som kirgiz", "iso": "KGS", "notes": "Kyrgyz som — disambiguate from Uzbek so'm ONLY when 'qirgiz/кирғиз' modifier present"},
-    {"surface": "somoni", "iso": "TJS"},
-    {"surface": "lira", "iso": "TRY", "notes": "Turkey trips and Istanbul shopping"},
-    {"surface": "лира", "iso": "TRY"},
-    {"surface": "funt", "iso": "GBP"},
-    {"surface": "dirham", "iso": "AED", "notes": "Dubai trips"},
-    {"surface": "dirxam", "iso": "AED"},
-    {"surface": "дирхам", "iso": "AED"}
+    {
+      "surface": "so'm",
+      "iso": "UZS",
+      "notes": "canonical Latin spelling"
+    },
+    {
+      "surface": "so`m",
+      "iso": "UZS",
+      "notes": "backtick apostrophe — very common on phone keyboards"
+    },
+    {
+      "surface": "so’m",
+      "iso": "UZS",
+      "notes": "curly apostrophe from iOS autocorrect"
+    },
+    {
+      "surface": "som",
+      "iso": "UZS",
+      "notes": "apostrophe dropped — the most common typed form"
+    },
+    {
+      "surface": "sum",
+      "iso": "UZS",
+      "notes": "Russian-influenced spelling, extremely common"
+    },
+    {
+      "surface": "сўм",
+      "iso": "UZS",
+      "notes": "canonical Cyrillic"
+    },
+    {
+      "surface": "сум",
+      "iso": "UZS",
+      "notes": "common Cyrillic variant"
+    },
+    {
+      "surface": "сom",
+      "iso": "UZS",
+      "notes": "mixed-script typo (Cyrillic с + Latin om) — real STT/keyboard artifact"
+    },
+    {
+      "surface": "uzs",
+      "iso": "UZS"
+    },
+    {
+      "surface": "dollar",
+      "iso": "USD"
+    },
+    {
+      "surface": "dollor",
+      "iso": "USD",
+      "notes": "very common misspelling"
+    },
+    {
+      "surface": "dol",
+      "iso": "USD",
+      "notes": "clipped"
+    },
+    {
+      "surface": "доллар",
+      "iso": "USD"
+    },
+    {
+      "surface": "долл",
+      "iso": "USD"
+    },
+    {
+      "surface": "$",
+      "iso": "USD"
+    },
+    {
+      "surface": "ko'k",
+      "iso": "USD",
+      "notes": "SLANG, literally 'green' = US dollars. '200 ko'k' = 200 USD. Only counts as currency when it directly follows or precedes a number; 'ko'k ko'ylak' = blue shirt, NOT currency."
+    },
+    {
+      "surface": "kok",
+      "iso": "USD",
+      "notes": "apostrophe-less form of the slang"
+    },
+    {
+      "surface": "кўк",
+      "iso": "USD",
+      "notes": "Cyrillic slang for dollars"
+    },
+    {
+      "surface": "кук",
+      "iso": "USD"
+    },
+    {
+      "surface": "yevro",
+      "iso": "EUR"
+    },
+    {
+      "surface": "evro",
+      "iso": "EUR"
+    },
+    {
+      "surface": "евро",
+      "iso": "EUR"
+    },
+    {
+      "surface": "eur",
+      "iso": "EUR"
+    },
+    {
+      "surface": "rubl",
+      "iso": "RUB",
+      "notes": "relevant — huge labour-migration remittance flow from Russia"
+    },
+    {
+      "surface": "рубл",
+      "iso": "RUB"
+    },
+    {
+      "surface": "рубль",
+      "iso": "RUB"
+    },
+    {
+      "surface": "tenge",
+      "iso": "KZT",
+      "notes": "Kazakh tenge — border trade / Almaty trips"
+    },
+    {
+      "surface": "теңге",
+      "iso": "KZT"
+    },
+    {
+      "surface": "тенге",
+      "iso": "KZT"
+    },
+    {
+      "surface": "som kirgiz",
+      "iso": "KGS",
+      "notes": "Kyrgyz som — disambiguate from Uzbek so'm ONLY when 'qirgiz/кирғиз' modifier present"
+    },
+    {
+      "surface": "somoni",
+      "iso": "TJS"
+    },
+    {
+      "surface": "lira",
+      "iso": "TRY",
+      "notes": "Turkey trips and Istanbul shopping"
+    },
+    {
+      "surface": "лира",
+      "iso": "TRY"
+    },
+    {
+      "surface": "funt",
+      "iso": "GBP"
+    },
+    {
+      "surface": "dirham",
+      "iso": "AED",
+      "notes": "Dubai trips"
+    },
+    {
+      "surface": "dirxam",
+      "iso": "AED"
+    },
+    {
+      "surface": "дирхам",
+      "iso": "AED"
+    }
   ],
   "currency_notes": "CRITICAL: a bare number with no currency word must yield currency=null (the app applies the user's default later). Do NOT infer UZS from the magnitude word 'ming'. Separately, Uzbeks quote USD constantly for anything big (rent, cars, phones, apartments) while quoting UZS for daily life — so '3 mln' is almost certainly so'm and '300' next to 'telefon' is very likely dollars.",
   "magnitude_ellipsis": {
@@ -110,197 +538,1621 @@
     "counter_rule_3": "A number immediately followed by -ta, kg, kilo, dona, litr, marta, foiz/% is a QUANTITY, not an amount."
   },
   "expense_markers": [
-    {"surface": "sarfladim", "notes": "'I spent' — explicit, rare in fast speech"},
-    {"surface": "сарфладим", "notes": "Cyrillic"},
-    {"surface": "ketdi", "notes": "'went' = it cost me. '30 ming ketdi'. VERY common, no object needed."},
-    {"surface": "кетди", "notes": "Cyrillic"},
-    {"surface": "chiqdi", "notes": "'came out to' — total of a bill. 'kafeda 120 ming chiqdi'"},
-    {"surface": "чиқди", "notes": "Cyrillic"},
-    {"surface": "to'ladim", "notes": "'I paid' — bills, tuition, rent, fines"},
-    {"surface": "тўладим", "notes": "Cyrillic"},
-    {"surface": "berdim", "notes": "'I gave' — cash handed over: to'y, family, lending"},
-    {"surface": "бердим", "notes": "Cyrillic"},
-    {"surface": "oldim", "notes": "AMBIGUOUS AND CENTRAL: means both 'I bought' and 'I received'. 'non oldim' = bought bread (EXPENSE). 'oylik oldim' = got salary (INCOME). Disambiguate by the object noun, not the verb."},
-    {"surface": "олдим", "notes": "same ambiguity in Cyrillic"},
-    {"surface": "sotib oldim", "notes": "unambiguously 'I bought' — expense"},
-    {"surface": "сотиб олдим", "notes": "Cyrillic"},
-    {"surface": "quydim", "notes": "'I poured' — fuel only. 'benzin 100 ming quydim'. Also quydirdim (had it filled)."},
-    {"surface": "қуйдим", "notes": "Cyrillic"},
-    {"surface": "tashladim", "notes": "'I threw' = topped up a phone balance. 'Beelinega 30 ming tashladim'"},
-    {"surface": "ташладим", "notes": "Cyrillic"},
-    {"surface": "yechdim", "notes": "'I withdrew' (from card/ATM). TRAP: a withdrawal is NOT an expense — it is a transfer between the user's own pockets."},
-    {"surface": "ечдим", "notes": "Cyrillic"},
-    {"surface": "xarajat", "notes": "'expense' noun"},
-    {"surface": "harajat", "notes": "spelling variant"},
-    {"surface": "харажат", "notes": "Cyrillic"},
-    {"surface": "uzdim", "notes": "'I paid off' (a debt/instalment). 'nasiyani uzdim'"},
-    {"surface": "yedim", "notes": "'I ate' — implies a dining expense even with no verb of payment"},
-    {"surface": "едим", "notes": "Cyrillic"},
-    {"surface": "bordim / bordik", "notes": "'I/we went' — with kino, restoran, bozor implies spending"},
-    {"surface": "olib berdim", "notes": "'I bought (for someone)' — family/gifts signal"}
+    {
+      "surface": "sarfladim",
+      "notes": "'I spent' — explicit, rare in fast speech"
+    },
+    {
+      "surface": "сарфладим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "ketdi",
+      "notes": "'went' = it cost me. '30 ming ketdi'. VERY common, no object needed."
+    },
+    {
+      "surface": "кетди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "chiqdi",
+      "notes": "'came out to' — total of a bill. 'kafeda 120 ming chiqdi'"
+    },
+    {
+      "surface": "чиқди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "to'ladim",
+      "notes": "'I paid' — bills, tuition, rent, fines"
+    },
+    {
+      "surface": "тўладим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "berdim",
+      "notes": "'I gave' — cash handed over: to'y, family, lending"
+    },
+    {
+      "surface": "бердим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "oldim",
+      "notes": "AMBIGUOUS AND CENTRAL: means both 'I bought' and 'I received'. 'non oldim' = bought bread (EXPENSE). 'oylik oldim' = got salary (INCOME). Disambiguate by the object noun, not the verb."
+    },
+    {
+      "surface": "олдим",
+      "notes": "same ambiguity in Cyrillic"
+    },
+    {
+      "surface": "sotib oldim",
+      "notes": "unambiguously 'I bought' — expense"
+    },
+    {
+      "surface": "сотиб олдим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "quydim",
+      "notes": "'I poured' — fuel only. 'benzin 100 ming quydim'. Also quydirdim (had it filled)."
+    },
+    {
+      "surface": "қуйдим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "tashladim",
+      "notes": "'I threw' = topped up a phone balance. 'Beelinega 30 ming tashladim'"
+    },
+    {
+      "surface": "ташладим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "yechdim",
+      "notes": "'I withdrew' (from card/ATM). TRAP: a withdrawal is NOT an expense — it is a transfer between the user's own pockets."
+    },
+    {
+      "surface": "ечдим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "xarajat",
+      "notes": "'expense' noun"
+    },
+    {
+      "surface": "harajat",
+      "notes": "spelling variant"
+    },
+    {
+      "surface": "харажат",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "uzdim",
+      "notes": "'I paid off' (a debt/instalment). 'nasiyani uzdim'"
+    },
+    {
+      "surface": "yedim",
+      "notes": "'I ate' — implies a dining expense even with no verb of payment"
+    },
+    {
+      "surface": "едим",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "bordim / bordik",
+      "notes": "'I/we went' — with kino, restoran, bozor implies spending"
+    },
+    {
+      "surface": "olib berdim",
+      "notes": "'I bought (for someone)' — family/gifts signal"
+    }
   ],
   "income_markers": [
-    {"surface": "oylik", "notes": "'monthly' = salary. Core income noun."},
-    {"surface": "ойлик", "notes": "Cyrillic"},
-    {"surface": "oyligim tushdi", "notes": "'my salary landed' — the canonical salary phrase"},
-    {"surface": "ойлигим тушди", "notes": "Cyrillic"},
-    {"surface": "maosh", "notes": "salary (more formal register)"},
-    {"surface": "маош", "notes": "Cyrillic"},
-    {"surface": "ish haqi", "notes": "'wage', formal/official"},
-    {"surface": "иш ҳақи", "notes": "Cyrillic"},
-    {"surface": "tushdi", "notes": "'landed/arrived' — money into card or hand. STRONG income verb, but 'kartaga tushdi' alone does not say WHAT kind of income."},
-    {"surface": "тушди", "notes": "Cyrillic"},
-    {"surface": "kirdi", "notes": "'came in' — same as tushdi"},
-    {"surface": "кирди", "notes": "Cyrillic"},
-    {"surface": "avans", "notes": "advance on salary — mid-month payment, very common in Uzbekistan"},
-    {"surface": "аванс", "notes": "Cyrillic"},
-    {"surface": "premiya", "notes": "bonus"},
-    {"surface": "премия", "notes": "Cyrillic"},
-    {"surface": "ustama", "notes": "bonus/top-up pay"},
-    {"surface": "frilans", "notes": "freelance work"},
-    {"surface": "фриланс", "notes": "Cyrillic"},
-    {"surface": "buyurtma", "notes": "'order/commission' — freelance or small-business income"},
-    {"surface": "буюртма", "notes": "Cyrillic"},
-    {"surface": "foyda", "notes": "profit — business income"},
-    {"surface": "фойда", "notes": "Cyrillic"},
-    {"surface": "savdo", "notes": "trade/sales — business income"},
-    {"surface": "qaytdi", "notes": "'came back' = refund"},
-    {"surface": "қайтди", "notes": "Cyrillic"},
-    {"surface": "qaytarib berishdi", "notes": "'they gave it back' — refund or repaid loan"},
-    {"surface": "foiz tushdi", "notes": "'interest landed' — deposit interest, investment income"},
-    {"surface": "berdi", "notes": "'he/she gave' — 3rd person = INCOME to me. Contrast 'berdim' (I gave) = expense. ONE LETTER apart; the parser must key on the personal suffix -m."},
-    {"surface": "берди", "notes": "Cyrillic, same contrast with 'бердим'"},
-    {"surface": "topdim", "notes": "'I earned'"},
-    {"surface": "ishlab topdim", "notes": "'I earned by working'"},
-    {"surface": "pul kelди", "notes": "money arrived (remittance)"},
-    {"surface": "o'tkazma", "notes": "transfer (often remittance from Russia)"},
-    {"surface": "ўтказма", "notes": "Cyrillic"}
+    {
+      "surface": "oylik",
+      "notes": "'monthly' = salary. Core income noun."
+    },
+    {
+      "surface": "ойлик",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "oyligim tushdi",
+      "notes": "'my salary landed' — the canonical salary phrase"
+    },
+    {
+      "surface": "ойлигим тушди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "maosh",
+      "notes": "salary (more formal register)"
+    },
+    {
+      "surface": "маош",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "ish haqi",
+      "notes": "'wage', formal/official"
+    },
+    {
+      "surface": "иш ҳақи",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "tushdi",
+      "notes": "'landed/arrived' — money into card or hand. STRONG income verb, but 'kartaga tushdi' alone does not say WHAT kind of income."
+    },
+    {
+      "surface": "тушди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "kirdi",
+      "notes": "'came in' — same as tushdi"
+    },
+    {
+      "surface": "кирди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "avans",
+      "notes": "advance on salary — mid-month payment, very common in Uzbekistan"
+    },
+    {
+      "surface": "аванс",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "premiya",
+      "notes": "bonus"
+    },
+    {
+      "surface": "премия",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "ustama",
+      "notes": "bonus/top-up pay"
+    },
+    {
+      "surface": "frilans",
+      "notes": "freelance work"
+    },
+    {
+      "surface": "фриланс",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "buyurtma",
+      "notes": "'order/commission' — freelance or small-business income"
+    },
+    {
+      "surface": "буюртма",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "foyda",
+      "notes": "profit — business income"
+    },
+    {
+      "surface": "фойда",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "savdo",
+      "notes": "trade/sales — business income"
+    },
+    {
+      "surface": "qaytdi",
+      "notes": "'came back' = refund"
+    },
+    {
+      "surface": "қайтди",
+      "notes": "Cyrillic"
+    },
+    {
+      "surface": "qaytarib berishdi",
+      "notes": "'they gave it back' — refund or repaid loan"
+    },
+    {
+      "surface": "foiz tushdi",
+      "notes": "'interest landed' — deposit interest, investment income"
+    },
+    {
+      "surface": "berdi",
+      "notes": "'he/she gave' — 3rd person = INCOME to me. Contrast 'berdim' (I gave) = expense. ONE LETTER apart; the parser must key on the personal suffix -m."
+    },
+    {
+      "surface": "берди",
+      "notes": "Cyrillic, same contrast with 'бердим'"
+    },
+    {
+      "surface": "topdim",
+      "notes": "'I earned'"
+    },
+    {
+      "surface": "ishlab topdim",
+      "notes": "'I earned by working'"
+    },
+    {
+      "surface": "pul kelди",
+      "notes": "money arrived (remittance)"
+    },
+    {
+      "surface": "o'tkazma",
+      "notes": "transfer (often remittance from Russia)"
+    },
+    {
+      "surface": "ўтказма",
+      "notes": "Cyrillic"
+    }
   ],
   "category_keywords": [
-    {"category": "groceries", "keywords": ["non", "нон", "sut", "сут", "tuxum", "тухум", "go'sht", "gosht", "гўшт", "guruch", "гуруч", "yog'", "ёғ", "kartoshka", "картошка", "piyoz", "пиёз", "sabzi", "сабзи", "bozor", "бозор", "chorsu", "чорсу", "do'kon", "дўкон", "magazin", "магазин", "produkt", "продукт", "oziq-ovqat", "озиқ-овқат", "meva", "мева", "sabzavot", "сабзавот", "shakar", "шакар", "un", "makaron", "макарон", "qatiq", "қатиқ", "pishloq", "пишлоқ", "kolbasa", "колбаса", "suv", "мойка"]},
-    {"category": "dining", "keywords": ["lavash", "лаваш", "somsa", "сомса", "osh", "ош", "palov", "палов", "kabob", "кабоб", "shashlik", "шашлик", "restoran", "ресторан", "ovqat", "овқат", "tushlik", "тушлик", "obed", "обед", "kechki ovqat", "кечки овқат", "choyxona", "чойхона", "burger", "бургер", "pizza", "пицца", "hotdog", "хотдог", "fastfud", "фастфуд", "yedik", "едик", "manti", "манти", "lag'mon", "лағмон", "norin", "норин", "shaurma", "шаурма", "sushi", "суши", "dostavka", "доставка"]},
-    {"category": "cafe_coffee", "keywords": ["kofe", "кофе", "kafe", "кафе", "choy", "чой", "latte", "латте", "kapuchino", "капучино", "amerikano", "американо", "raf", "раф", "kofeynya", "кофейня", "smuzi", "смузи", "muzqaymoq", "музқаймоқ"]},
-    {"category": "transport", "keywords": ["taksi", "такси", "taxi", "такса", "avtobus", "автобус", "metro", "метро", "marshrutka", "маршрутка", "yo'lkira", "йўлкира", "poyezd", "поезд", "yandex go", "яндекс", "mytaxi", "мой такси", "shofyor", "шофёр", "yo'l puli", "йўл пули", "atm karta", "elektrokart", "samokat", "самокат"]},
-    {"category": "fuel", "keywords": ["benzin", "бензин", "gaz quydim", "газ қуйдим", "metan", "метан", "propan", "пропан", "zapravka", "заправка", "ai-80", "ai-92", "аи-92", "аи-80", "solyarka", "солярка", "yoqilg'i", "ёқилғи", "uzgasoil", "узгазойл"]},
-    {"category": "rent", "keywords": ["ijara", "ижара", "arenda", "аренда", "kvartira puli", "квартира пули", "uy puli", "уй пули", "kvartplata", "квартплата"]},
-    {"category": "utilities", "keywords": ["kommunalka", "коммуналка", "svet", "свет", "elektr", "электр", "gaz puli", "газ пули", "suv puli", "сув пули", "issiq suv", "иссиқ сув", "isitish", "иситиш", "chiqindi", "чиқинди", "hududgaz", "ҳудудгаз", "hisoblagich", "ҳисоблагич"]},
-    {"category": "health", "keywords": ["dori", "дори", "dorixona", "дорихона", "apteka", "аптека", "shifokor", "шифокор", "vrach", "врач", "klinika", "клиника", "analiz", "анализ", "tish", "тиш", "stomatolog", "стоматолог", "ukol", "укол", "uzi", "узи", "mrt", "мрт", "kasalxona", "касалхона", "vitamin", "витамин", "massaj", "массаж"]},
-    {"category": "education", "keywords": ["kurs", "курс", "kontrakt", "контракт", "universitet", "университет", "institut", "институт", "repetitor", "репетитор", "maktab", "мактаб", "dars", "дарс", "o'quv", "ўқув", "kitob", "китоб", "daftar", "дафтар", "ingliz tili", "инглиз тили", "ielts", "айлц", "bog'cha", "боғча", "o'quv qurollari", "ўқув қуроллари"]},
-    {"category": "clothing", "keywords": ["kiyim", "кийим", "ko'ylak", "кўйлак", "shim", "шим", "krosovka", "кроссовка", "poyabzal", "пойабзал", "tufli", "туфли", "kurtka", "куртка", "futbolka", "футболка", "jinsi", "жинси", "paypoq", "пайпоқ", "sumka", "сумка", "kepka", "кепка", "pero", "либос"]},
-    {"category": "entertainment", "keywords": ["kino", "кино", "teatr", "театр", "park", "парк", "o'yin", "ўйин", "konsert", "концерт", "bilyard", "билярд", "akvapark", "аквапарк", "attraksion", "аттракцион", "bouling", "боулинг", "playstation", "плейстейшн", "kinoteatr", "кинотеатр", "sirk", "цирк"]},
-    {"category": "gifts", "keywords": ["sovg'a", "совға", "sovga", "tug'ilgan kun", "туғилган кун", "to'y", "тўй", "to'yga", "тўйга", "nikoh", "никоҳ", "beshik to'y", "бешик тўй", "sunnat to'y", "суннат тўй", "ma'raka", "маърака", "xudoyi", "худойи", "gul", "гул", "buket", "букет", "konvert", "конверт"]},
-    {"category": "travel", "keywords": ["sayohat", "саёҳат", "aviabilet", "авиабилет", "chipta", "чипта", "bilet", "билет", "mehmonxona", "меҳмонхона", "otel", "отель", "putyovka", "путёвка", "viza", "виза", "chegara", "чегара", "dubay", "дубай", "istanbul", "истанбул", "turfirma", "турфирма", "bagaj", "багаж"]},
-    {"category": "communication", "keywords": ["telefon", "телефон", "internet", "интернет", "aloqa", "алоқа", "balans", "баланс", "tarif", "тариф", "beeline", "билайн", "ucell", "юселл", "uzmobile", "узмобайл", "mobiuz", "мобиуз", "humans", "хумо", "wifi", "вайфай", "trafik", "трафик", "sim karta", "сим карта"]},
-    {"category": "subscriptions", "keywords": ["obuna", "обуна", "podpiska", "подписка", "netflix", "нетфликс", "spotify", "спотифай", "youtube premium", "ютуб премиум", "ivi", "иви", "icloud", "айклауд", "chatgpt", "premium", "премиум", "kinopoisk", "кинопоиск", "yandex plus", "яндекс плюс"]},
-    {"category": "family", "keywords": ["bolamga", "боламга", "bolalarga", "болаларга", "onamga", "онамга", "otamga", "отамга", "xotinga", "хотинга", "ayolimga", "аёлимга", "akamga", "акамга", "ukamga", "укамга", "opamga", "опамга", "singlimga", "синглимга", "oila", "оила", "nevaraga", "неварага", "ota-onaga", "ота-онага", "cho'ntak puli", "чўнтак пули"]},
-    {"category": "household", "keywords": ["uy uchun", "уй учун", "mebel", "мебел", "remont", "ремонт", "gilam", "гилам", "idish", "идиш", "kir yuvish", "кир ювиш", "poroshok", "порошок", "xo'jalik", "хўжалик", "muzlatgich", "музлатгич", "kir mashina", "кир машина", "changyutgich", "чангютгич", "lampochka", "лампочка", "sement", "цемент", "bo'yoq", "бўёқ", "salfetka", "салфетка"]},
-    {"category": "beauty", "keywords": ["sartarosh", "сартарош", "sartaroshxona", "сартарошхона", "soch", "соч", "manikur", "маникюр", "pedikur", "педикюр", "kosmetika", "косметика", "salon", "салон", "krem", "крем", "parfyum", "парфюм", "atir", "атир", "qosh", "қош", "kiprik", "киприк", "epilyatsiya", "эпиляция"]},
-    {"category": "pets", "keywords": ["mushuk", "мушук", "it ", "ит ", "kuchuk", "кучук", "hayvon", "ҳайвон", "veterinar", "ветеринар", "mushukka", "мушукка", "itga", "итга", "korm", "корм", "akvarium", "аквариум", "tovuq yem", "ем"]},
-    {"category": "charity", "keywords": ["xayriya", "хайрия", "sadaqa", "садақа", "ehson", "эҳсон", "zakot", "закот", "fitr", "фитр", "yordam berdim", "ёрдам бердим", "masjidga", "масжидга", "gadoyga", "тиланчига"]},
-    {"category": "fees", "keywords": ["komissiya", "комиссия", "jarima", "жарима", "shtraf", "штраф", "soliq", "солиқ", "boj", "божхона", "bank xizmati", "банк хизмати", "plastik uchun", "пластик учун", "peня", "пеня", "notarius", "нотариус", "davlat boji", "давлат божи"]},
-    {"category": "other", "keywords": ["boshqa", "бошқа", "nimadir", "нимадир", "pul", "пул"]}
+    {
+      "category": "groceries",
+      "keywords": [
+        "non",
+        "нон",
+        "sut",
+        "сут",
+        "tuxum",
+        "тухум",
+        "go'sht",
+        "gosht",
+        "гўшт",
+        "guruch",
+        "гуруч",
+        "yog'",
+        "ёғ",
+        "kartoshka",
+        "картошка",
+        "piyoz",
+        "пиёз",
+        "sabzi",
+        "сабзи",
+        "bozor",
+        "бозор",
+        "chorsu",
+        "чорсу",
+        "do'kon",
+        "дўкон",
+        "magazin",
+        "магазин",
+        "produkt",
+        "продукт",
+        "oziq-ovqat",
+        "озиқ-овқат",
+        "meva",
+        "мева",
+        "sabzavot",
+        "сабзавот",
+        "shakar",
+        "шакар",
+        "un",
+        "makaron",
+        "макарон",
+        "qatiq",
+        "қатиқ",
+        "pishloq",
+        "пишлоқ",
+        "kolbasa",
+        "колбаса"
+      ]
+    },
+    {
+      "category": "dining",
+      "keywords": [
+        "lavash",
+        "лаваш",
+        "somsa",
+        "сомса",
+        "osh",
+        "ош",
+        "palov",
+        "палов",
+        "kabob",
+        "кабоб",
+        "shashlik",
+        "шашлик",
+        "restoran",
+        "ресторан",
+        "ovqat",
+        "овқат",
+        "tushlik",
+        "тушлик",
+        "obed",
+        "обед",
+        "kechki ovqat",
+        "кечки овқат",
+        "choyxona",
+        "чойхона",
+        "burger",
+        "бургер",
+        "pizza",
+        "пицца",
+        "hotdog",
+        "хотдог",
+        "fastfud",
+        "фастфуд",
+        "yedik",
+        "едик",
+        "manti",
+        "манти",
+        "lag'mon",
+        "лағмон",
+        "norin",
+        "норин",
+        "shaurma",
+        "шаурма",
+        "sushi",
+        "суши",
+        "dostavka",
+        "доставка"
+      ]
+    },
+    {
+      "category": "cafe_coffee",
+      "keywords": [
+        "kofe",
+        "кофе",
+        "kafe",
+        "кафе",
+        "choy",
+        "чой",
+        "latte",
+        "латте",
+        "kapuchino",
+        "капучино",
+        "amerikano",
+        "американо",
+        "raf",
+        "раф",
+        "kofeynya",
+        "кофейня",
+        "smuzi",
+        "смузи",
+        "muzqaymoq",
+        "музқаймоқ"
+      ]
+    },
+    {
+      "category": "transport",
+      "keywords": [
+        "taksi",
+        "такси",
+        "taxi",
+        "такса",
+        "avtobus",
+        "автобус",
+        "metro",
+        "метро",
+        "marshrutka",
+        "маршрутка",
+        "yo'lkira",
+        "йўлкира",
+        "poyezd",
+        "поезд",
+        "yandex go",
+        "яндекс",
+        "mytaxi",
+        "мой такси",
+        "shofyor",
+        "шофёр",
+        "yo'l puli",
+        "йўл пули",
+        "atm karta",
+        "elektrokart",
+        "samokat",
+        "самокат"
+      ]
+    },
+    {
+      "category": "fuel",
+      "keywords": [
+        "benzin",
+        "бензин",
+        "gaz quydim",
+        "газ қуйдим",
+        "metan",
+        "метан",
+        "propan",
+        "пропан",
+        "zapravka",
+        "заправка",
+        "ai-80",
+        "ai-92",
+        "аи-92",
+        "аи-80",
+        "solyarka",
+        "солярка",
+        "yoqilg'i",
+        "ёқилғи",
+        "uzgasoil",
+        "узгазойл"
+      ]
+    },
+    {
+      "category": "rent",
+      "keywords": [
+        "ijara",
+        "ижара",
+        "arenda",
+        "аренда",
+        "kvartira puli",
+        "квартира пули",
+        "uy puli",
+        "уй пули",
+        "квартплата"
+      ]
+    },
+    {
+      "category": "utilities",
+      "keywords": [
+        "kommunalka",
+        "коммуналка",
+        "svet",
+        "свет",
+        "elektr",
+        "электр",
+        "gaz puli",
+        "газ пули",
+        "suv puli",
+        "сув пули",
+        "issiq suv",
+        "иссиқ сув",
+        "isitish",
+        "иситиш",
+        "chiqindi",
+        "чиқинди",
+        "hududgaz",
+        "ҳудудгаз",
+        "hisoblagich",
+        "ҳисоблагич"
+      ]
+    },
+    {
+      "category": "health",
+      "keywords": [
+        "dori",
+        "дори",
+        "dorixona",
+        "дорихона",
+        "apteka",
+        "аптека",
+        "shifokor",
+        "шифокор",
+        "vrach",
+        "врач",
+        "klinika",
+        "клиника",
+        "analiz",
+        "анализ",
+        "tish",
+        "тиш",
+        "stomatolog",
+        "стоматолог",
+        "ukol",
+        "укол",
+        "uzi",
+        "узи",
+        "mrt",
+        "мрт",
+        "kasalxona",
+        "касалхона",
+        "vitamin",
+        "витамин",
+        "massaj"
+      ]
+    },
+    {
+      "category": "education",
+      "keywords": [
+        "kurs",
+        "курс",
+        "kontrakt",
+        "контракт",
+        "universitet",
+        "университет",
+        "institut",
+        "институт",
+        "repetitor",
+        "репетитор",
+        "maktab",
+        "мактаб",
+        "dars",
+        "дарс",
+        "o'quv",
+        "ўқув",
+        "kitob",
+        "китоб",
+        "daftar",
+        "дафтар",
+        "ingliz tili",
+        "инглиз тили",
+        "ielts",
+        "айлц",
+        "bog'cha",
+        "боғча",
+        "o'quv qurollari",
+        "ўқув қуроллари"
+      ]
+    },
+    {
+      "category": "clothing",
+      "keywords": [
+        "kiyim",
+        "кийим",
+        "ko'ylak",
+        "кўйлак",
+        "shim",
+        "шим",
+        "krosovka",
+        "кроссовка",
+        "poyabzal",
+        "пойабзал",
+        "tufli",
+        "туфли",
+        "kurtka",
+        "куртка",
+        "futbolka",
+        "футболка",
+        "jinsi",
+        "жинси",
+        "paypoq",
+        "пайпоқ",
+        "sumka",
+        "сумка",
+        "kepka",
+        "кепка",
+        "pero",
+        "либос"
+      ]
+    },
+    {
+      "category": "entertainment",
+      "keywords": [
+        "kino",
+        "кино",
+        "teatr",
+        "театр",
+        "park",
+        "парк",
+        "o'yin",
+        "ўйин",
+        "konsert",
+        "концерт",
+        "bilyard",
+        "билярд",
+        "akvapark",
+        "аквапарк",
+        "attraksion",
+        "аттракцион",
+        "bouling",
+        "боулинг",
+        "playstation",
+        "плейстейшн",
+        "kinoteatr",
+        "кинотеатр",
+        "sirk",
+        "цирк"
+      ]
+    },
+    {
+      "category": "gifts",
+      "keywords": [
+        "sovg'a",
+        "совға",
+        "sovga",
+        "tug'ilgan kun",
+        "туғилган кун",
+        "to'y",
+        "тўй",
+        "to'yga",
+        "тўйга",
+        "nikoh",
+        "никоҳ",
+        "beshik to'y",
+        "бешик тўй",
+        "sunnat to'y",
+        "суннат тўй",
+        "ma'raka",
+        "маърака",
+        "xudoyi",
+        "худойи",
+        "gul",
+        "гул",
+        "buket",
+        "букет",
+        "konvert",
+        "конверт"
+      ]
+    },
+    {
+      "category": "travel",
+      "keywords": [
+        "sayohat",
+        "саёҳат",
+        "aviabilet",
+        "авиабилет",
+        "chipta",
+        "чипта",
+        "bilet",
+        "билет",
+        "mehmonxona",
+        "меҳмонхона",
+        "otel",
+        "отель",
+        "putyovka",
+        "путёвка",
+        "viza",
+        "виза",
+        "chegara",
+        "чегара",
+        "dubay",
+        "дубай",
+        "istanbul",
+        "истанбул",
+        "turfirma",
+        "турфирма",
+        "bagaj",
+        "багаж"
+      ]
+    },
+    {
+      "category": "communication",
+      "keywords": [
+        "telefon",
+        "телефон",
+        "internet",
+        "интернет",
+        "aloqa",
+        "алоқа",
+        "balans",
+        "баланс",
+        "tarif",
+        "тариф",
+        "beeline",
+        "билайн",
+        "ucell",
+        "юселл",
+        "uzmobile",
+        "узмобайл",
+        "mobiuz",
+        "мобиуз",
+        "humans",
+        "хумо",
+        "wifi",
+        "вайфай",
+        "trafik",
+        "трафик",
+        "sim karta",
+        "сим карта"
+      ]
+    },
+    {
+      "category": "subscriptions",
+      "keywords": [
+        "obuna",
+        "обуна",
+        "podpiska",
+        "подписка",
+        "netflix",
+        "нетфликс",
+        "spotify",
+        "спотифай",
+        "youtube premium",
+        "ютуб премиум",
+        "ivi",
+        "иви",
+        "icloud",
+        "айклауд",
+        "chatgpt",
+        "premium",
+        "премиум",
+        "kinopoisk",
+        "кинопоиск",
+        "yandex plus",
+        "яндекс плюс"
+      ]
+    },
+    {
+      "category": "family",
+      "keywords": [
+        "bolamga",
+        "боламга",
+        "bolalarga",
+        "болаларга",
+        "onamga",
+        "онамга",
+        "otamga",
+        "отамга",
+        "xotinga",
+        "хотинга",
+        "ayolimga",
+        "аёлимга",
+        "akamga",
+        "акамга",
+        "ukamga",
+        "укамга",
+        "opamga",
+        "опамга",
+        "singlimga",
+        "синглимга",
+        "oila",
+        "оила",
+        "nevaraga",
+        "неварага",
+        "ota-onaga",
+        "ота-онага",
+        "cho'ntak puli",
+        "чўнтак пули"
+      ]
+    },
+    {
+      "category": "household",
+      "keywords": [
+        "uy uchun",
+        "уй учун",
+        "mebel",
+        "мебел",
+        "remont",
+        "ремонт",
+        "gilam",
+        "гилам",
+        "idish",
+        "идиш",
+        "kir yuvish",
+        "кир ювиш",
+        "poroshok",
+        "порошок",
+        "xo'jalik",
+        "хўжалик",
+        "muzlatgich",
+        "музлатгич",
+        "kir mashina",
+        "кир машина",
+        "changyutgich",
+        "чангютгич",
+        "lampochka",
+        "лампочка",
+        "sement",
+        "цемент",
+        "bo'yoq",
+        "бўёқ",
+        "salfetka",
+        "салфетка"
+      ]
+    },
+    {
+      "category": "beauty",
+      "keywords": [
+        "sartarosh",
+        "сартарош",
+        "sartaroshxona",
+        "сартарошхона",
+        "soch",
+        "соч",
+        "manikur",
+        "маникюр",
+        "pedikur",
+        "педикюр",
+        "kosmetika",
+        "косметика",
+        "salon",
+        "салон",
+        "krem",
+        "крем",
+        "parfyum",
+        "парфюм",
+        "atir",
+        "атир",
+        "qosh",
+        "қош",
+        "kiprik",
+        "киприк",
+        "epilyatsiya",
+        "эпиляция"
+      ]
+    },
+    {
+      "category": "pets",
+      "keywords": [
+        "mushuk",
+        "мушук",
+        "it ",
+        "ит ",
+        "kuchuk",
+        "кучук",
+        "hayvon",
+        "ҳайвон",
+        "veterinar",
+        "ветеринар",
+        "mushukka",
+        "мушукка",
+        "itga",
+        "итга",
+        "korm",
+        "корм",
+        "akvarium",
+        "аквариум",
+        "tovuq yem",
+        "ем"
+      ]
+    },
+    {
+      "category": "charity",
+      "keywords": [
+        "xayriya",
+        "хайрия",
+        "sadaqa",
+        "садақа",
+        "ehson",
+        "эҳсон",
+        "zakot",
+        "закот",
+        "fitr",
+        "фитр",
+        "yordam berdim",
+        "ёрдам бердим",
+        "masjidga",
+        "масжидга",
+        "gadoyga",
+        "тиланчига"
+      ]
+    },
+    {
+      "category": "fees",
+      "keywords": [
+        "komissiya",
+        "комиссия",
+        "jarima",
+        "жарима",
+        "shtraf",
+        "штраф",
+        "soliq",
+        "солиқ",
+        "boj",
+        "божхона",
+        "bank xizmati",
+        "банк хизмати",
+        "plastik uchun",
+        "пластик учун",
+        "peня",
+        "пеня",
+        "notarius",
+        "нотариус",
+        "davlat boji",
+        "давлат божи"
+      ]
+    },
+    {
+      "category": "other",
+      "keywords": [
+        "boshqa",
+        "бошқа",
+        "nimadir",
+        "нимадир",
+        "pul",
+        "пул"
+      ]
+    }
   ],
   "income_category_keywords": [
-    {"category": "salary", "keywords": ["oylik", "ойлик", "maosh", "маош", "ish haqi", "иш ҳақи", "avans", "аванс", "premiya", "премия", "oyligim", "ойлигим", "zarplata", "зарплата"]},
-    {"category": "freelance", "keywords": ["frilans", "фриланс", "buyurtma", "буюртма", "loyiha", "лойиҳа", "kalim ish", "shabashka", "шабашка", "gonorar", "гонорар", "upwork", "апворк"]},
-    {"category": "business", "keywords": ["savdo", "савдо", "foyda", "фойда", "biznes", "бизнес", "do'kondan tushdi", "дўкондан тушди", "mijoz to'ladi", "мижоз тўлади", "ijaraga berdim", "ижарага бердим"]},
-    {"category": "gift_received", "keywords": ["berdi", "берди", "sovg'a qildi", "совға қилди", "to'ydan", "тўйдан", "yubordi", "юборди", "o'tkazma keldi", "ўтказма келди", "hadya", "ҳадя"]},
-    {"category": "refund", "keywords": ["qaytdi", "қайтди", "qaytarib berishdi", "қайтариб беришди", "vozvrat", "возврат", "kesh bek", "кэшбэк", "cashback", "keshbek", "qaytarma", "қайтарма"]},
-    {"category": "investment", "keywords": ["foiz", "фоиз", "depozit", "депозит", "dividend", "дивиденд", "obligatsiya", "облигация", "aksiya foydasi", "акция фойдаси"]},
-    {"category": "other_income", "keywords": ["topdim", "топдим", "qarz oldim", "қарз олдим", "yutdim", "ютдим", "sotdim", "сотдим"]}
+    {
+      "category": "salary",
+      "keywords": [
+        "oylik",
+        "ойлик",
+        "maosh",
+        "маош",
+        "ish haqi",
+        "иш ҳақи",
+        "avans",
+        "аванс",
+        "premiya",
+        "премия",
+        "oyligim",
+        "ойлигим",
+        "zarplata",
+        "зарплата"
+      ]
+    },
+    {
+      "category": "freelance",
+      "keywords": [
+        "frilans",
+        "фриланс",
+        "buyurtma",
+        "буюртма",
+        "loyiha",
+        "лойиҳа",
+        "kalim ish",
+        "shabashka",
+        "шабашка",
+        "gonorar",
+        "гонорар",
+        "upwork",
+        "апворк"
+      ]
+    },
+    {
+      "category": "business",
+      "keywords": [
+        "savdo",
+        "савдо",
+        "foyda",
+        "фойда",
+        "biznes",
+        "бизнес",
+        "do'kondan tushdi",
+        "дўкондан тушди",
+        "mijoz to'ladi",
+        "мижоз тўлади",
+        "ijaraga berdim",
+        "ижарага бердим"
+      ]
+    },
+    {
+      "category": "gift_received",
+      "keywords": [
+        "berdi",
+        "берди",
+        "sovg'a qildi",
+        "совға қилди",
+        "to'ydan",
+        "тўйдан",
+        "yubordi",
+        "юборди",
+        "o'tkazma keldi",
+        "ўтказма келди",
+        "hadya",
+        "ҳадя"
+      ]
+    },
+    {
+      "category": "refund",
+      "keywords": [
+        "qaytdi",
+        "қайтди",
+        "qaytarib berishdi",
+        "қайтариб беришди",
+        "vozvrat",
+        "возврат",
+        "kesh bek",
+        "кэшбэк",
+        "cashback",
+        "keshbek",
+        "qaytarma",
+        "қайтарма"
+      ]
+    },
+    {
+      "category": "investment",
+      "keywords": [
+        "foiz",
+        "фоиз",
+        "depozit",
+        "депозит",
+        "dividend",
+        "дивиденд",
+        "obligatsiya",
+        "облигация",
+        "aksiya foydasi",
+        "акция фойдаси"
+      ]
+    },
+    {
+      "category": "other_income",
+      "keywords": [
+        "topdim",
+        "топдим",
+        "qarz oldim",
+        "қарз олдим",
+        "yutdim",
+        "ютдим",
+        "sotdim",
+        "сотдим"
+      ]
+    }
   ],
   "date_expressions": [
-    {"surface": "bugun", "meaning": "today"},
-    {"surface": "бугун", "meaning": "today"},
-    {"surface": "hozir", "meaning": "today", "notes": "'now'"},
-    {"surface": "ҳозир", "meaning": "today"},
-    {"surface": "ertalab", "meaning": "today", "notes": "'in the morning' — same day unless another date word is present"},
-    {"surface": "эрталаб", "meaning": "today"},
-    {"surface": "tushda", "meaning": "today", "notes": "'at noon'"},
-    {"surface": "kechqurun", "meaning": "today", "notes": "'in the evening'"},
-    {"surface": "кечқурун", "meaning": "today"},
-    {"surface": "kecha", "meaning": "yesterday", "notes": "TRAP: 'kecha' = yesterday, but 'kechqurun'/'kechasi' = in the evening (today). One extra syllable flips the date."},
-    {"surface": "кеча", "meaning": "yesterday"},
-    {"surface": "kechagi", "meaning": "yesterday", "notes": "adjectival 'yesterday's'"},
-    {"surface": "avvalgi kuni", "meaning": "day_before_yesterday"},
-    {"surface": "аввалги куни", "meaning": "day_before_yesterday"},
-    {"surface": "kechadan oldin", "meaning": "day_before_yesterday"},
-    {"surface": "indinga oldin", "meaning": "day_before_yesterday", "notes": "colloquial, less standard"},
-    {"surface": "<N> kun oldin", "meaning": "<N>_days_ago", "example": "3 kun oldin"},
-    {"surface": "<N> кун олдин", "meaning": "<N>_days_ago"},
-    {"surface": "<N> kun burun", "meaning": "<N>_days_ago", "notes": "'burun' is a synonym of 'oldin', equally common"},
-    {"surface": "<N> кун бурун", "meaning": "<N>_days_ago"},
-    {"surface": "o'tgan dushanba", "meaning": "last_monday"},
-    {"surface": "ўтган душанба", "meaning": "last_monday"},
-    {"surface": "o'tgan seshanba", "meaning": "last_tuesday"},
-    {"surface": "o'tgan chorshanba", "meaning": "last_wednesday"},
-    {"surface": "o'tgan payshanba", "meaning": "last_thursday"},
-    {"surface": "o'tgan juma", "meaning": "last_friday"},
-    {"surface": "ўтган жума", "meaning": "last_friday"},
-    {"surface": "o'tgan shanba", "meaning": "last_saturday"},
-    {"surface": "o'tgan yakshanba", "meaning": "last_sunday"},
-    {"surface": "shu dushanba", "meaning": "this_monday"},
-    {"surface": "шу душанба", "meaning": "this_monday"},
-    {"surface": "shu juma", "meaning": "this_friday"},
-    {"surface": "<weekday> kuni", "meaning": "AMBIGUOUS", "notes": "bare 'juma kuni' with no o'tgan/shu is genuinely ambiguous — Uzbeks say it for both the past and coming Friday. Resolve to last_<weekday> for a PAST-tense verb, but lower confidence."},
-    {"surface": "o'tgan hafta", "meaning": "UNSUPPORTED", "notes": "'last week' has no slot in the schema. Emit date=null and keep the phrase in `note`."},
-    {"surface": "ўтган ҳафта", "meaning": "UNSUPPORTED"},
-    {"surface": "o'tgan oy", "meaning": "UNSUPPORTED", "notes": "'last month' — same, date=null"},
-    {"surface": "o'tgan kuni", "meaning": "UNSUPPORTED", "notes": "TRAP: looks like 'avvalgi kuni' but actually means the vague 'the other day'. date=null, not day_before_yesterday."},
-    {"surface": "ertaga", "meaning": "FUTURE", "notes": "'tomorrow' — a FUTURE plan, not a transaction. Parser must refuse to log it."},
-    {"surface": "эртага", "meaning": "FUTURE"},
-    {"surface": "har oy", "meaning": "RECURRING", "notes": "'every month' — a recurring rule, not a single dated event"}
+    {
+      "surface": "bugun",
+      "meaning": "today"
+    },
+    {
+      "surface": "бугун",
+      "meaning": "today"
+    },
+    {
+      "surface": "hozir",
+      "meaning": "today",
+      "notes": "'now'"
+    },
+    {
+      "surface": "ҳозир",
+      "meaning": "today"
+    },
+    {
+      "surface": "ertalab",
+      "meaning": "today",
+      "notes": "'in the morning' — same day unless another date word is present"
+    },
+    {
+      "surface": "эрталаб",
+      "meaning": "today"
+    },
+    {
+      "surface": "tushda",
+      "meaning": "today",
+      "notes": "'at noon'"
+    },
+    {
+      "surface": "kechqurun",
+      "meaning": "today",
+      "notes": "'in the evening'"
+    },
+    {
+      "surface": "кечқурун",
+      "meaning": "today"
+    },
+    {
+      "surface": "kecha",
+      "meaning": "yesterday",
+      "notes": "TRAP: 'kecha' = yesterday, but 'kechqurun'/'kechasi' = in the evening (today). One extra syllable flips the date."
+    },
+    {
+      "surface": "кеча",
+      "meaning": "yesterday"
+    },
+    {
+      "surface": "kechagi",
+      "meaning": "yesterday",
+      "notes": "adjectival 'yesterday's'"
+    },
+    {
+      "surface": "avvalgi kuni",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "аввалги куни",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "kechadan oldin",
+      "meaning": "day_before_yesterday"
+    },
+    {
+      "surface": "indinga oldin",
+      "meaning": "day_before_yesterday",
+      "notes": "colloquial, less standard"
+    },
+    {
+      "surface": "<N> kun oldin",
+      "meaning": "<N>_days_ago",
+      "example": "3 kun oldin"
+    },
+    {
+      "surface": "<N> кун олдин",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "<N> kun burun",
+      "meaning": "<N>_days_ago",
+      "notes": "'burun' is a synonym of 'oldin', equally common"
+    },
+    {
+      "surface": "<N> кун бурун",
+      "meaning": "<N>_days_ago"
+    },
+    {
+      "surface": "o'tgan dushanba",
+      "meaning": "last_monday"
+    },
+    {
+      "surface": "ўтган душанба",
+      "meaning": "last_monday"
+    },
+    {
+      "surface": "o'tgan seshanba",
+      "meaning": "last_tuesday"
+    },
+    {
+      "surface": "o'tgan chorshanba",
+      "meaning": "last_wednesday"
+    },
+    {
+      "surface": "o'tgan payshanba",
+      "meaning": "last_thursday"
+    },
+    {
+      "surface": "o'tgan juma",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "ўтган жума",
+      "meaning": "last_friday"
+    },
+    {
+      "surface": "o'tgan shanba",
+      "meaning": "last_saturday"
+    },
+    {
+      "surface": "o'tgan yakshanba",
+      "meaning": "last_sunday"
+    },
+    {
+      "surface": "shu dushanba",
+      "meaning": "this_monday"
+    },
+    {
+      "surface": "шу душанба",
+      "meaning": "this_monday"
+    },
+    {
+      "surface": "shu juma",
+      "meaning": "this_friday"
+    },
+    {
+      "surface": "<weekday> kuni",
+      "meaning": "AMBIGUOUS",
+      "notes": "bare 'juma kuni' with no o'tgan/shu is genuinely ambiguous — Uzbeks say it for both the past and coming Friday. Resolve to last_<weekday> for a PAST-tense verb, but lower confidence."
+    },
+    {
+      "surface": "o'tgan hafta",
+      "meaning": "UNSUPPORTED",
+      "notes": "'last week' has no slot in the schema. Emit date=null and keep the phrase in `note`."
+    },
+    {
+      "surface": "ўтган ҳафта",
+      "meaning": "UNSUPPORTED"
+    },
+    {
+      "surface": "o'tgan oy",
+      "meaning": "UNSUPPORTED",
+      "notes": "'last month' — same, date=null"
+    },
+    {
+      "surface": "o'tgan kuni",
+      "meaning": "UNSUPPORTED",
+      "notes": "TRAP: looks like 'avvalgi kuni' but actually means the vague 'the other day'. date=null, not day_before_yesterday."
+    },
+    {
+      "surface": "ertaga",
+      "meaning": "FUTURE",
+      "notes": "'tomorrow' — a FUTURE plan, not a transaction. Parser must refuse to log it."
+    },
+    {
+      "surface": "эртага",
+      "meaning": "FUTURE"
+    },
+    {
+      "surface": "har oy",
+      "meaning": "RECURRING",
+      "notes": "'every month' — a recurring rule, not a single dated event"
+    }
   ],
   "merchants": [
-    {"surface": "korzinka", "canonical": "Korzinka", "category": "groceries", "variants": ["korzinka.uz", "корзинка", "karzinka", "корзинкa"]},
-    {"surface": "makro", "canonical": "Makro", "category": "groceries", "variants": ["макро", "macro"]},
-    {"surface": "havas", "canonical": "Havas", "category": "groceries", "variants": ["хавас", "ҳавас", "xavas"]},
-    {"surface": "carrefour", "canonical": "Carrefour", "category": "groceries", "variants": ["карфур", "karfur", "карефур"]},
-    {"surface": "magnum", "canonical": "Magnum", "category": "groceries", "variants": ["магнум"]},
-    {"surface": "chorsu bozor", "canonical": "Chorsu Bozor", "category": "groceries", "variants": ["чорсу", "chorsu"]},
-    {"surface": "alay bozor", "canonical": "Alay Bozor", "category": "groceries", "variants": ["олой", "oloy", "алайский"]},
-    {"surface": "yandex taxi", "canonical": "Yandex Taxi", "category": "transport", "variants": ["yandex go", "яндекс такси", "яндекс го", "yandeks taksi", "yandex"]},
-    {"surface": "mytaxi", "canonical": "MyTaxi", "category": "transport", "variants": ["май такси", "маy taxi", "mytaxi.uz"]},
-    {"surface": "uzum", "canonical": "Uzum", "category": "other", "variants": ["узум", "uzum market", "узум маркет", "uzum nasiya"], "notes": "marketplace — category depends on the item bought, do NOT force a category from the merchant alone"},
-    {"surface": "click", "canonical": null, "category": null, "variants": ["клик", "click up", "клик ап"], "notes": "PAYMENT RAIL, NOT A MERCHANT. 'click orqali to'ladim' = paid via Click. merchant must stay null (or be the real payee)."},
-    {"surface": "payme", "canonical": null, "category": null, "variants": ["пайме", "пейми", "peyme"], "notes": "PAYMENT RAIL, NOT A MERCHANT — same rule as Click."},
-    {"surface": "uzcard", "canonical": null, "category": null, "variants": ["узкард", "humo", "хумо", "visa"], "notes": "card scheme, not a merchant"},
-    {"surface": "beeline", "canonical": "Beeline", "category": "communication", "variants": ["билайн", "bilayn", "biline"]},
-    {"surface": "ucell", "canonical": "Ucell", "category": "communication", "variants": ["юсел", "юселл", "yusell"]},
-    {"surface": "uzmobile", "canonical": "Uzmobile", "category": "communication", "variants": ["узмобайл", "uzmobayl", "узмобиле"]},
-    {"surface": "mobiuz", "canonical": "Mobiuz", "category": "communication", "variants": ["мобиуз", "mobi uz"]},
-    {"surface": "evos", "canonical": "Evos", "category": "dining", "variants": ["эвос", "evos burger"]},
-    {"surface": "oqtepa lavash", "canonical": "Oqtepa Lavash", "category": "dining", "variants": ["оқтепа", "октепа", "oqtepa", "oktepa lavash"]},
-    {"surface": "les ailes", "canonical": "Les Ailes", "category": "dining", "variants": ["лес айлес", "лезайл", "lezail", "les eyls"]},
-    {"surface": "chopar", "canonical": "Chopar", "category": "dining", "variants": ["чопар", "chopar pizza", "чопар пицца"]},
-    {"surface": "maxway", "canonical": "MaxWay", "category": "dining", "variants": ["максвей", "max way", "макс вей"]},
-    {"surface": "bellissimo", "canonical": "Bellissimo", "category": "dining", "variants": ["беллиссимо", "belisimo"]},
-    {"surface": "kfc", "canonical": "KFC", "category": "dining", "variants": ["кфс", "кейэфси"]},
-    {"surface": "texnomart", "canonical": "Texnomart", "category": "household", "variants": ["техномарт", "tehnomart"]},
-    {"surface": "mediapark", "canonical": "Mediapark", "category": "household", "variants": ["медиапарк", "media park"]},
-    {"surface": "idea", "canonical": "Idea", "category": "household", "variants": ["идея"]},
-    {"surface": "uzgasoil", "canonical": "UzGasOil", "category": "fuel", "variants": ["узгазойл", "узгасойл", "gaz oil"]},
-    {"surface": "hududgaz", "canonical": "Hududgaz", "category": "utilities", "variants": ["ҳудудгаз", "худудгаз"]},
-    {"surface": "netflix", "canonical": "Netflix", "category": "subscriptions", "variants": ["нетфликс", "netfliks"]},
-    {"surface": "spotify", "canonical": "Spotify", "category": "subscriptions", "variants": ["спотифай"]},
-    {"surface": "wildberries", "canonical": "Wildberries", "category": "other", "variants": ["вайлдберриз", "вб", "wb"]}
+    {
+      "surface": "korzinka",
+      "canonical": "Korzinka",
+      "category": "groceries",
+      "variants": [
+        "korzinka.uz",
+        "корзинка",
+        "karzinka",
+        "корзинкa"
+      ]
+    },
+    {
+      "surface": "makro",
+      "canonical": "Makro",
+      "category": "groceries",
+      "variants": [
+        "макро",
+        "macro"
+      ]
+    },
+    {
+      "surface": "havas",
+      "canonical": "Havas",
+      "category": "groceries",
+      "variants": [
+        "хавас",
+        "ҳавас",
+        "xavas"
+      ]
+    },
+    {
+      "surface": "carrefour",
+      "canonical": "Carrefour",
+      "category": "groceries",
+      "variants": [
+        "карфур",
+        "karfur",
+        "карефур"
+      ]
+    },
+    {
+      "surface": "magnum",
+      "canonical": "Magnum",
+      "category": "groceries",
+      "variants": [
+        "магнум"
+      ]
+    },
+    {
+      "surface": "chorsu bozor",
+      "canonical": "Chorsu Bozor",
+      "category": "groceries",
+      "variants": [
+        "чорсу",
+        "chorsu"
+      ]
+    },
+    {
+      "surface": "alay bozor",
+      "canonical": "Alay Bozor",
+      "category": "groceries",
+      "variants": [
+        "олой",
+        "oloy",
+        "алайский"
+      ]
+    },
+    {
+      "surface": "yandex taxi",
+      "canonical": "Yandex Taxi",
+      "category": "transport",
+      "variants": [
+        "yandex go",
+        "яндекс такси",
+        "яндекс го",
+        "yandeks taksi",
+        "yandex"
+      ]
+    },
+    {
+      "surface": "mytaxi",
+      "canonical": "MyTaxi",
+      "category": "transport",
+      "variants": [
+        "май такси",
+        "маy taxi",
+        "mytaxi.uz"
+      ]
+    },
+    {
+      "surface": "uzum",
+      "canonical": "Uzum",
+      "category": "other",
+      "variants": [
+        "узум",
+        "uzum market",
+        "узум маркет",
+        "uzum nasiya"
+      ],
+      "notes": "marketplace — category depends on the item bought, do NOT force a category from the merchant alone"
+    },
+    {
+      "surface": "click",
+      "canonical": null,
+      "category": null,
+      "variants": [
+        "клик",
+        "click up",
+        "клик ап"
+      ],
+      "notes": "PAYMENT RAIL, NOT A MERCHANT. 'click orqali to'ladim' = paid via Click. merchant must stay null (or be the real payee)."
+    },
+    {
+      "surface": "payme",
+      "canonical": null,
+      "category": null,
+      "variants": [
+        "пайме",
+        "пейми",
+        "peyme"
+      ],
+      "notes": "PAYMENT RAIL, NOT A MERCHANT — same rule as Click."
+    },
+    {
+      "surface": "uzcard",
+      "canonical": null,
+      "category": null,
+      "variants": [
+        "узкард",
+        "humo",
+        "хумо",
+        "visa"
+      ],
+      "notes": "card scheme, not a merchant"
+    },
+    {
+      "surface": "beeline",
+      "canonical": "Beeline",
+      "category": "communication",
+      "variants": [
+        "билайн",
+        "bilayn",
+        "biline"
+      ]
+    },
+    {
+      "surface": "ucell",
+      "canonical": "Ucell",
+      "category": "communication",
+      "variants": [
+        "юсел",
+        "юселл",
+        "yusell"
+      ]
+    },
+    {
+      "surface": "uzmobile",
+      "canonical": "Uzmobile",
+      "category": "communication",
+      "variants": [
+        "узмобайл",
+        "uzmobayl",
+        "узмобиле"
+      ]
+    },
+    {
+      "surface": "mobiuz",
+      "canonical": "Mobiuz",
+      "category": "communication",
+      "variants": [
+        "мобиуз",
+        "mobi uz"
+      ]
+    },
+    {
+      "surface": "evos",
+      "canonical": "Evos",
+      "category": "dining",
+      "variants": [
+        "эвос",
+        "evos burger"
+      ]
+    },
+    {
+      "surface": "oqtepa lavash",
+      "canonical": "Oqtepa Lavash",
+      "category": "dining",
+      "variants": [
+        "оқтепа",
+        "октепа",
+        "oqtepa",
+        "oktepa lavash"
+      ]
+    },
+    {
+      "surface": "les ailes",
+      "canonical": "Les Ailes",
+      "category": "dining",
+      "variants": [
+        "лес айлес",
+        "лезайл",
+        "lezail",
+        "les eyls"
+      ]
+    },
+    {
+      "surface": "chopar",
+      "canonical": "Chopar Pizza",
+      "category": "dining",
+      "variants": [
+        "чопар",
+        "chopar pizza",
+        "чопар пицца"
+      ]
+    },
+    {
+      "surface": "maxway",
+      "canonical": "MaxWay",
+      "category": "dining",
+      "variants": [
+        "максвей",
+        "max way",
+        "макс вей"
+      ]
+    },
+    {
+      "surface": "bellissimo",
+      "canonical": "Bellissimo",
+      "category": "dining",
+      "variants": [
+        "беллиссимо",
+        "belisimo"
+      ]
+    },
+    {
+      "surface": "kfc",
+      "canonical": "KFC",
+      "category": "dining",
+      "variants": [
+        "кфс",
+        "кейэфси"
+      ]
+    },
+    {
+      "surface": "texnomart",
+      "canonical": "Texnomart",
+      "category": "household",
+      "variants": [
+        "техномарт",
+        "tehnomart"
+      ]
+    },
+    {
+      "surface": "mediapark",
+      "canonical": "Mediapark",
+      "category": "household",
+      "variants": [
+        "медиапарк",
+        "media park"
+      ]
+    },
+    {
+      "surface": "idea",
+      "canonical": "Idea",
+      "category": "household",
+      "variants": [
+        "идея"
+      ]
+    },
+    {
+      "surface": "uzgasoil",
+      "canonical": "UzGasOil",
+      "category": "fuel",
+      "variants": [
+        "узгазойл",
+        "узгасойл",
+        "gaz oil"
+      ]
+    },
+    {
+      "surface": "hududgaz",
+      "canonical": "Hududgaz",
+      "category": "utilities",
+      "variants": [
+        "ҳудудгаз",
+        "худудгаз"
+      ]
+    },
+    {
+      "surface": "netflix",
+      "canonical": "Netflix",
+      "category": "subscriptions",
+      "variants": [
+        "нетфликс",
+        "netfliks"
+      ]
+    },
+    {
+      "surface": "spotify",
+      "canonical": "Spotify",
+      "category": "subscriptions",
+      "variants": [
+        "спотифай"
+      ]
+    },
+    {
+      "surface": "wildberries",
+      "canonical": "Wildberries",
+      "category": "clothing",
+      "variants": [
+        "вайлдберриз",
+        "вб",
+        "wb"
+      ]
+    }
   ],
   "noise_words": [
-    "uchun", "учун", "ga", "ga", "да", "дан", "ни", "ta", "та", "dona", "дона",
-    "bo'ldi", "бўлди", "edi", "эди", "ekan", "экан", "emish", "эмиш",
-    "ha", "ҳа", "e", "э", "mana", "мана", "anavi", "анави", "shu", "шу",
-    "yana", "яна", "ham", "ҳам", "juda", "жуда", "biroz", "бироз", "sal", "сал",
-    "shekilli", "шекилли", "aftidan", "афтидан", "chamasi", "чамаси",
-    "voobshe", "вообще", "blin", "блин", "attang", "аттанг", "eh", "эҳ",
-    "bilan", "билан", "keyin", "кейин", "avval", "аввал", "yoki", "ёки",
-    "menimcha", "менимча", "yani", "яъни", "boldi", "xullas", "хуллас",
-    "qarang", "қаранг", "nima", "нима", "deb", "деб", "kerak", "керак"
+    "uchun",
+    "учун",
+    "ga",
+    "ga",
+    "да",
+    "дан",
+    "ни",
+    "ta",
+    "та",
+    "dona",
+    "дона",
+    "bo'ldi",
+    "бўлди",
+    "edi",
+    "эди",
+    "ekan",
+    "экан",
+    "emish",
+    "эмиш",
+    "ha",
+    "ҳа",
+    "e",
+    "э",
+    "mana",
+    "мана",
+    "anavi",
+    "анави",
+    "shu",
+    "шу",
+    "yana",
+    "яна",
+    "ham",
+    "ҳам",
+    "juda",
+    "жуда",
+    "biroz",
+    "бироз",
+    "sal",
+    "сал",
+    "shekilli",
+    "шекилли",
+    "aftidan",
+    "афтидан",
+    "chamasi",
+    "чамаси",
+    "voobshe",
+    "вообще",
+    "blin",
+    "блин",
+    "attang",
+    "аттанг",
+    "eh",
+    "эҳ",
+    "bilan",
+    "билан",
+    "keyin",
+    "кейин",
+    "avval",
+    "аввал",
+    "yoki",
+    "ёки",
+    "menimcha",
+    "менимча",
+    "yani",
+    "яъни",
+    "boldi",
+    "xullas",
+    "хуллас",
+    "qarang",
+    "қаранг",
+    "nima",
+    "нима",
+    "deb",
+    "деб",
+    "kerak",
+    "керак"
   ],
   "orthography_normalisation": [
-    {"rule": "apostrophes", "detail": "o' / o` / o’ / oʻ / o -> single canonical form. Same for g'. 'so'm', 'so`m', 'som', 'sum' must all hash to UZS."},
-    {"rule": "cyrillic-latin transliteration", "detail": "Normalise both scripts to one internal key: ў->o', қ->q, ғ->g', ҳ->h, ш->sh, ч->ch, я->ya, ю->yu, ё->yo, ж->j, ц->ts, х->x, э->e."},
-    {"rule": "mixed script", "detail": "Single utterances routinely mix scripts ('Korzinkadan 90 минг') because the keyboard was switched mid-sentence. Tokenise per-token, not per-utterance."},
-    {"rule": "digit grouping", "detail": "'45 000', '45.000', '45,000', '45000' all mean 45000. A space or dot INSIDE a digit run is a thousands separator, not a decimal point — but '1.5 mln' IS a decimal. Disambiguate by whether a magnitude word follows."},
-    {"rule": "russian code-switch", "detail": "Tashkent speech is heavily Russian-mixed: obed, produkt, zapravka, kommunalka, remont, podpiska, vozvrat, shtraf. Treat these as native Uzbek vocabulary, not foreign."}
+    {
+      "rule": "apostrophes",
+      "detail": "o' / o` / o’ / oʻ / o -> single canonical form. Same for g'. 'so'm', 'so`m', 'som', 'sum' must all hash to UZS."
+    },
+    {
+      "rule": "cyrillic-latin transliteration",
+      "detail": "Normalise both scripts to one internal key: ў->o', қ->q, ғ->g', ҳ->h, ш->sh, ч->ch, я->ya, ю->yu, ё->yo, ж->j, ц->ts, х->x, э->e."
+    },
+    {
+      "rule": "mixed script",
+      "detail": "Single utterances routinely mix scripts ('Korzinkadan 90 минг') because the keyboard was switched mid-sentence. Tokenise per-token, not per-utterance."
+    },
+    {
+      "rule": "digit grouping",
+      "detail": "'45 000', '45.000', '45,000', '45000' all mean 45000. A space or dot INSIDE a digit run is a thousands separator, not a decimal point — but '1.5 mln' IS a decimal. Disambiguate by whether a magnitude word follows."
+    },
+    {
+      "rule": "russian code-switch",
+      "detail": "Tashkent speech is heavily Russian-mixed: obed, produkt, zapravka, kommunalka, remont, podpiska, vozvrat, shtraf. Treat these as native Uzbek vocabulary, not foreign."
+    }
   ]
 }

@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "intent": {
+      "type": "string",
+      "enum": ["expense", "income", "query", "delete", "chitchat", "unclear"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "amount": { "type": "number" },
+          "currency": {
+            "type": "string",
+            "enum": ["UZS", "RUB", "USD", "EUR", "KZT"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["food", "groceries", "transport", "fuel", "shopping",
+                     "health", "bills", "entertainment", "education", "rent",
+                     "travel", "gifts", "salary", "other"]
+          },
+          "merchant": { "type": ["string", "null"] },
+          "note": { "type": ["string", "null"] },
+          "when": {
+            "type": "string",
+            "enum": ["today", "yesterday", "day_before_yesterday",
+                     "last_monday", "last_tuesday", "last_wednesday",
+                     "last_thursday", "last_friday", "last_saturday",
+                     "last_sunday", "last_week", "last_month",
+                     "start_of_month", "unspecified"]
+          }
+        },
+        "required": ["amount", "currency", "category", "merchant", "note", "when"],
+        "additionalProperties": false
+      }
+    },
+    "clarification": { "type": ["string", "null"] }
+  },
+  "required": ["intent", "confidence", "items", "clarification"],
+  "additionalProperties": false
+}
