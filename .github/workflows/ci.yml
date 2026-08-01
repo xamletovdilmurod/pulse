@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The domain logic and the language parser build and test without a simulator, so this job is fast
+  # and is the one that gates everything else.
+  test:
+    name: PulseKit tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+
+      - name: Build
+        working-directory: Packages/PulseKit
+        run: swift build
+
+      - name: Test
+        working-directory: Packages/PulseKit
+        run: swift test
+
+  # Corpus and lexicon integrity. These files are shared with the fine-tuning pipeline, so a malformed
+  # line here would silently poison training data as well as the parser.
+  data:
+    name: Gold data integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate lexicons and corpora
+        run: python3 ml/scripts/validate_data.py
+
+  app:
+    name: Build iOS app
+    runs-on: macos-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        run: xcodegen generate
+
+      # Signing is skipped: CI has no provisioning profile, and this job only needs to prove the app
+      # target compiles and links.
+      - name: Build for simulator
+        run: |
+          xcodebuild build \
+            -project Pulse.xcodeproj \
+            -scheme Pulse \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcbeautify --quiet || xcodebuild build \
+            -project Pulse.xcodeproj \
+            -scheme Pulse \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO

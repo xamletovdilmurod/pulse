@@ -1,0 +1,45 @@
+# Xcode
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcuserstate
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# XcodeGen generates the project, the Info.plist and the entitlements from project.yml,
+# which is the single source of truth. Committing the generated copies invites them to drift.
+Pulse.xcodeproj/
+Pulse/Info.plist
+Pulse/Pulse.entitlements
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/*/.build/
+
+# macOS
+.DS_Store
+
+# Python / ML
+ml/.venv/
+ml/**/__pycache__/
+*.pyc
+
+# Model artifacts and training runs are large; keep them out of git.
+ml/out/
+ml/adapters/
+ml/models/
+Pulse/Resources/Model/
+
+# Generated training data (reproducible from scripts + seed).
+# The hand-curated gold lexicon and corpus under ml/data/lexicon and ml/data/corpus ARE tracked —
+# they are the most expensive artifacts in the project to recreate.
+ml/data/generated/
+
+# Secrets
+*.env
+.env.local
