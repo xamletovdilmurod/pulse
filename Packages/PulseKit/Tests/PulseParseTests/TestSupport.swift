@@ -41,6 +41,19 @@ enum TestData {
         let notes: String?
     }
 
+    static let generatedDirectory = repoRoot.appending(path: "ml/data/generated")
+
+    /// The generated training set, if it has been built. Not committed — it is reproducible from
+    /// `ml/scripts/generate_training_data.py` with a fixed seed.
+    static let synthetic: [CorpusCase] = {
+        let url = generatedDirectory.appending(path: "train.labelled.jsonl")
+        guard let text = try? String(contentsOf: url, encoding: .utf8) else { return [] }
+        let decoder = JSONDecoder()
+        return text.split(separator: "\n").compactMap { line in
+            try? decoder.decode(CorpusCase.self, from: Data(line.utf8))
+        }
+    }()
+
     /// Every corpus line across all languages.
     static let corpus: [CorpusCase] = {
         guard let files = try? FileManager.default.contentsOfDirectory(

@@ -49,7 +49,7 @@ The deterministic layer alone, measured against 682 hand-authored gold utterance
 | Amount | 95% |
 | Income vs expense | 98% |
 | Date | 92% |
-| Currency | 91% |
+| Currency | 92% |
 | Category | 88% |
 | Rejects non-transactions | 75% |
 

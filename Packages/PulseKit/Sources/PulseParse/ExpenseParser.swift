@@ -117,14 +117,23 @@ public struct ExpenseParser: Sendable {
         let tokens = bestTokens(for: normalized)
 
         let stems = UzbekMorphology.stems(of:)
-        let amountMatch = amountParser.principalAmount(in: tokens)
+
+        // Numbers that are not money must be taken off the table before any amount is read, because a
+        // stray digit beside a real amount does not compete with it — it merges into it.
+        let dateHit = dateHit(in: tokens)
+        var notMoney = Self.fuelGradeIndices(in: tokens)
+        if let dateHit, dateHit.range.count > 1 {
+            // The "3" of "3 kun oldin" belongs to the date, not the price.
+            notMoney.formUnion(dateHit.range)
+        }
+
+        let amountMatch = amountParser.principalAmount(in: tokens, excluding: notMoney)
         let anchor = amountMatch?.tokenRange
 
         // Where an utterance names several things — "spent 90k at havas and 20k on taxi" — the words
         // nearest the amount are the ones describing it. Taking the first or last match instead would
         // attach the wrong category to the wrong price about half the time.
         let currencyHit = Self.nearest(currencies.matches(tokens, stems: stems), to: anchor)
-        let dateHit = dateHit(in: tokens)
         let merchantHit = Self.nearest(merchants.matches(tokens, stems: stems), to: anchor)
         let categoryHit = Self.nearest(categories.matches(tokens, stems: stems), to: anchor)
 
@@ -181,7 +190,7 @@ public struct ExpenseParser: Sendable {
             appliedImpliedThousands: appliedImpliedThousands,
             futureIntent: mentionsFuture(tokens),
             isQuestion: looksLikeQuestion(normalized),
-            amountCount: amountParser.amounts(in: tokens).count
+            amountCount: amountParser.amounts(in: tokens, excluding: notMoney).count
         )
 
         let parsed = ParsedTransaction(
@@ -338,6 +347,24 @@ public struct ExpenseParser: Sendable {
         var rounded = Decimal()
         NSDecimalRound(&rounded, &input, 0, .down)
         return rounded == value
+    }
+
+    /// Token positions holding a petrol octane grade rather than a price.
+    ///
+    /// "аи-92", "ai 80", "АИ 95" name the fuel, and the number is part of the name. Uzbek drivers say
+    /// this constantly — "за аи 92 310 к" is 310 000 so'm of AI-92 — and without this the grade fuses
+    /// onto the front of the amount to give 92 310 000.
+    private static func fuelGradeIndices(in tokens: [String]) -> Set<Int> {
+        let markers: Set<String> = ["ai", "аи", "аи", "ай", "benzin", "бензин", "oktan", "октан"]
+        let grades: Set<String> = ["80", "91", "92", "93", "95", "98", "100"]
+
+        var indices: Set<Int> = []
+        for index in tokens.indices.dropLast() where markers.contains(tokens[index]) {
+            if grades.contains(tokens[index + 1]) {
+                indices.insert(index + 1)
+            }
+        }
+        return indices
     }
 
     /// The match closest to `anchor`, or the first if there is no anchor.

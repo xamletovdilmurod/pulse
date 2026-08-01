@@ -61,7 +61,7 @@ public struct TextNormalizer: Sendable {
         let folded = Self.unifyApostrophes(input)
             .precomposedStringWithCanonicalMapping
             .lowercased()
-        let collapsed = Self.collapseWhitespace(folded)
+        let collapsed = Self.collapseAbbreviationPeriods(Self.collapseWhitespace(folded))
 
         let transliterated: String =
             switch script {
@@ -113,6 +113,36 @@ public struct TextNormalizer: Sendable {
 
     static func collapseWhitespace(_ text: String) -> String {
         text.split(whereSeparator: \.isWhitespace).joined(separator: " ")
+    }
+
+    /// Remove periods that sit between letters, so dotted abbreviations survive tokenization.
+    ///
+    /// `у.е.` — *условные единицы*, the post-Soviet way of saying "dollars" — is the case that forces
+    /// this: without it the periods split the word into `у` and `е`, the currency is never recognised,
+    /// and a dollar amount silently gets the so'm implied-thousands treatment. Digits are untouched, so
+    /// `12.35` keeps its decimal point.
+    static func collapseAbbreviationPeriods(_ text: String) -> String {
+        var result = ""
+        result.reserveCapacity(text.count)
+        let characters = Array(text)
+
+        for index in characters.indices {
+            let character = characters[index]
+            if character == "." {
+                let previous = index > 0 ? characters[index - 1] : nil
+                let next = index + 1 < characters.count ? characters[index + 1] : nil
+                // Drop the period when it is bounded by letters on at least one side and never by
+                // digits — "у.е." and "у.е" both collapse, "12.35" does not.
+                let previousIsLetter = previous?.isLetter ?? false
+                let nextIsLetter = next?.isLetter ?? false
+                let touchesDigit = (previous?.isNumber ?? false) || (next?.isNumber ?? false)
+                if !touchesDigit && (previousIsLetter || nextIsLetter) {
+                    continue
+                }
+            }
+            result.append(character)
+        }
+        return result
     }
 
     /// Split into words and numbers.

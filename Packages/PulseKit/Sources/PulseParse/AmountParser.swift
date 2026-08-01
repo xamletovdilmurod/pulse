@@ -40,11 +40,20 @@ public struct AmountParser: Sendable {
     }
 
     /// Every amount in the token stream, left to right, non-overlapping.
-    public func amounts(in tokens: [String]) -> [Match] {
+    ///
+    /// `excluding` names token positions that hold a number which is definitely not money — a petrol
+    /// octane grade, the count in "three days ago". They are skipped entirely rather than merely
+    /// deprioritised, because a stray digit adjacent to a real amount does not compete with it, it
+    /// *joins* it: "аи 92 310 к" would otherwise read as 92 310 000.
+    public func amounts(in tokens: [String], excluding: Set<Int> = []) -> [Match] {
         var matches: [Match] = []
         var index = 0
         while index < tokens.count {
-            if let match = scan(tokens, from: index) {
+            if excluding.contains(index) {
+                index += 1
+                continue
+            }
+            if let match = scan(tokens, from: index, excluding: excluding) {
                 matches.append(match)
                 index = match.tokenRange.upperBound
             } else {
@@ -59,8 +68,8 @@ public struct AmountParser: Sendable {
     /// Prefers an amount that carried an explicit magnitude word — someone who says "2 kg go'sht 40
     /// ming" attached the magnitude to the price, not the quantity — and falls back to the largest
     /// value, then to the first.
-    public func principalAmount(in tokens: [String]) -> Match? {
-        let all = amounts(in: tokens)
+    public func principalAmount(in tokens: [String], excluding: Set<Int> = []) -> Match? {
+        let all = amounts(in: tokens, excluding: excluding)
         guard !all.isEmpty else { return nil }
         if let explicit = all.filter(\.hadExplicitMagnitude).max(by: { $0.value < $1.value }) {
             return explicit
@@ -71,7 +80,7 @@ public struct AmountParser: Sendable {
     // MARK: - Scanning
 
     /// Try to consume one amount expression starting at `start`.
-    private func scan(_ tokens: [String], from start: Int) -> Match? {
+    private func scan(_ tokens: [String], from start: Int, excluding: Set<Int> = []) -> Match? {
         // Running total of completed magnitude groups (the "45 000" in "45 ming 500").
         var total: Decimal = 0
         // The group being built, awaiting a magnitude word to scale it.
@@ -84,6 +93,7 @@ public struct AmountParser: Sendable {
         var index = start
 
         while index < tokens.count {
+            if excluding.contains(index) { break }
             let token = tokens[index]
             let key = MergedLexicon.key(token)
 

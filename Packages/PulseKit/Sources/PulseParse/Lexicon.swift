@@ -363,8 +363,10 @@ public struct MergedLexicon: Sendable {
 
     /// Normalise a surface the same way input is normalised, so the two always meet.
     static func key(_ surface: String) -> String {
-        TextNormalizer.collapseWhitespace(
-            TextNormalizer.unifyApostrophes(surface).lowercased()
+        TextNormalizer.collapseAbbreviationPeriods(
+            TextNormalizer.collapseWhitespace(
+                TextNormalizer.unifyApostrophes(surface).lowercased()
+            )
         )
     }
 }
