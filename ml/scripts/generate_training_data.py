@@ -219,7 +219,14 @@ def render_amount(rng: random.Random, thousands: int, lexicon: dict, lang: str) 
             if rng.random() < 0.25:
                 cents = rng.choice([25, 50, 75, 99])
                 return f"{value}.{cents} {word['surface']}", value + cents / 100, word["iso"]
-            return f"{value} {word['surface']}", float(value), word["iso"]
+            # The currency word goes before the number about as often as after it — "usd 45",
+            # "$45", "45 usd" are all ordinary. Training only the trailing form taught the model to
+            # miss the currency entirely when it led.
+            surface = word["surface"]
+            if surface in {"$", "€", "£"} or rng.random() < 0.35:
+                joiner = "" if surface in {"$", "€", "£"} else " "
+                return f"{surface}{joiner}{value}", float(value), word["iso"]
+            return f"{value} {surface}", float(value), word["iso"]
 
     thousand_words = magnitudes(lexicon, 1000)
     million_words = magnitudes(lexicon, 1000000)
@@ -344,6 +351,111 @@ def generate(count: int, seed: int) -> list[dict]:
     return rows
 
 
+# Utterances that must NOT become transactions. Without these the model learns that every input is a
+# transaction and never refuses — measured at 0/14 on the first fine-tune, which would mean every
+# question a user asks silently corrupts their ledger.
+REJECT_FRAMES = {
+    "uz": [
+        "{q} sarfladim", "{q} pul {q2}", "bu oy {q} ketdi", "{q}",
+        "{i} {a} to'lashim kerak", "{i} {a} olaman", "{c}ga {a} {i}",
+        "{n} sotib olmadim", "{c}ga pul sarflamadim", "hech narsa olmadim",
+        "{t} {a}", "{c} {a} {n}",
+    ],
+    "ru": [
+        "{q} я потратил на {c}", "{q} осталось", "{q} денег у меня", "{q}",
+        "{i} {a} на {c}", "{i} купить {c}", "{n} покупал {c}",
+        "{n} потратил ни копейки", "{c} стоит {a}?", "{t} {a}",
+    ],
+    "en": [
+        "{q} did i spend on {c}", "{q} is my balance", "{q} last week expenses", "{q}",
+        "{i} spend {a} on {c}", "{i} buy {c}", "{n} buy the {c}",
+        "i earn {a} a month", "how much is {c}", "{t} {a}",
+    ],
+}
+
+# App commands and standing statements, which are the same in every language for our purposes.
+REJECT_LITERALS = {
+    "uz": ["oxirgi xarajatni o'chir", "hisobimda qancha bor", "byudjetni ko'rsat",
+           "korzinkada ishlayman", "narxlar qimmat bo'lib ketdi"],
+    "ru": ["удали последнюю трату", "покажи расходы за неделю", "какой у меня баланс",
+           "я работаю в корзинке", "цены выросли"],
+    "en": ["delete the last expense", "show me last week expenses", "what is my balance",
+           "i work at korzinka", "prices went up"],
+}
+
+
+def marker_surfaces(lexicon: dict, key: str) -> list[str]:
+    """Whole-word markers only. Suffix patterns like '-madim / -medim' cannot stand alone."""
+    if key in {"hedge_words", "transfer_markers"}:
+        entries = (lexicon.get(key) or {}).get("entries", [])
+    else:
+        entries = lexicon.get(key, [])
+    out = []
+    for entry in entries:
+        surface = (entry.get("surface") or "").strip()
+        if not surface or surface.startswith("-") or "<" in surface or "/" in surface:
+            continue
+        out.append(surface)
+    return out
+
+
+def generate_rejects(count: int, rng, lexicons: dict, by_lang_categories: dict) -> list[dict]:
+    rows, seen = [], set()
+    langs = [l for l in ("uz", "ru", "en") if l in lexicons]
+    attempts = 0
+
+    while len(rows) < count and attempts < count * 60:
+        attempts += 1
+        lang = rng.choice(langs)
+        lexicon = lexicons[lang]
+
+        if rng.random() < 0.25:
+            text = rng.choice(REJECT_LITERALS[lang])
+        else:
+            queries = marker_surfaces(lexicon, "query_markers")
+            intents = marker_surfaces(lexicon, "intent_markers")
+            negations = marker_surfaces(lexicon, "negation_markers")
+            transfers = marker_surfaces(lexicon, "transfer_markers")
+            if not (queries and intents and negations):
+                continue
+
+            frame = rng.choice(REJECT_FRAMES[lang])
+            categories = by_lang_categories[lang]
+            available = [c for c in EXPENSE_CATEGORIES if categories.get(c)]
+            if not available:
+                continue
+            category_word = rng.choice(categories[rng.choice(available)])
+
+            thousands = rng.randint(10, 900)
+            amount_text, _, _ = render_amount(rng, thousands, lexicon, lang)
+
+            text = frame.format(
+                q=rng.choice(queries), q2=rng.choice(queries),
+                i=rng.choice(intents), n=rng.choice(negations),
+                t=rng.choice(transfers) if transfers else rng.choice(negations),
+                a=amount_text, c=category_word,
+            )
+
+        text = " ".join(text.split()).strip().lower()
+        if not text or text in seen:
+            continue
+        seen.add(text)
+
+        rows.append({
+            "text": text,
+            "lang": lang,
+            "source": "synthetic-reject",
+            "expected": {
+                # The corpus convention: every slot blanked, category pinned to "other", confidence 0.
+                "kind": "expense",
+                "amount": None, "currency": None, "category": "other",
+                "merchant": None, "note": None, "date": None,
+                "confidence": 0.0,
+            },
+        })
+    return rows
+
+
 def load_gold() -> list[dict]:
     rows = []
     for path in sorted(CORPUS_DIR.glob("*.jsonl")):
@@ -383,6 +495,17 @@ def main() -> int:
     args = parser.parse_args()
 
     synthetic = generate(args.count, args.seed)
+
+    # ~12% rejects. The gold corpus is 5.5% rejects, but refusing needs a stronger signal than
+    # accepting does: the cost of a missed refusal is a fabricated ledger entry the user never notices.
+    rng_rejects = random.Random(args.seed + 1)
+    lexicons = load_lexicons()
+    by_lang_categories = {l: index_by_category(lexicons[l]) for l in lexicons}
+    rejects = generate_rejects(
+        max(400, int(args.count * 0.12)), rng_rejects, lexicons, by_lang_categories
+    )
+    synthetic += rejects
+
     gold = load_gold()
 
     rng = random.Random(args.seed)
@@ -412,6 +535,7 @@ def main() -> int:
     print(f"  train {len(train_rows):>5}  (synthetic)")
     print(f"  valid {len(valid_rows):>5}  (synthetic)")
     print(f"  test  {len(test_rows):>5}  (gold, never trained on)")
+    print(f"  rejects in train: {sum(1 for r in train_rows if r['source'] == 'synthetic-reject')}")
     print(f"  language:   {dict(langs)}")
     print(f"  kind:       {dict(kinds)}")
     print(f"  currency:   {dict(currencies)}")
