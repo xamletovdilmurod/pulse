@@ -470,6 +470,34 @@ def load_gold() -> list[dict]:
     return rows
 
 
+def split_gold(rows: list[dict], test_fraction: float, seed: int) -> tuple[list[dict], list[dict]]:
+    """Split the gold corpus into train and test halves, stratified.
+
+    Training on 100% synthetic text taught the model template shapes rather than the language: it
+    reached a validation loss of 0.015 on generated data while doing markedly worse on real
+    utterances. The templates give breadth of coverage; the hand-authored corpus gives the messy,
+    elliptical phrasing people actually use, and the model needs both.
+
+    The split is stratified by (language, is-reject) and seeded, so the held-out set keeps the same
+    shape as the whole and the same rows land in it on every run — a benchmark that moves between runs
+    measures nothing.
+    """
+    buckets: dict[tuple, list[dict]] = {}
+    for row in rows:
+        key = (row.get("lang"), row["expected"].get("confidence") == 0.0)
+        buckets.setdefault(key, []).append(row)
+
+    rng = random.Random(seed)
+    train, test = [], []
+    for key in sorted(buckets, key=str):
+        bucket = sorted(buckets[key], key=lambda r: r["text"])
+        rng.shuffle(bucket)
+        cut = max(1, int(len(bucket) * test_fraction))
+        test.extend(bucket[:cut])
+        train.extend(bucket[cut:])
+    return train, test
+
+
 def as_chat(row: dict) -> dict:
     """mlx-lm's chat format. The completion is compact JSON — every space costs tokens on a phone."""
     target = json.dumps(row["expected"], ensure_ascii=False, separators=(",", ":"), sort_keys=True)
@@ -492,6 +520,10 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=6000, help="synthetic examples to generate")
     parser.add_argument("--seed", type=int, default=20260802)
+    parser.add_argument(
+        "--gold-test-fraction", type=float, default=0.35,
+        help="share of the gold corpus held out for evaluation; the rest joins training",
+    )
     args = parser.parse_args()
 
     synthetic = generate(args.count, args.seed)
@@ -506,7 +538,15 @@ def main() -> int:
     )
     synthetic += rejects
 
-    gold = load_gold()
+    gold_train, gold_test = split_gold(load_gold(), args.gold_test_fraction, args.seed)
+
+    # A generated utterance can coincide with a real one — the hand-written reject literals such as
+    # "delete the last expense" are exactly the phrases the corpus authors also thought of. Any that
+    # collide with the held-out set are dropped, or the benchmark would be scoring memorisation.
+    held_out = {row["text"].strip().lower() for row in gold_test}
+    before = len(synthetic)
+    synthetic = [row for row in synthetic if row["text"].strip().lower() not in held_out]
+    dropped = before - len(synthetic)
 
     rng = random.Random(args.seed)
     rng.shuffle(synthetic)
@@ -515,8 +555,9 @@ def main() -> int:
     # pool so that it matches the training distribution, which is what makes the loss curve readable.
     holdout = max(200, len(synthetic) // 20)
     valid_rows = synthetic[:holdout]
-    train_rows = synthetic[holdout:]
-    test_rows = gold
+    train_rows = synthetic[holdout:] + gold_train
+    rng.shuffle(train_rows)
+    test_rows = gold_test
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     write_jsonl(OUT_DIR / "train.jsonl", [as_chat(r) for r in train_rows])
@@ -534,7 +575,10 @@ def main() -> int:
     print(f"wrote {OUT_DIR.relative_to(ROOT)}/")
     print(f"  train {len(train_rows):>5}  (synthetic)")
     print(f"  valid {len(valid_rows):>5}  (synthetic)")
-    print(f"  test  {len(test_rows):>5}  (gold, never trained on)")
+    print(f"  train {sum(1 for r in train_rows if r['source'] == 'gold'):>5}  of which gold")
+    if dropped:
+        print(f"  dropped {dropped} generated rows colliding with the held-out set")
+    print(f"  test  {len(test_rows):>5}  (gold, held out, never trained on)")
     print(f"  rejects in train: {sum(1 for r in train_rows if r['source'] == 'synthetic-reject')}")
     print(f"  language:   {dict(langs)}")
     print(f"  kind:       {dict(kinds)}")

@@ -52,6 +52,11 @@ let package = Package(
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         .testTarget(
+            name: "PulseAITests",
+            dependencies: ["PulseAI", "PulseParse", "PulseCore"],
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
+        .testTarget(
             name: "PulseParseTests",
             dependencies: ["PulseParse", "PulseCore"],
             swiftSettings: [.swiftLanguageMode(.v6)]

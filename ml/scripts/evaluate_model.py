@@ -141,7 +141,10 @@ def main() -> int:
         # Non-transactions are marked by confidence 0.0 in the corpus; check the model also refuses.
         if want.get("confidence") == 0.0:
             rejects_total += 1
-            if float(got.get("confidence") or 1.0) < 0.25:
+            # `or` is wrong here: a correct refusal *is* confidence 0.0, which is falsy in Python, so
+            # `x or 1.0` silently turned every right answer into a wrong one and reported 0%.
+            reported = got.get("confidence")
+            if reported is not None and float(reported) < 0.25:
                 rejects_right += 1
             elif len(failures) < args.show:
                 failures.append(

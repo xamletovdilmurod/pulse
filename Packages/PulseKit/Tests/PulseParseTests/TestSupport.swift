@@ -39,7 +39,21 @@ enum TestData {
         let expected: ParsedTransaction
         let difficulty: String?
         let notes: String?
+        let source: String?
+
+        /// Rows the generator produced, as opposed to hand-authored gold now mixed into training.
+        var isSynthetic: Bool { (source ?? "").hasPrefix("synthetic") }
     }
+
+    /// The held-out gold rows — the only ones training must never contain.
+    static let heldOutGold: [CorpusCase] = {
+        let url = generatedDirectory.appending(path: "test.labelled.jsonl")
+        guard let text = try? String(contentsOf: url, encoding: .utf8) else { return [] }
+        let decoder = JSONDecoder()
+        return text.split(separator: "\n").compactMap { line in
+            try? decoder.decode(CorpusCase.self, from: Data(line.utf8))
+        }
+    }()
 
     static let generatedDirectory = repoRoot.appending(path: "ml/data/generated")
 

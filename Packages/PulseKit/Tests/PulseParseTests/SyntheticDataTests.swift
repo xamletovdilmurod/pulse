@@ -18,15 +18,23 @@ struct SyntheticDataTests {
 
     @Test("Generated utterances are well-formed")
     func wellFormed() throws {
-        for row in TestData.synthetic.prefix(2_000) {
+        for row in TestData.synthetic.filter(\.isSynthetic).prefix(2_000) {
             #expect(!row.text.trimmingCharacters(in: .whitespaces).isEmpty)
             // A rendering slot that never got filled would train the model on literal braces.
             #expect(!row.text.contains("{"), "unfilled frame slot: \(row.text)")
             #expect(!row.text.contains("<"), "template placeholder leaked: \(row.text)")
             // Doubled spaces mean a slot rendered empty and the frame collapsed badly.
             #expect(!row.text.contains("  "), "collapsed frame: \(row.text)")
-            #expect(row.expected.amount != nil, "no amount: \(row.text)")
-            #expect(row.expected.category != nil, "no category: \(row.text)")
+
+            // Reject rows deliberately blank every slot — that shape *is* the label. Only the rows
+            // that claim to be transactions must actually carry one.
+            if row.expected.confidence > 0 {
+                #expect(row.expected.amount != nil, "no amount: \(row.text)")
+                #expect(row.expected.category != nil, "no category: \(row.text)")
+            } else {
+                #expect(row.expected.amount == nil, "reject row kept an amount: \(row.text)")
+                #expect(row.expected.category == .other, "reject row must use 'other': \(row.text)")
+            }
         }
     }
 
@@ -40,7 +48,8 @@ struct SyntheticDataTests {
         var disagreements: [String] = []
 
         for row in TestData.synthetic {
-            guard let expected = row.expected.amount else { continue }
+            guard row.isSynthetic, row.expected.confidence > 0, let expected = row.expected.amount
+            else { continue }
             checked += 1
             let got = parser.analyze(row.text).parsed.amount
             if got == expected {
@@ -78,7 +87,9 @@ struct SyntheticDataTests {
 
         var categoryAgreed = 0
         var kindAgreed = 0
-        let rows = Array(TestData.synthetic.prefix(3_000))
+        let rows = Array(
+            TestData.synthetic.filter { $0.isSynthetic && $0.expected.confidence > 0 }.prefix(3_000)
+        )
 
         for row in rows {
             let parsed = parser.analyze(row.text).parsed
@@ -97,10 +108,14 @@ struct SyntheticDataTests {
         #expect(kindRate > 0.85, "generated income/expense framing does not read as its label")
     }
 
-    @Test("No training row duplicates a gold test row")
+    @Test("No training row duplicates a held-out gold row")
     func noTestLeakage() throws {
-        // Training on the benchmark would make every subsequent accuracy number a lie.
-        let goldTexts = Set(TestData.corpus.map { $0.text.trimmingCharacters(in: .whitespaces).lowercased() })
+        // Part of the gold corpus is now mixed into training on purpose — templates alone taught the
+        // model template shapes rather than the language. What must never leak is the *held-out*
+        // portion, because training on the benchmark would make every accuracy number a lie.
+        let goldTexts = Set(
+            TestData.heldOutGold.map { $0.text.trimmingCharacters(in: .whitespaces).lowercased() }
+        )
         let leaked = TestData.synthetic
             .map { $0.text.trimmingCharacters(in: .whitespaces).lowercased() }
             .filter(goldTexts.contains)
